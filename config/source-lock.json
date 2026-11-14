@@ -1,0 +1,17 @@
+{
+  "openwrt_commit": "bb6df54d9d1cb486f7102e9863f0380cb9f3a1f3",
+  "linux": "6.18.55",
+  "toolchain": "aarch64_cortex-a53 GCC14.4.0 musl",
+  "kernel_archive_sha256": "f410638061a165c12f42ab871d2f3fcd525515359b5faeee80969cff84524df9",
+  "exported_kernel_sources": {
+    "drivers/dma/qcom/bam_dma.c": "f0a29a997a32dc1314802b45d33a1a42ae687ce98f62d77c5c64a4eb4380ce5e",
+    "drivers/mtd/nand/raw/qcom_nandc.c": "6b9c20a2be724ce3002a61e99c7c8113c68772eb0c30d72c8ff1c3514263b20a",
+    "drivers/net/mdio/mdio-ipq4019.c": "05277956637dbbd1e85b59a7b39fab3396b068597f40a8bd2e2feb06075f9b0c",
+    "drivers/net/pcs/pcs-qca-uniphy.c": "8fdca9ef16a24932b2971184add511aefdf442dcf13eb5be438de25950fbd214",
+    "drivers/spi/spi-qpic-snand.c": "877dba2b90093006e220e8a1d04b9abe51041833b21ffab1bd2e4520c5635080",
+    "drivers/mtd/nand/spi/foresee.c": "4b900d255c876a1010b657cd1d85d25e72b52be4327c059697729af1fdede86e"
+  },
+  "full_clean_userspace_build_reproduced": false,
+  "raw_device_backups_included": false,
+  "credentials_included": false
+}
