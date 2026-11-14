@@ -9,6 +9,18 @@
       "bytes": 259,
       "sha256": "7bc7628981be1c518588db54425074cd6b57e45af5a47cbac07d71810989d603"
     },
+    "LICENSES/GPL-2.0.txt": {
+      "bytes": 18600,
+      "sha256": "8780e78a1a737e127f25a65f6d95269bffd36158dc261114de7859b490bfc5aa"
+    },
+    "NOTICE.md": {
+      "bytes": 2556,
+      "sha256": "c6fc101dbb9c23ca361a176633e587562e0a3c584d1cc613aa24801cb4895f5f"
+    },
+    "README.md": {
+      "bytes": 6321,
+      "sha256": "1192bf6b103bf77ca469e0f883595efa3df93c10bdc8407c485cf7ec475b365b"
+    },
     "config/kernel-native.config": {
       "bytes": 155856,
       "sha256": "2de09db4370f9bc250112f28f2edc7bb3c547c9396668c2e1f8a40f18e720773"
@@ -81,21 +93,9 @@
       "bytes": 616,
       "sha256": "8a0ed31571af66454d16985d2b41d16c1775d493e325fd67a11bbb6a64a6fa27"
     },
-    "LICENSES/GPL-2.0.txt": {
-      "bytes": 18600,
-      "sha256": "8780e78a1a737e127f25a65f6d95269bffd36158dc261114de7859b490bfc5aa"
-    },
-    "NOTICE.md": {
-      "bytes": 1893,
-      "sha256": "326531e7168e1ba188d7386831185a96c1175a9448732b35c32d10dc734a8001"
-    },
     "patches/0999-mf297d-board-port.patch": {
       "bytes": 3809,
       "sha256": "c4230c9e34be602a27703a8acbb2ddcf56e65169e65878c5fe69623ff97b19c5"
-    },
-    "README.md": {
-      "bytes": 2462,
-      "sha256": "31d55b24f2441c482936dd292f8d6f6f17ecf5ffbfe2569d27d2406e8969c1d9"
     },
     "reference/env-writer/README.md": {
       "bytes": 961,
@@ -124,6 +124,10 @@
     "reference/rootfs/etc/hotplug.d/firmware/11-ath11k-caldata": {
       "bytes": 6623,
       "sha256": "d7a312a86f09ce579d2d74a07b3f84da5b6b1236a0f9e7d90cc318234f92ac76"
+    },
+    "reference/stock-ramboot/README.md": {
+      "bytes": 879,
+      "sha256": "d8746cccc609303f8b45866236be9b0bc29c0a7ad83f51608beb005c501ac21a"
     },
     "reference/stock-ramboot/build_ramboot.py": {
       "bytes": 4079,
@@ -165,10 +169,6 @@
       "bytes": 2987,
       "sha256": "674dc42df3642e2127f3df876e545b23b791591bcc5f995723d72fe55f9e672a"
     },
-    "reference/stock-ramboot/README.md": {
-      "bytes": 879,
-      "sha256": "d8746cccc609303f8b45866236be9b0bc29c0a7ad83f51608beb005c501ac21a"
-    },
     "src/kernel/drivers/dma/qcom/bam_dma.c": {
       "bytes": 40545,
       "sha256": "f0a29a997a32dc1314802b45d33a1a42ae687ce98f62d77c5c64a4eb4380ce5e"
@@ -193,13 +193,13 @@
       "bytes": 48043,
       "sha256": "877dba2b90093006e220e8a1d04b9abe51041833b21ffab1bd2e4520c5635080"
     },
-    "src/lte-modules/build.sh": {
-      "bytes": 1094,
-      "sha256": "a0e5d0033e1f3831eac640b556037a4ac697a4dc396ee1fafd1c115b10cf2558"
-    },
     "src/lte-modules/Makefile": {
       "bytes": 452,
       "sha256": "168594e4d9fa139370f528e3c097218cd349638c54cfff813090c199ea1e887d"
+    },
+    "src/lte-modules/build.sh": {
+      "bytes": 1094,
+      "sha256": "a0e5d0033e1f3831eac640b556037a4ac697a4dc396ee1fafd1c115b10cf2558"
     },
     "src/lte-modules/patch_option.py": {
       "bytes": 380,
@@ -233,6 +233,10 @@
       "bytes": 1423,
       "sha256": "648ebf2f949676a491fbf3edc97a1fa0b0af41b624723925250aa899582ebd17"
     },
+    "tools/personalise_release.py": {
+      "bytes": 2329,
+      "sha256": "8bbd504b415c57d90b2008563e31ff4df742ddd51bf58eafda413b41f73eb52a"
+    },
     "tools/preflight.sh": {
       "bytes": 604,
       "sha256": "a25a7ae8c17f21158c9dc3261f3f2e0b7b75de0b9e691a60c3e7009bec751773"
@@ -240,6 +244,10 @@
     "tools/prepare_caldata.py": {
       "bytes": 1525,
       "sha256": "c8d653d1eaaafbccd919c7ef60a6da21b724982a2031380a2d3b7c0b2161499e"
+    },
+    "tools/ram-boot-manual.sh": {
+      "bytes": 1111,
+      "sha256": "c54452ff44d5111b3f510ff2c6671d5bdff2d64ef0cf8197203739df7be6969c"
     },
     "tools/replace_fit_dtb.py": {
       "bytes": 2081,
@@ -252,6 +260,22 @@
     "tools/verify_export.py": {
       "bytes": 1801,
       "sha256": "13c72a879877ebcb14771b872ab118ad4376ec1459ee415719d1c120af37c846"
+    },
+    "tools/windows-manager/LICENSE.txt": {
+      "bytes": 1056,
+      "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685"
+    },
+    "tools/windows-manager/MF297D-Yerel-Yonetici.spec": {
+      "bytes": 889,
+      "sha256": "c465ecf6754a017d2548afd8a1d691a89fb6d4766ede6713e0ed5dccd2ba9071"
+    },
+    "tools/windows-manager/README.md": {
+      "bytes": 5170,
+      "sha256": "d4ef794cd492c19d1b5aad5256990b5a0392bcc294c2f2f0816eca4ebbbce49f"
+    },
+    "tools/windows-manager/THIRD_PARTY_NOTICES.json": {
+      "bytes": 1629,
+      "sha256": "ec174e34d6e80357849fb7ca2e680d8170bc470488dd9a6d5fe8c7cf620b5296"
     },
     "tools/windows-manager/assets/app.ico": {
       "bytes": 312,
@@ -277,10 +301,6 @@
       "bytes": 18596,
       "sha256": "34fb033768bf70c703b66ba7a9424fbb901f9ab2b536d54e3d948a785fdc3aa2"
     },
-    "tools/windows-manager/LICENSE.txt": {
-      "bytes": 1056,
-      "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685"
-    },
     "tools/windows-manager/licenses/cryptography-LICENSE": {
       "bytes": 197,
       "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
@@ -301,17 +321,9 @@
       "bytes": 18092,
       "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
     },
-    "tools/windows-manager/MF297D-Yerel-Yonetici.spec": {
-      "bytes": 889,
-      "sha256": "c465ecf6754a017d2548afd8a1d691a89fb6d4766ede6713e0ed5dccd2ba9071"
-    },
     "tools/windows-manager/network_services.py": {
       "bytes": 8314,
       "sha256": "f0a0d584c755cbd76f056fcf02b2f6b42bce8f58148ed67c72db7b040383a331"
-    },
-    "tools/windows-manager/README.md": {
-      "bytes": 5170,
-      "sha256": "d4ef794cd492c19d1b5aad5256990b5a0392bcc294c2f2f0816eca4ebbbce49f"
     },
     "tools/windows-manager/requirements.txt": {
       "bytes": 54,
@@ -328,10 +340,6 @@
     "tools/windows-manager/test_flash_backup.py": {
       "bytes": 3177,
       "sha256": "6c1a40c6c354cc286e6398f55cb1934a9c6d204e04b9ce05b514f8ebd2f0b45f"
-    },
-    "tools/windows-manager/THIRD_PARTY_NOTICES.json": {
-      "bytes": 1629,
-      "sha256": "ec174e34d6e80357849fb7ca2e680d8170bc470488dd9a6d5fe8c7cf620b5296"
     },
     "tools/windows-manager/windows_net.py": {
       "bytes": 5849,

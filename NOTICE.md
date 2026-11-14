@@ -25,3 +25,14 @@ Bu depoyu tam binary firmware yayınının bütün corresponding-source yüküml
 karşılayan eksiksiz bir sürüm olarak değerlendirmeyin: source-lock ve TODO
 eksik userspace/paket yeniden üretimini açıkça kaydeder. Yeni binary sürüm
 yayımlanmadan önce kaynak/provenance/lisans kapsamı tamamlanmalıdır.
+
+## 14 Kasım 2026 binary ön sürümü
+
+Release, mevcut cihazda test edilmiş kernel payload'larını içerir. FIT DTB'leri
+MAC şablonuna dönüştürülmüştür; kişiselleştirme aracı payload'ı değiştirmez.
+NSS RAM rootfs'i sabit commit/feed/config ile kaynaklardan yeni üretilmiştir;
+eski kullanıcı overlay'i veya cihaz yedeği değildir. Native dosya yalnız
+kernel bileşenidir; ilk sağlanan userspace/rootfs binary'si dağıtılmaz.
+NSS kaynak entegrasyonu ayrıca Release asset'i olarak verilir; taban kaynak
+ve feed commitleri pakette kayıtlıdır. kexec binary'sinin kaynağı kexec-tools
+2.0.32 ve bu depodaki build_kexec.sh reçetesidir.
