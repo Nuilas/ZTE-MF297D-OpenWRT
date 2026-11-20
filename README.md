@@ -2,12 +2,12 @@
 
 MF297D üzerinde NAND'dan çalışan OpenWrt 6.18.60 portu. Ethernet, 2,4/5 GHz
 Wi-Fi NSS ve QMI/LTE `rmnet_rx` hızlandırması doğrulandı. İki normal NAND
-yeniden başlatması ve gerçek LTE trafiği test edildi. CPU1 şu an kapalı;
+yeniden başlatması ve gerçek LTE trafiği test edildi. İki CPU, başlangıç servisiyle etkin;
 hız/uzun süreli kararlılık, IPv6 NSS ve SQM testleri henüz tamamlanmadı.
 
 ## İndir
 
-**[Güncel firmware ve araçlar — Release](https://github.com/ozgunokan/ZTE-MF297D-OpenWRT/releases/tag/mf297d-2026.11.20-nss.1)**
+**[Güncel firmware ve araçlar — Release](https://github.com/ozgunokan/ZTE-MF297D-OpenWRT/releases/tag/mf297d-2026.11.20-nss.2)**
 
 | Dosya | Kullanım |
 | --- | --- |
@@ -195,6 +195,10 @@ Yeniden derlediğin kernel ve modülleri aynı derlemeden kullan.
 - [Tarihsel ilk port](docs/BUILD-LEGACY.md)
 - [Lisans/kaynak notları](NOTICE.md)
 
-CPU1 henüz etkin değil. Kaynaklardaki `maxcpus=1` sınırını yalnız silip
-NAND'a yazmak doğrulanmış bir CPU düzeltmesi değildir; sonraki çalışma RAM
-testi ve hata kaydı üzerinden yapılacak.
+CPU1 düzeltmesi `mf297d-cpu` servisindedir: erken açılışta `maxcpus=1`
+korunur, S18 aşamasında CPU1 açılır ve S19 NSS bundan sonra başlar.
+Bootloader/ENV değiştirilmez. Çalışan cihazda otomatik yeniden açılış ve
+iki çekirdeğe sabitlenen işler NSS/iki Wi-Fi radyosuyla birlikte doğrulandı.
+Kontrol: `cat /sys/devices/system/cpu/online` çıktısı `0-1` olmalıdır.
+Bu, erken SMP açılış sorununun çekirdek düzeyinde çözülmesi iddiası değildir;
+çalışan iki çekirdek sağlayan başlangıç düzenidir.

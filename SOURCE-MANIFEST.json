@@ -14,8 +14,8 @@
       "sha256": "04b0870962ed363adbf91a177444cda6148d3145476806f686841fa4e01d3b81"
     },
     "README.md": {
-      "bytes": 7927,
-      "sha256": "fe9c981752303f27e4841126c6a806c1d3547542ab8dcb480775d34676c65b1f"
+      "bytes": 8281,
+      "sha256": "80b229fb97fa775edfa8309d374f46e862fbd4701da2055303289ab068e49c4c"
     },
     "config/kernel-native.config": {
       "bytes": 155856,
@@ -50,8 +50,8 @@
       "sha256": "7bcee31893df30b78296cf054cd82388bb086448bae05df1598f2e90b75826d2"
     },
     "docs/NSS-RELEASE.md": {
-      "bytes": 2285,
-      "sha256": "b1af7719295650d39508bc10fcae3fd8b4f8440709f206d026239a6aa36997c8"
+      "bytes": 2948,
+      "sha256": "4959f7b52a98236d8d3fbfe4c5ccebb90c597095872b6ecf91b410c576915559"
     },
     "docs/RADIOS.md": {
       "bytes": 4948,
@@ -94,8 +94,8 @@
       "sha256": "b67b8aa4caa8e5fdc282744088d1f09a7e7344530f75baa0cc969d321f1f3847"
     },
     "nss/configure.sh": {
-      "bytes": 1584,
-      "sha256": "6fb3326084c5bb4ac97ace4f2122cb392179331064b893e93b9f7be844a8ca7c"
+      "bytes": 1612,
+      "sha256": "7a2863456ffc9ef7dd64e8084272a3d182c8bef7f6c0c661a4df43f920b6da72"
     },
     "nss/feeds-lock.json": {
       "bytes": 339,
@@ -561,9 +561,17 @@
       "bytes": 748,
       "sha256": "ea66e43b7f79cea9a59a83418f8d2b4d0846c85b66ef0dd2d880d8d5fe178a0a"
     },
+    "nss/overlay/files/etc/init.d/mf297d-cpu": {
+      "bytes": 577,
+      "sha256": "e9b72bcd3b2de2cc7ce1a7e9dd3aa540db9d816c1acdeda9f71abda20c9f3ff9"
+    },
     "nss/overlay/files/etc/init.d/mf297d-radio": {
       "bytes": 78,
       "sha256": "c03c2e489792890fdaf881bf43b13d41f0020dd90c50617c18505d0452169ef7"
+    },
+    "nss/overlay/files/etc/uci-defaults/08-mf297d-cpu": {
+      "bytes": 76,
+      "sha256": "92d7d1f635a1cfedd0bfd42ccdf42d215c97e7bcdeefc5ec27faae19e44d3b56"
     },
     "nss/overlay/files/etc/uci-defaults/09-mf297d-owner": {
       "bytes": 517,

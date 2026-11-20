@@ -1,0 +1,4 @@
+#!/bin/sh
+/etc/init.d/mf297d-cpu enable
+/etc/init.d/mf297d-cpu start
+exit 0

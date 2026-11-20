@@ -1,0 +1,16 @@
+#!/bin/sh /etc/rc.common
+# SPDX-License-Identifier: GPL-2.0-only
+# Preserve the proven single-CPU early boot, then online CPU1 before NSS.
+START=18
+
+start() {
+ [ "$(cat /tmp/sysinfo/board_name 2>/dev/null)" = 'zte,mf297d' ] || return 0
+ [ -e /sys/devices/system/cpu/cpu1/online ] || return 0
+ if [ "$(cat /sys/devices/system/cpu/cpu1/online)" != 1 ]; then
+  if ! echo 1 > /sys/devices/system/cpu/cpu1/online; then
+   logger -t mf297d-cpu 'CPU1 online failed; continuing on CPU0'
+   return 0
+  fi
+ fi
+ logger -t mf297d-cpu "Online CPUs: $(cat /sys/devices/system/cpu/online)"
+}
