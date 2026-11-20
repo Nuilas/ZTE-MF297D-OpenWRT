@@ -1,5 +1,13 @@
 # Kaynak kökeni ve lisanslar
 
+## Telnet CFG yardımcısı
+
+`tools/telnet_cfg.py` GPL-2.0-only lisanslı proje kodudur. Windows EXE'si
+Python 3.14/Tcl-Tk ve PyInstaller 6.22.3 ile paketlenir; ilgili lisans ve
+bootloader istisnası `mf297d-telnet-source.zip` içindedir. Araç yalnız yerel
+CFG dosyasında LAN Telnet değerini değiştirir. Test cihazının kişisel CFG'si
+dağıtılmaz. ACS yönetici EXE'sinin kaynakları `tools/windows-manager/` altındadır.
+
 - Temel ağaç: https://git.openwrt.org/openwrt/openwrt.git,
   commit `bb6df54d9d1cb486f7102e9863f0380cb9f3a1f3`.
 - Linux 6.18.55; hazırlanan OpenWrt kernel ağacından seçilen sürücüler

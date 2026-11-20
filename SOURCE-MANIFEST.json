@@ -10,12 +10,12 @@
       "sha256": "7bc7628981be1c518588db54425074cd6b57e45af5a47cbac07d71810989d603"
     },
     "NOTICE.md": {
-      "bytes": 3889,
-      "sha256": "04b0870962ed363adbf91a177444cda6148d3145476806f686841fa4e01d3b81"
+      "bytes": 4323,
+      "sha256": "e83a749d9232d01952ed8195f51b74ce1ed797796bf24fddf212418e3c3fa917"
     },
     "README.md": {
-      "bytes": 8281,
-      "sha256": "80b229fb97fa775edfa8309d374f46e862fbd4701da2055303289ab068e49c4c"
+      "bytes": 14837,
+      "sha256": "4da62df96585046dda654f467bfd3dba247a5af20d36fe59c507308eefa5a255"
     },
     "config/kernel-native.config": {
       "bytes": 155856,
@@ -48,6 +48,10 @@
     "docs/INSTALL.md": {
       "bytes": 7582,
       "sha256": "7bcee31893df30b78296cf054cd82388bb086448bae05df1598f2e90b75826d2"
+    },
+    "docs/NSS-GUNCELLEME.md": {
+      "bytes": 8270,
+      "sha256": "70a25449d51bdd423214fa8c2f5d23287fc76c467546c1969fbcbd87aea665dc"
     },
     "docs/NSS-RELEASE.md": {
       "bytes": 2948,
@@ -168,6 +172,10 @@
     "tools/replace_fit_dtb.py": {
       "bytes": 2081,
       "sha256": "e5a92785bc80943b6338aeb25770aee1a7dde286782063756e3905e34d4382bc"
+    },
+    "tools/telnet_cfg.py": {
+      "bytes": 3008,
+      "sha256": "54960074faa7fa74e36115fdabf869ae034b7ffd114113a3d05429ae4c318cbf"
     },
     "tools/test_offline.py": {
       "bytes": 4764,
