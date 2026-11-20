@@ -67,3 +67,20 @@ Kapalı radyo firmware veya kişisel kalibrasyon dağıtılmaz; kendi cihazını
 korunmuş wifi_fw ve ART verileri çalışma anında okunur. Genel profil ve
 genelleştirilmiş NAND kurucu tam canlı kurulum testinden geçmemiştir.
 Temiz reçete kontrolü tam bit-eşdeğer yeniden üretim iddiası değildir.
+
+
+## Stok RAM ve ilk kurulum kiti
+
+stock/ yeni proje kodu GPL-2.0-only'dir. Telnet istemcisi kendi Windows manager
+kodundan alınmıştır; onun MIT lisans metni tools/windows-manager/LICENSE.txt'dir.
+ARM32 modül, ARM64 shim, aktarım yardımcıları ve sabit CRC konfigürasyonu kaynakları
+stock/loader/ içindedir. Vendor bootloader veya bootconfig.ko dağıtılmaz; yalnız
+tam eşleşen dosyaların hashleriyle kontrol edilir. Sahip ENV/MAC/ART/yedekleri
+pakete girmez; owner dosyaları yalnız hazırlayan kişinin bilgisayarında üretilir.
+
+ADB1.0.32 OpenWrt package/utils/adb5.0.2~6fe92d1a reçetesinden derlendi;
+upstream https://android.googlesource.com/platform/system/core ,
+commit6fe92d1a3fb17545d82d020a3c995f32e6b71f9d. Apache-2.0 ve upstream dosya
+bildirimleri geçerlidir. Paket tarball hash'i OpenWrt Makefile'da sabittir.
+Python/PyInstaller/Paramiko/Cryptography ve ilgili Windows EXE bağımlılıklarının
+lisans bildirimleri stok araç ZIP'inin LICENSES klasöründedir.

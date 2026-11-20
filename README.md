@@ -1,52 +1,57 @@
-# ZTE MF297D — adım adım OpenWrt kurulumu
+# ZTE MF297D — Telnet'ten OpenWrt NAND'a kurulum
 
-Sıra: **1. Telnet aç → 2. kexec/yükleyici ekle → 3. RAM'de dene →
-4. RESET kurtarmasını doğrula → 5. NAND'a yaz.**
+Sıra: **1. Telnet → 2. yükleyiciyi aktar/hazırla → 3. RAM'de aç ve yedekle →
+4. RESET kurtarmasını doğrula → 5. en son NAND'a kur.**
 
-**Şu anki eksik:** Release, stok Turkcell yazılımından sonuna kadar çalışan
-bir ilk kurulum paketi değildir. Telnet aracı var. OpenWrt kurulu cihazın RAM
-denemesi ve eşleşen NAND düzenini güncelleme araçları var. **Stoktan ilk RAM
-geçişinin dağıtıma hazır yükleyicisi ve ilk NAND/kurtarma kurucusu henüz yok.**
-Stok cihazla başlayan kişi **2A'da durmalıdır**. Önceki README bu başlangıcı
-atlayıp zaten OpenWrt kurulu cihazdan devam ediyordu.
+Bu sürümde stok RAM yükleyicisi, iki aşamalı ilk NAND/kurtarma kurucusu ve
+CPU/Wi-Fi LED düzeltmeli imajlar birlikte veriliyor. **Yeni stoktan ilk kurulum
+kiti canlı bir stok cihazda henüz baştan sona denenmedi; deneysel ön sürümdür.**
+Emülasyon, stok yedekleriyle hazırlama ve mevcut çekirdekte rootfs testleri geçti.
+Genel RAM imajı ayrıca mevcut OpenWrt üzerinden canlı açıldı: iki CPU, NSS,
+iki Wi-Fi radyosu ve IPv4/IPv6 iletimi geçti. Bu, stoktan ilk NAND kurulumunun
+canlı testi değildir.
+Çalışan cihazı stok yazılıma döndürerek test edilmedi.
 
-Test cihazında Linux 6.18.60, iki CPU, NSS ve iki Wi-Fi radyosu çalışıyor.
-Bu, genel ilk kurulum paketinin tamamlandığı anlamına gelmez.
+Doğrulanan donanım/firmware: **ZTE MF297D, Turkcell B18**. Başka model/sürüm
+desteklenmez. Stok sistem 32 bit ARM'dır; `kexec-aarch64` dosyasını tek başına
+stokta çalıştıramazsın. İlk RAM geçişini aşağıdaki **Stok RAM** aracı yapar;
+sonraki bakım geçişlerinde gerçek AArch64 kexec kullanılır.
 
-## Ön hazırlık: komutları nereye yazacaksın?
+## Komutları nerede çalıştıracağım?
 
 | Etiket | Neresi? |
 | --- | --- |
-| **PC / Windows** | Bilgisayardaki tarayıcı, EXE veya PowerShell. |
-| **PC / Ubuntu** | Bilgisayardaki Ubuntu/WSL terminali. Modemin terminali değil. |
-| **MODEM / Telnet** | PuTTY ile modeme Telnet bağlandıktan sonraki ekran. |
-| **MODEM / SSH** | SSH ile OpenWrt'ye bağlandıktan sonraki ekran. |
+| PC Windows | Bilgisayardaki PowerShell, tarayıcı veya EXE. |
+| PC Ubuntu | Bilgisayardaki Ubuntu/WSL terminali; modem terminali değil. |
+| Modem Telnet/SSH | Modeme bağlandıktan sonraki komut ekranı. |
 
-Kurulum/SSH için Ethernet kablosu **PC ↔ modem LAN1/LAN2/LAN3** arasında olur.
-**WAN** soketi yalnız 1B'deki ACS işlemi sırasında kullanılacak.
+Kurulumda kablo **PC ↔ modem LAN1/LAN2/LAN3** arasında kalır. Yalnız 1B'deki ACS
+Telnet açma işlemi için WAN kullanılır; ne zaman LAN'a dönüleceği orada yazıyor.
+PC Ethernet **192.168.1.2/24**, modem **192.168.1.1**. Ethernet ağ geçidi/DNS
+boş; PC'nin internet için kullandığı Wi-Fi değişmeyecek.
 
-**PC / Windows:** Ayarlar → Ağ ve İnternet → Ethernet → IP ataması → Düzenle
-→ El ile → IPv4. Adres **192.168.1.2**, maske **255.255.255.0** gir.
-Ethernet ağ geçidi/DNS alanını boş bırak. Modemin LAN adresi **192.168.1.1**.
-PC'nin internet için kullandığı Wi-Fi ayarını değiştirme.
+## İndir
 
-## Dosyalar
+[Bütün dosyalar — Release](https://github.com/ozgunokan/ZTE-MF297D-OpenWRT/releases/tag/mf297d-2026.11.20-install-kit.3)
 
-[Release sayfasından indir](https://github.com/ozgunokan/ZTE-MF297D-OpenWRT/releases/tag/mf297d-2026.11.20-nss.2):
-
-| Dosya | Kullanımı |
+| Dosya | Ne işe yarıyor? |
 | --- | --- |
-| `MF297D-Telnet-CFG.exe` | Kendi CFG yedeğinden Telnet açık dosya üretir; Python gerekmez. |
-| `MF297D-Yerel-Yonetici.exe` | ACS üzerinden sUser/LAN Telnet yardımcısı; Npcap gerekir. |
-| `mf297d-telnet-source.zip` | CFG aracının kaynağı, test ve lisans notları. |
-| `mf297d-tools.zip` | OpenWrt için kexec ve RAM/NAND yardımcıları. |
-| `openwrt-mf297d-6.18.60-nss-initramfs.itb` | RAM'de çalışan geçici sistem. |
-| `openwrt-mf297d-6.18.60-nss-nand.bin` | Mevcut proje NAND düzenine özel bileşen paketi. |
+| MF297D-Telnet-CFG.exe | Kendi CFG yedeğinden LAN Telnet açık CFG üretir. |
+| MF297D-Yerel-Yonetici.exe | ACS üzerinden sUser/LAN Telnet yardımcısı. |
+| MF297D-Stok-RAM.zip | Stok B18 için EXE, ARM32 modüller, kernel ve RAM dosya sistemi. |
+| mf297d-tools.zip | AArch64 kexec, kişiselleştirme ve ilk/güncelleme kurulum araçları. |
+| openwrt-mf297d-6.18.60-nss-initramfs.itb | Genel RAM imajı ve kurucunun RAM şablonu. |
+| RAM-PROFILE.json | Yukarıdaki RAM imajına ait hash ve yerleşim bilgisi; aynı sürümden indir. |
+| openwrt-mf297d-6.18.60-nss-nand.bin | Kernel + hizalı rootfs paketi; kurucu kullanır. |
+| mf297d-nss-source.zip | DTS, yamalar, profiller, stok yükleyici/kurucu kaynakları. |
+| VALIDATION.json / SHA256SUMS | Test kapsamı ve bütün dosyaların SHA256 değerleri. |
 
-**NAND `.bin` dosyasını stok panelinin firmware güncelleme ekranına verme.
-Standart `sysupgrade` imajı da değildir.**
+**NAND `.bin` dosyası factory veya sysupgrade imajı değildir. Stok firmware
+güncelleme ekranına yükleme.** Stok işletim sistemi ancak son B aşamasında
+kaldırılır. Korunan stok yedekleri ve radyo verileri her cihazın kendisine aittir.
 
 ## 1. İlk iş: LAN Telnet aç
+
 
 Doğrulanan stok sürüm **CR_TKCTURMF297DV1.0.0B18**. Modem zaten OpenWrt
 çalıştırıyorsa bu adımı atla; stok CFG'yi OpenWrt'ye yükleme.
@@ -124,230 +129,159 @@ nv get telnet_lan_enable
 
 `id` içinde **uid=0**, son komutta **1** görmelisin.
 
-## 2. Kexec/yükleyici ekle
+## 2. Stok RAM yükleyicisini hazırla ve kontrol et
 
-### 2A. Cihaz hâlâ stok Turkcell yazılımındaysa: burada eksik var
 
-**MODEM / Telnet — yalnız kontrol:**
+PC Ethernet `192.168.1.2`, maske `255.255.255.0`, ağ geçidi/DNS boş.
+Kablo **PC ↔ modem LAN1/LAN2/LAN3** arasında. Modem `192.168.1.1:2323` Telnet.
 
-```sh
-command -v kexec
-zcat /proc/config.gz | grep KEXEC
-```
-
-Stok B18'de normal kexec desteği yoktu. Stok sistem 32 bit ARM; Release'teki
-`kexec-aarch64` ise 64 bit OpenWrt içindir. **Bu dosyayı TFTP ile stok modeme
-göndermek ilk geçişi sağlamaz.**
-
-İlk RAM açılışını stok sürüme ve imaja özel kernel modülü/trampoline ile
-yaptık. [Araştırma kaynakları](reference/stock-ramboot/README.md) var; fakat
-sürüm kontrolü, eşleşen dosyalar ve başlatma aracı bir arada olan genel paket
-Release'te yok. **Stok cihaz için burada dur.** Eski modülü rastgele `insmod`
-ile yüklemek bu rehberin bir kurulum adımı değildir.
-
-### 2B. Bu projenin OpenWrt'si zaten kuruluysa
-
-**PC / Windows — Ubuntu terminaline gir:**
+ZIP'i örneğin `C:\MF297D\MF297D-Stok-RAM` içine çıkar. PowerShell:
 
 ```powershell
-wsl -d MF297D-Ubuntu -u build
+cd C:\MF297D\MF297D-Stok-RAM
+.\MF297D-Stok-RAM.exe --check
 ```
 
-**PC / Ubuntu — araçları ve dosyaları indir:**
+Sorunca **sUser parolasını** gir. Parola komuta yazılmaz, kaydedilmez.
+Sürüm/ABI kontrolü hata verirse devam etme.
+
+Dosyaları modem PC'den yerel TCP18869 üzerinden alır; **TFTP kullanılmaz**.
+Windows engellerse **Yönetici PowerShell** ile yalnız bu bağlantıya izin ver:
+
+```powershell
+New-NetFirewallRule -DisplayName MF297D-RAM-Aktarim -Direction Inbound -Protocol TCP -LocalPort 18869 -LocalAddress 192.168.1.2 -RemoteAddress 192.168.1.1 -Action Allow
+```
+
+## 3. OpenWrt'yi önce RAM'de aç
+
+Normal **PC Windows / PowerShell** terminalinde:
+
+```powershell
+.\MF297D-Stok-RAM.exe --boot
+```
+
+Araç dosyaları aktarır, SHA256/CRC ve hazırlık modülünü kontrol eder, Wi-Fi/USB
+yardımcılarını durdurur ve RAM geçişini gönderir. **NAND/ENV yazmaz.** Yaklaşık
+90 saniye sonra SSH22 açılmasını ve bütün 25 NAND bölümünün salt okunur olmasını
+kontrol eder. Doğrulama başarısızsa otomatik tekrar yapmaz.
+
+Bu ilk RAM ortamı kurulum içindir; NSS ve Wi-Fi başlangıçta kapalıdır, Ethernet
+ve LuCI kullanılır. `reboot` stok sisteme döner; henüz kalıcı OpenWrt kurulmadı.
+İş bitince eklenen Windows kuralını **Yönetici PowerShell** ile kaldır:
+
+```powershell
+Remove-NetFirewallRule -DisplayName MF297D-RAM-Aktarim
+```
+
+Python alternatifi: `python boot.py --bundle . --boot`; gözlem için Paramiko gerekir.
+
+### 3A. PC Ubuntu: kendi yedeğini al, kurulum dosyalarını hazırla
+
+Ubuntu 24.04/Python3.12 kullan. İndirilen `.itb`, `.bin`, `RAM-PROFILE.json`
+dosyalarını `~/MF297D-kurulum` klasörüne koy; `mf297d-tools.zip` dosyasını da
+bu klasöre aç. Kexec dosyası `~/MF297D-kurulum/mf297d-tools/kexec-aarch64` olacak.
 
 ```sh
 sudo apt update
-sudo apt install gh unzip python3 openssh-client
+sudo apt install gh git python3 python3-paramiko gcc-aarch64-linux-gnu libc6-dev-arm64-cross mtd-utils squashfs-tools unzip
 gh auth login
-mkdir -p ~/MF297D-kurulum
-cd ~/MF297D-kurulum
-gh release download mf297d-2026.11.20-nss.2 --repo ozgunokan/ZTE-MF297D-OpenWRT -p mf297d-tools.zip -p openwrt-mf297d-6.18.60-nss-initramfs.itb -p openwrt-mf297d-6.18.60-nss-nand.bin
-unzip mf297d-tools.zip
-cd mf297d-tools
-```
-
-Depo private ise `gh auth login` sırasında erişimi olan kendi GitHub hesabını
-kullan. Bu indirme komutları modeme yazmaz.
-
-**PC / Ubuntu — kexec'i modemin geçici belleğine gönder:**
-
-```sh
-ssh root@192.168.1.1 'mkdir -p /tmp/mf297d-ram'
-scp -O kexec-aarch64 root@192.168.1.1:/tmp/mf297d-ram/
-ssh root@192.168.1.1 'chmod 500 /tmp/mf297d-ram/kexec-aarch64; /tmp/mf297d-ram/kexec-aarch64 --help'
-```
-
-Yardım yazısı gelirse dosya çalışıyor. Henüz RAM sistemi başlatılmadı.
-Aktarım **SCP** ile yapıldı; TFTP sunucusu gerekmiyor. `/tmp`, modemin RAM'idir;
-modem yeniden başlayınca içindeki dosyalar silinir.
-
-## 3. Önce RAM'den başlat
-
-Bu bölüm **2B'deki mevcut OpenWrt** için geçerli; 2A'da duran stok cihaz için değil.
-
-**PC / Ubuntu — kendi cihazının iki MAC adresini oku:**
-
-```sh
-cd ~/MF297D-kurulum/mf297d-tools
-ssh root@192.168.1.1 'cat /sys/class/net/eth0/address; cat /sys/class/net/wan/address'
-```
-
-İlk adresi aşağıdaki `LAN_MAC`, ikinciyi `WAN_MAC` yerine yaz:
-
-```sh
-python3 tools/personalise_release.py ../openwrt-mf297d-6.18.60-nss-initramfs.itb --lan-mac LAN_MAC --wan-mac WAN_MAC
-```
-
-PC'de `ready` klasörü oluşur. Bu klasör zaten varsa önceki denemeyle
-karıştırma; yeni bir çalışma klasörü kullan.
-
-**PC / Ubuntu — NSS'yi bir açılış için kapatıp yeniden başlat:**
-
-```sh
-ssh root@192.168.1.1 'uci set nss.general.enabled=0; uci set nss.general.wifi_offload=0; uci commit nss; reboot'
-```
-
-**90 saniye bekle.** Yeniden başlatma önceki geçici dosyaları sildiği için
-kexec dahil **hepsini yeniden gönderiyoruz**:
-
-```sh
-ssh root@192.168.1.1 'mkdir -p /tmp/mf297d-ram'
-scp -O ready/* kexec-aarch64 tools/ram-boot-manual.sh root@192.168.1.1:/tmp/mf297d-ram/
-ssh root@192.168.1.1 'sh /tmp/mf297d-ram/ram-boot-manual.sh'
-```
-
-SSH kesilir. **90 saniye bekle**, sonra **PC / Ubuntu**:
-
-```sh
-ssh -o HostKeyAlias=mf297d-ram root@192.168.1.1
-```
-
-**MODEM / SSH — yeni RAM sisteminde kontrol:**
-
-```sh
-uname -r
-cat /proc/cmdline
-cat /proc/mounts
-cat /sys/devices/system/cpu/online
-nss-status -j
-```
-
-Kernel `6.18.60`, komut satırında `root=/dev/ram0`, CPU listesi `0-1` olmalı.
-Tarayıcıdan `http://192.168.1.1` açılabilir. Genel RAM profilinde Wi-Fi başlangıçta
-kapalıdır; Ethernet'i kullan. RAM'deki ayarlar kalıcı değildir.
-NAND'daki önceki sisteme dönmek için **MODEM / SSH**: `reboot`.
-
-## 4. RESET tuşu ile kurtarma
-
-**Yalnız projenin kurtarma bölümü ve açılış seçicisi önceden kurulmuşsa geçerli.**
-Stok modemde RESET'e basmak bu kurtarmayı kurmaz; fabrika ayarına döndürebilir.
-Stoktan ilk kurtarma kurucusu henüz dağıtılan pakette yok.
-
-Kurtarması kurulu düzende:
-
-1. Ethernet **LAN1/LAN2/LAN3'te**, PC `192.168.1.2/24` olsun.
-2. Modemin güç fişini çıkar.
-3. **RESET'e basılı tutarken** güç fişini tak.
-4. Gücü taktıktan yaklaşık **7 saniye sonra RESET'i bırak**.
-5. **90 saniye bekle.** RESET'e yeniden uzun basma.
-6. **PC / Ubuntu** terminalinden bağlan:
-
-```sh
-ssh -o HostKeyAlias=mf297d-recovery root@192.168.1.1
-```
-
-**MODEM / SSH:** `cat /proc/cmdline` ve `cat /proc/mounts` çalıştır.
-Kök RAM'de olmalı (`root=/dev/ram0`). Normal kurtarma NAND'ı salt okunur açar.
-**PC'den TFTP dosyası beklemez; modemde kayıtlı kurtarma imajını açar.**
-Normal sisteme dönmek için `reboot` yaz; bu sefer RESET'e basma.
-Kurtarmayı gerçekten açıp doğrulamadan NAND'a yazma aşamasına geçme.
-
-## 5. En son NAND'a yaz
-
-### Stoktan ilk kurulum
-
-Kendi yedeğini alan, uygun bölümleri hazırlayan, kurtarmayı önce kurup
-doğrulayan ve cihazın açılış ayarını üreten **ilk kurulum aracı eksik**.
-Bu nedenle burada stoktan doğrudan çalıştırılacak silme/yazma komutu yok.
-Mevcut `nand.bin` bu eksik aracı içermiyor.
-
-### Mevcut proje NAND düzenini güncelleme
-
-Yalnız şu birimler zaten varsa: `wifi_fw`, `bt_fw`, `owrt_kernel`,
-`owrt_rootfs`, `rootfs_data`, `owrt_recovery`. Betik stok cihazı kabul etmez.
-Genelleştirilmiş kurucu bütünüyle canlı flash testinden geçmedi: **deneysel**.
-
-RAM/kurtarma oturumundaysan önce `reboot` ile **normal NAND OpenWrt'ye dön**;
-90 saniye bekle. Hazırlama işlemi normal sistemden yedek alır, sonra ayrı RAM
-bakım sistemine geçer. Bilgisayardaki dosyaları bu geçişte kaybetmezsin.
-
-**PC / Ubuntu — hazırlama araçlarını al:**
-
-```sh
-sudo apt install git gcc-aarch64-linux-gnu libc6-dev-arm64-cross mtd-utils squashfs-tools
 gh repo clone ozgunokan/ZTE-MF297D-OpenWRT ~/MF297D
 cd ~/MF297D
-python3 nss/tools/prepare-nand.py --router 192.168.1.1 --firmware ~/MF297D-kurulum/openwrt-mf297d-6.18.60-nss-nand.bin --kexec ~/MF297D-kurulum/mf297d-tools/kexec-aarch64 --out ~/MF297D-ready
+python3 stock/prepare_install.py --nand ~/MF297D-kurulum/openwrt-mf297d-6.18.60-nss-nand.bin --ram ~/MF297D-kurulum/openwrt-mf297d-6.18.60-nss-initramfs.itb --profile ~/MF297D-kurulum/RAM-PROFILE.json --kexec ~/MF297D-kurulum/mf297d-tools/kexec-aarch64 --out ~/MF297D-ilk-kurulum
 ```
 
-Bu komut henüz flash yazmaz. `~/MF297D-ready/backups` eski sistemi ve özel
-ayarlarını içerir. Klasörü başka yere kopyalayıp sakla; GitHub'a yükleme.
-Kontrol hata verirse sonraki komuta geçme.
+Bu komut **henüz flash yazmaz**. Bütün 25 fiziksel MTD veri alanını ve stok
+UBI dosyalarını indirip boyut/SHA256 ile kontrol eder. `.CFG`, tam flash yedeğinin
+yerine geçmez. Bu yedek data-only/ECC düzeltilmiştir; OOB'lu programlayıcı imajı değildir.
+`~/MF297D-ilk-kurulum/backups` klasörünü ikinci bir yere kopyala.
+Bu klasörü ve `owner` dosyalarını GitHub'a yükleme; sana özeldir.
 
-**PC / Ubuntu — RAM bakım sistemini başlat:**
+Hazırlama sırasında kernel/model, tüm MTD'lerin salt okunur olması, stok hacim
+düzeni, bootloader ve kendi MAC verin kontrol edilir. Hata varsa aşama A'ya geçilmez.
+
+### 3B. Önce kurtarmayı kur — A aşaması
+
+**Bu komut recovery hacmini ve bootloader ENV'sini yazar.** Stok işletim sistemi
+hacimlerini henüz silmez. Güç kesilmemeli; hata sonrası otomatik tekrar yapılmaz.
 
 ```sh
-sh ~/MF297D-ready/boot-maintenance.sh
+cd ~/MF297D
+python3 stock/install.py --ready ~/MF297D-ilk-kurulum --phase-a
 ```
 
-**90 saniye bekle.** RAM değiştiği için dosyaları **yeniden SCP ile** gönder:
+Araç kexec/dosyaları **SCP yerine kendi SSH aktarımıyla** `/tmp` içine gönderir;
+RAM bakım ortamını açar, dosyaları yeni RAM'e yeniden aktarır. Kurtarma imajını
+yazıp geri okur; yalnız bu cihaza bağlı ENV yardımcı programını çalıştırır.
+Stok kernel/rootfs hacimleri ve radyo firmware korunur. Sonunda yeniden başlar.
+
+## 4. Fiziksel RESET kurtarmasını gerçekten dene
+
+1. Ethernet LAN'da, PC `192.168.1.2/24` kalsın.
+2. Modemin fişini çıkar.
+3. **RESET'e basılı tutarken** fişi tak.
+4. Fişi taktıktan **7 saniye sonra RESET'i bırak**.
+5. Yaklaşık **90 saniye** bekle.
+
+**PC Ubuntu:**
 
 ```sh
-ssh -o HostKeyAlias=mf297d-maintenance root@192.168.1.1 'touch /tmp/mf297d-source-keep; mkdir -p /tmp/mf297d-install'
-cd ~/MF297D-ready
-scp -O -o HostKeyAlias=mf297d-maintenance Image maintenance.dtb bootargs.txt kernel.bin rootfs.bin overlay.ubifs env-helper kexec SHA256SUMS install-from-ram.sh prefix.before.sha256 root@192.168.1.1:/tmp/mf297d-install/
+cd ~/MF297D
+python3 stock/install.py --ready ~/MF297D-ilk-kurulum --verify-reset
 ```
 
-**Sıradaki komut NAND'a gerçekten yazar.** Betik hashleri/mevcut düzeni kontrol
-eder; kurtarma ve radyo birimlerini korur, kerneli en son yazar.
+Sadece paneli açılmış görmek yetmez: araç owner kimliğini, U-Boot'tan
+**fiziksel RESET seçimiyle** açıldığını, RAM kökü, salt okunur NAND'ı ve korunan
+bölüm hashlerini doğrular. Başarılıysa yerel RESET kanıtı kaydeder.
+Bu kanıt olmadan B aşaması başlamaz. RESET kurtarma **TFTP beklemez**;
+modemde kayıtlı kurtarma imajını açar.
 
-**PC / Ubuntu:**
+## 5. PC Ubuntu: en son stok OS'yi kaldır ve NAND'a kur — B aşaması
+
+**Bu komut stok işletim sistemi hacimlerini kaldırır.** Doğrulanmış kurtarma,
+bootloader/ART/MAC ve radyo firmware korunur. Sonuç tek OpenWrt'dir.
 
 ```sh
-ssh -o HostKeyAlias=mf297d-maintenance root@192.168.1.1 'chmod 500 /tmp/mf297d-install/env-helper; sh /tmp/mf297d-install/install-from-ram.sh'
+cd ~/MF297D
+python3 stock/install.py --ready ~/MF297D-ilk-kurulum --phase-b
 ```
 
-Bitince modem yeniden başlar. **90 saniye bekle**, sonra **PC / Ubuntu**:
+Araç doğrulanan kurtarma oturumundan ayrı RAM bakımına geçer. Yedeklenmiş üst
+NAND alanını hazırlar; eski UBI'nin alt 58MiB'inin ve korunan bölümlerin
+değişmediğini kontrol eder. Rootfs ve boş overlay yazılıp doğrulanır; kernel
+**en son** yazılır. İşlem sonunda normal yeniden başlar. Hata varsa logu ve
+yedekleri sakla; komutu körlemesine tekrar çalıştırma. Otomatik yarım-kurulum
+devam ettirme/rollback uygulaması bu kitte yoktur.
+
+Yaklaşık 90 saniye sonra **PC Ubuntu**:
 
 ```sh
 ssh root@192.168.1.1 'uname -r; cat /sys/devices/system/cpu/online; nss-status -j; df -h /overlay'
 ```
 
-Kernel `6.18.60`, CPU `0-1`, NSS `active` olmalı. Tarayıcıdan
-`http://192.168.1.1` aç; kendi root şifreni, Wi-Fi ve SIM/APN ayarlarını yap.
-Genel profilde Wi-Fi/LTE kullanıcı tarafından yapılandırılır.
+Kernel `6.18.60`, CPU `0-1`, NSS `active` beklenir. Tarayıcıda
+`http://192.168.1.1` aç. Root parolasını belirle; Wi-Fi'ye şifre koyup etkinleştir;
+SIM/APN'yi ayarla. Genel imaj kişisel Wi-Fi şifresi taşımaz ve radyolar başlangıçta kapalıdır.
+İlk kurulumun başarılı sayılması için normal açılış ve RESET kurtarma geri dönüşü
+cihaz üzerinde ayrıca doğrulanmalıdır. Kitin yeni sürümünde bu canlı uçtan uca
+test henüz yapılmadı; çevrimdışı testler bunun yerine geçmez.
 
-## TFTP mi, SCP mi, RESET mi?
+## Kaynak ve test
 
-| İş | Nasıl? |
-| --- | --- |
-| Telnet CFG hazırlamak | PC'deki EXE; yalnız yerel dosya değişir. |
-| CFG geri yüklemek | Stok config içe aktarma yolu varsa o yol; firmware ekranı değil. |
-| ACS ile Telnet açmak | PC ↔ modem **WAN**; sonra kablo LAN'a alınır. |
-| OpenWrt'ye kexec/RAM dosyası göndermek | PC Ubuntu'dan **SCP**, modem `/tmp` klasörüne. |
-| RAM sistemi başlatmak | Modemde **kexec**; dosya aktarımı değil. |
-| RESET kurtarma | Modemde kayıtlı kurtarma açılır; TFTP gerekmez. |
-| Stoktan ilk RAM/NAND geçişi | Tam dağıtım yolu henüz eksik; SCP komutları bunun yerine geçmez. |
+`loader/` ARM32 modül, ARM64 shim ve aktarım yardımcılarının kaynaklarını içerir.
+Sabit paketi Zig ile yeniden derlemek: `python stock/build.py --bundle PAKET --zig ZIG_YOLU`.
+Kernel/rootfs kaynak reçetesi `nss/` altındadır. `tests/test_handoff.py` gerçek
+derlenmiş geçiş kodunu Unicorn ile çalıştırır; Capstone/Unicorn gerekir.
+Yeni image/DTB ile eski sabit modül karıştırılmaz; CRC ve bellek tablosu birlikte üretilmelidir.
 
-## Ubuntu'da paket ekleyip derlemek
+## Zaten bu projenin OpenWrt'si kuruluysa
 
-Mevcut bilgisayardaki alan duruyor. **PC / Windows**:
+Stok kurucusunu yeniden çalıştırma. [Mevcut NAND sistemini güncelleme ve temiz derleme](docs/NSS-GUNCELLEME.md)
+anlatımını kullan. Kullanımdaki cihazda CPU ve LED düzeltmeleri ayrıca kalıcı kurulmuştur.
 
-```powershell
-wsl -d MF297D-Ubuntu -u build
-```
+## Bu bilgisayardaki Ubuntu derleme alanı
 
-**PC / Ubuntu**:
+PC Windows: `wsl -d MF297D-Ubuntu -u build`.
+Ardından **PC Ubuntu**:
 
 ```sh
 cd /home/build/openwrt-mf297d-nss-ipq50
@@ -357,12 +291,5 @@ make defconfig
 make -j8
 ```
 
-Paketlerini `menuconfig` ekranında seçip kaydet. Derlemek kendiliğinden
-modeme yazmaz. [Başka Ubuntu'da temiz derleme](docs/NSS-GUNCELLEME.md#başka-bir-ubuntuda-temiz-alan).
-
-[NSS/CPU test kapsamı](docs/NSS-RELEASE.md) · [Kurtarma](docs/RECOVERY.md) ·
-[İlk cihazdaki tarihsel geçiş](docs/INSTALL.md) · [Lisanslar](NOTICE.md).
-
-Genel yayın profili ve genelleştirilmiş NAND kurucu bütünüyle canlı flash
-testinden geçmedi. Çalışan test cihazı ile temiz genel profilin kapsamları
-NSS test belgesinde ayrı açıklanır.
+Derlemek modeme kendiliğinden yazmaz. Kaynak reçetesi [nss/](nss/SOURCE.json),
+test ayrıntıları [NSS-RELEASE](docs/NSS-RELEASE.md), lisanslar [NOTICE](NOTICE.md).

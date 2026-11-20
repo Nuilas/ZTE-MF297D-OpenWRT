@@ -10,15 +10,18 @@ if command -v nss-status >/dev/null && nss-status -j | grep -q '"state":"active"
 fi
 [ "$(cat /sys/kernel/kexec_loaded)" = '0' ]
 grep -q 'mf297d.permanent=1' /proc/cmdline
+[ "$(cat /sys/devices/system/cpu/online)" = 0 ] || {
+ echo 'Prepare a clean single-CPU boot using tools/prepare_ram_boot.py first.' >&2
+ exit 1
+}
+! grep -q '^ath11k ' /proc/modules || {
+ echo 'Wi-Fi has already started; use the one-shot clean boot procedure.' >&2
+ exit 1
+}
 grep -Eq 'mf297d.nss_lab=20261114|mf297d.public_ram=1' bootargs.txt
 grep -q 'root=/dev/ram0' bootargs.txt
 ! grep -q 'ubi.mtd=' bootargs.txt
 sha256sum -c SHA256SUMS
-if [ -f /etc/config/nss ]; then
- uci set nss.general.enabled=1
- uci set nss.general.wifi_offload=1
- uci commit nss
-fi
 chmod 500 kexec-aarch64
 [ ! -x /etc/init.d/mf297d-wifi ] || /etc/init.d/mf297d-wifi stop
 wifi down

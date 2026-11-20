@@ -1,0 +1,4 @@
+#!/bin/sh
+/etc/init.d/mf297d-wifi-led enable
+/etc/init.d/mf297d-wifi-led start
+exit 0

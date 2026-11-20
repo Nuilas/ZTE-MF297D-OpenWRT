@@ -1,0 +1,52 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-2.0-only
+# MF297D's front Wi-Fi LED belongs to the internal ZTE USB modem, not TLMM.
+USB=/sys/bus/usb/devices/2-1
+export HOME=/tmp/mf297d-adb-home
+mkdir -p "$HOME"
+
+set_led() {
+ [ "$(cat "$USB/idVendor" 2>/dev/null)" = 19d2 ] || return 1
+ [ "$(cat "$USB/idProduct" 2>/dev/null)" = 1485 ] || return 1
+ serial=$(cat "$USB/serial" 2>/dev/null)
+ [ -n "$serial" ] || return 1
+ # A serial target prevents commands reaching any external ADB device.
+ timeout 8 /usr/bin/adb -s "$serial" shell \
+  "test -f /sys/class/leds/led:wifi_white/brightness && echo $1 > /sys/class/leds/led:wifi_white/brightness" \
+  >/dev/null 2>&1
+}
+
+wifi_value() {
+ # Any running radio lights the shared front Wi-Fi indicator.
+ if ubus call network.wireless status 2>/dev/null |
+    jsonfilter -e '@.*.up' 2>/dev/null | grep -qx true; then
+  echo 4
+ else
+  echo 0
+ fi
+}
+
+case "${1:-}" in
+ --on) set_led 4; exit $? ;;
+ --off) set_led 0; exit $? ;;
+ --sync) set_led "$(wifi_value)"; exit $? ;;
+ '') ;;
+ *) echo 'Usage: mf297d-wifi-led [--on|--off|--sync]' >&2; exit 2 ;;
+esac
+
+last=unknown
+age=0
+while :; do
+ value=$(wifi_value)
+ # Refresh periodically to recover after an internal modem restart.
+ if [ "$value" != "$last" ] || [ "$age" -ge 10 ]; then
+  if set_led "$value"; then
+   last=$value
+  else
+   last=unknown
+  fi
+  age=0
+ fi
+ age=$((age+1))
+ sleep 3
+done

@@ -9,14 +9,6 @@
       "bytes": 259,
       "sha256": "7bc7628981be1c518588db54425074cd6b57e45af5a47cbac07d71810989d603"
     },
-    "NOTICE.md": {
-      "bytes": 4323,
-      "sha256": "e83a749d9232d01952ed8195f51b74ce1ed797796bf24fddf212418e3c3fa917"
-    },
-    "README.md": {
-      "bytes": 14837,
-      "sha256": "4da62df96585046dda654f467bfd3dba247a5af20d36fe59c507308eefa5a255"
-    },
     "config/kernel-native.config": {
       "bytes": 155856,
       "sha256": "2de09db4370f9bc250112f28f2edc7bb3c547c9396668c2e1f8a40f18e720773"
@@ -50,12 +42,12 @@
       "sha256": "7bcee31893df30b78296cf054cd82388bb086448bae05df1598f2e90b75826d2"
     },
     "docs/NSS-GUNCELLEME.md": {
-      "bytes": 8270,
-      "sha256": "70a25449d51bdd423214fa8c2f5d23287fc76c467546c1969fbcbd87aea665dc"
+      "bytes": 9310,
+      "sha256": "7c599f3bfed78a0570618cdea98a97974c67f0a7661f745f500f8e43316ab769"
     },
     "docs/NSS-RELEASE.md": {
-      "bytes": 2948,
-      "sha256": "4959f7b52a98236d8d3fbfe4c5ccebb90c597095872b6ecf91b410c576915559"
+      "bytes": 5752,
+      "sha256": "e3daefb7a3b9a72c8964d06d5766692d2b0d5a487862edad9c9a7e520e304cd5"
     },
     "docs/RADIOS.md": {
       "bytes": 4948,
@@ -89,17 +81,73 @@
       "bytes": 33166,
       "sha256": "2d9e9cb2c46b7ea5b1f5e2820c2374bff7bfa039da2b70fb249758b0f93a2715"
     },
+    "files/etc/init.d/mf297d-wifi": {
+      "bytes": 258,
+      "sha256": "5482a32c7a0bda74f8e8f6c314ad3441d4d36c48984b37de2392b5795c126377"
+    },
+    "files/etc/modules.d/60-mf297d-lte": {
+      "bytes": 55,
+      "sha256": "317b15d77b888c814dfce10201a511b58edcbb76414e1b8b01bb06b54e004a05"
+    },
+    "files/usr/sbin/mf297d-wifi-start": {
+      "bytes": 616,
+      "sha256": "8a0ed31571af66454d16985d2b41d16c1775d493e325fd67a11bbb6a64a6fa27"
+    },
+    "LICENSES/ADB-adb-NOTICE.txt": {
+      "bytes": 10750,
+      "sha256": "9e097c628332c9f60d958f4477b5a301c95e7342c0afbc513c61b8b6145f4c40"
+    },
+    "LICENSES/ADB-libcutils-NOTICE.txt": {
+      "bytes": 10695,
+      "sha256": "38751245389e1e23f73e6f5384b5cbe7fa972cc4410c5adc9c04b082a0b9561a"
+    },
+    "LICENSES/ADB-liblog-NOTICE.txt": {
+      "bytes": 10695,
+      "sha256": "f09747e3bc87e0ec3bdea983b37e18eeda223e01e678f76418a8a731ed8f590f"
+    },
+    "LICENSES/ADB-libmincrypt-NOTICE.txt": {
+      "bytes": 1480,
+      "sha256": "b220fd3c79e0906eda798b23699305ab05576e849f45810eca74afcb2c7f2311"
+    },
+    "LICENSES/ADB-libutils-NOTICE.txt": {
+      "bytes": 10695,
+      "sha256": "38751245389e1e23f73e6f5384b5cbe7fa972cc4410c5adc9c04b082a0b9561a"
+    },
+    "LICENSES/ADB-libzipfile-NOTICE.txt": {
+      "bytes": 10695,
+      "sha256": "38751245389e1e23f73e6f5384b5cbe7fa972cc4410c5adc9c04b082a0b9561a"
+    },
+    "LICENSES/ADB-NOTICE.txt": {
+      "bytes": 17680,
+      "sha256": "5f28c11f8b1b3f97b9d42c74b85371ebf4127f241b799279bcecd69f7ee542dc"
+    },
     "LICENSES/GPL-2.0.txt": {
       "bytes": 18600,
       "sha256": "8780e78a1a737e127f25a65f6d95269bffd36158dc261114de7859b490bfc5aa"
+    },
+    "NOTICE.md": {
+      "bytes": 5319,
+      "sha256": "0e9846ee9a88056e803eb9382c7f3f004b80fe92c3f896cb3493d7b5e2d1bb06"
     },
     "nss/build.sh": {
       "bytes": 1064,
       "sha256": "b67b8aa4caa8e5fdc282744088d1f09a7e7344530f75baa0cc969d321f1f3847"
     },
+    "nss/config/initramfs.config": {
+      "bytes": 296749,
+      "sha256": "7dd6646b02e083bb3ff15f2127a6dc4d310762467fcfc679c1e80facf317a460"
+    },
+    "nss/config/nand.config": {
+      "bytes": 296705,
+      "sha256": "14351e6aa1306e481c135080a40513097704ed23b23708498eebd5e6c4438675"
+    },
     "nss/configure.sh": {
-      "bytes": 1612,
-      "sha256": "7a2863456ffc9ef7dd64e8084272a3d182c8bef7f6c0c661a4df43f920b6da72"
+      "bytes": 1676,
+      "sha256": "2a7c136a57e9b2bf6d741e18004a265eb82ec08551d3f473f8eb0d5074eab2aa"
+    },
+    "nss/feed-overlay/qca-nss-drv/patches/0990-nss-queue-registration-on-available-cpus.patch": {
+      "bytes": 1187,
+      "sha256": "006e19924945741bb5a6df4290de056c9da9ab2a55a5e826cf654c3966ac80cd"
     },
     "nss/feeds-lock.json": {
       "bytes": 339,
@@ -117,321 +165,105 @@
       "bytes": 6993,
       "sha256": "92d31da6d8cdad2b705e88a38fcca0483548dceefd78d7a7bfafc961ac9950e9"
     },
-    "nss/SOURCE.json": {
-      "bytes": 343,
-      "sha256": "6132b8bf51752f5a5c92b57729e2829422a54cbf68efd72ffd4509aaecc1aec7"
-    },
-    "patches/0999-mf297d-board-port.patch": {
-      "bytes": 3809,
-      "sha256": "c4230c9e34be602a27703a8acbb2ddcf56e65169e65878c5fe69623ff97b19c5"
-    },
-    "tools/build_dtb.py": {
-      "bytes": 1277,
-      "sha256": "83b301edc3c4b9f285188b154e520d70ea9d271d3d78371d2f8efc4989a1371a"
-    },
-    "tools/build_fit.py": {
-      "bytes": 3064,
-      "sha256": "a65c730d6416e0803d390f21fb37a6818f592fabec51e4ec38b09778b2a7b3d1"
-    },
-    "tools/build_kernel.sh": {
-      "bytes": 1561,
-      "sha256": "7c5aec251a5e4d2839a1659e0b74cf52976b0bfd48030b7cfc9ef17ca72d2948"
-    },
-    "tools/build_kexec.sh": {
-      "bytes": 646,
-      "sha256": "2a9811b229b2e318f34cd01d7a37dd9249bea5c7c991a93ba749d9eb34a7618e"
-    },
-    "tools/fdt_codec.py": {
-      "bytes": 1683,
-      "sha256": "f2bb53163b1f6508a65ea296227850ba14d4ae91bea24c74fab6964f40efbdd0"
-    },
-    "tools/inspect_fit.py": {
-      "bytes": 3260,
-      "sha256": "71c905f8e1c0782f7d1fc453e3cfc5991c3f999d1d08f86adbf2674065e6186f"
-    },
-    "tools/package_stock_fw.py": {
-      "bytes": 1423,
-      "sha256": "648ebf2f949676a491fbf3edc97a1fa0b0af41b624723925250aa899582ebd17"
-    },
-    "tools/personalise_release.py": {
-      "bytes": 2351,
-      "sha256": "9413631ac63623f0d260d0fefd2895a1a4a143b0b682cb48055137a98443410b"
-    },
-    "tools/preflight.sh": {
-      "bytes": 604,
-      "sha256": "a25a7ae8c17f21158c9dc3261f3f2e0b7b75de0b9e691a60c3e7009bec751773"
-    },
-    "tools/prepare_caldata.py": {
-      "bytes": 1525,
-      "sha256": "c8d653d1eaaafbccd919c7ef60a6da21b724982a2031380a2d3b7c0b2161499e"
-    },
-    "tools/ram-boot-manual.sh": {
-      "bytes": 1418,
-      "sha256": "3e331c08c4392ac49739f94635601a88e3021c923806714184d223321b151164"
-    },
-    "tools/replace_fit_dtb.py": {
-      "bytes": 2081,
-      "sha256": "e5a92785bc80943b6338aeb25770aee1a7dde286782063756e3905e34d4382bc"
-    },
-    "tools/telnet_cfg.py": {
-      "bytes": 3008,
-      "sha256": "54960074faa7fa74e36115fdabf869ae034b7ffd114113a3d05429ae4c318cbf"
-    },
-    "tools/test_offline.py": {
-      "bytes": 4764,
-      "sha256": "829331e93019ffd4122a9edbcb4847ede8d2feaaaeedb4ead5fe076135b00b42"
-    },
-    "tools/verify_export.py": {
-      "bytes": 1801,
-      "sha256": "13c72a879877ebcb14771b872ab118ad4376ec1459ee415719d1c120af37c846"
-    },
-    "tools/windows-manager/controller.py": {
-      "bytes": 13981,
-      "sha256": "2dfc39eaf8c79b4dff91a80ff81692c98bea00de036b7ca885d7c7cacce2df16"
-    },
-    "tools/windows-manager/cwmp.py": {
-      "bytes": 16029,
-      "sha256": "869a8b6b0c6c40288dc2e856d6a8ea70276c78672c98db827c3166e0d6b185e0"
-    },
-    "tools/windows-manager/flash_backup.py": {
-      "bytes": 11540,
-      "sha256": "1f8ff6ca699ad16581e00969572e5034bf52b2cb3a2b0e5b9672d2a5e0478a57"
-    },
-    "tools/windows-manager/gui.py": {
-      "bytes": 18596,
-      "sha256": "34fb033768bf70c703b66ba7a9424fbb901f9ab2b536d54e3d948a785fdc3aa2"
-    },
-    "tools/windows-manager/LICENSE.txt": {
-      "bytes": 1056,
-      "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685"
-    },
-    "tools/windows-manager/MF297D-Yerel-Yonetici.spec": {
-      "bytes": 889,
-      "sha256": "c465ecf6754a017d2548afd8a1d691a89fb6d4766ede6713e0ed5dccd2ba9071"
-    },
-    "tools/windows-manager/network_services.py": {
-      "bytes": 8314,
-      "sha256": "f0a0d584c755cbd76f056fcf02b2f6b42bce8f58148ed67c72db7b040383a331"
-    },
-    "tools/windows-manager/README.md": {
-      "bytes": 5170,
-      "sha256": "d4ef794cd492c19d1b5aad5256990b5a0392bcc294c2f2f0816eca4ebbbce49f"
-    },
-    "tools/windows-manager/requirements.txt": {
-      "bytes": 54,
-      "sha256": "71a22ee0e28b8ac0dfa7ae8073fbcf92be64a9004e84803f7aa9398d08f78360"
-    },
-    "tools/windows-manager/telnet_client.py": {
-      "bytes": 3953,
-      "sha256": "b2d3c387c9387b24d6f53718e6dc704aff5b109cc101b9ed6b98a94d172eec26"
-    },
-    "tools/windows-manager/test_app.py": {
-      "bytes": 10566,
-      "sha256": "83f0841bcee7baf2cece15b071de0d6e5cd23077378452de2f701d24fec42e3e"
-    },
-    "tools/windows-manager/test_flash_backup.py": {
-      "bytes": 3177,
-      "sha256": "6c1a40c6c354cc286e6398f55cb1934a9c6d204e04b9ce05b514f8ebd2f0b45f"
-    },
-    "tools/windows-manager/THIRD_PARTY_NOTICES.json": {
-      "bytes": 1629,
-      "sha256": "ec174e34d6e80357849fb7ca2e680d8170bc470488dd9a6d5fe8c7cf620b5296"
-    },
-    "tools/windows-manager/windows_net.py": {
-      "bytes": 5849,
-      "sha256": "70a8e274da06ecd4b8ca146b507df1f4607c4fd814fa42ced9d7bd183ba45c1f"
-    },
-    "tools/windows-manager/assets/app.ico": {
-      "bytes": 312,
-      "sha256": "36091614a6cc8c1aa5effd82fb8fe20f061cfab13a176bfefbaf0f60492d32f2"
-    },
-    "tools/windows-manager/assets/app.png": {
-      "bytes": 290,
-      "sha256": "a14c14fd4ddfd0ee38f79df78773a3c31247b88af10cd0d4f2ab494a4e3dd602"
-    },
-    "tools/windows-manager/licenses/cryptography-LICENSE": {
-      "bytes": 197,
-      "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
-    },
-    "tools/windows-manager/licenses/cryptography-LICENSE.APACHE": {
-      "bytes": 11360,
-      "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
-    },
-    "tools/windows-manager/licenses/cryptography-LICENSE.BSD": {
-      "bytes": 1532,
-      "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb"
-    },
-    "tools/windows-manager/licenses/pyinstaller-COPYING.txt": {
-      "bytes": 32604,
-      "sha256": "0598064c7d2718e38d7914a7d08343b2fa008e3bea9ebba2aa7a6ffa5900dd64"
-    },
-    "tools/windows-manager/licenses/scapy-LICENSE": {
-      "bytes": 18092,
-      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
-    },
-    "src/lte-modules/build.sh": {
-      "bytes": 1094,
-      "sha256": "a0e5d0033e1f3831eac640b556037a4ac697a4dc396ee1fafd1c115b10cf2558"
-    },
-    "src/lte-modules/Makefile": {
-      "bytes": 452,
-      "sha256": "168594e4d9fa139370f528e3c097218cd349638c54cfff813090c199ea1e887d"
-    },
-    "src/lte-modules/patch_option.py": {
-      "bytes": 380,
-      "sha256": "35c79aa8f1eadd8255649fcec2e24f704315e89f787344c25847ff261f04b3bb"
-    },
-    "src/kernel/drivers/spi/spi-qpic-snand.c": {
-      "bytes": 48043,
-      "sha256": "877dba2b90093006e220e8a1d04b9abe51041833b21ffab1bd2e4520c5635080"
-    },
-    "src/kernel/drivers/net/mdio/mdio-ipq4019.c": {
-      "bytes": 10491,
-      "sha256": "05277956637dbbd1e85b59a7b39fab3396b068597f40a8bd2e2feb06075f9b0c"
-    },
-    "src/kernel/drivers/net/pcs/pcs-qca-uniphy.c": {
-      "bytes": 29836,
-      "sha256": "8fdca9ef16a24932b2971184add511aefdf442dcf13eb5be438de25950fbd214"
-    },
-    "src/kernel/drivers/mtd/nand/raw/qcom_nandc.c": {
-      "bytes": 70262,
-      "sha256": "6b9c20a2be724ce3002a61e99c7c8113c68772eb0c30d72c8ff1c3514263b20a"
-    },
-    "src/kernel/drivers/mtd/nand/spi/foresee.c": {
-      "bytes": 3468,
-      "sha256": "4b900d255c876a1010b657cd1d85d25e72b52be4327c059697729af1fdede86e"
-    },
-    "src/kernel/drivers/dma/qcom/bam_dma.c": {
-      "bytes": 40545,
-      "sha256": "f0a29a997a32dc1314802b45d33a1a42ae687ce98f62d77c5c64a4eb4380ce5e"
-    },
-    "reference/env-writer/README.md": {
-      "bytes": 961,
-      "sha256": "bd76c4c27f872fd3e6a41a3c0c0f129b698612c5d08e2d08cda0fed678c11c38"
-    },
-    "reference/env-writer/wifi_env_install.c": {
-      "bytes": 13394,
-      "sha256": "ec0a29363a9fad44dfb09c36693f410d8d26b86c55754286f6ebf68cd34fca90"
-    },
-    "reference/etc/openwrt_release": {
-      "bytes": 245,
-      "sha256": "cbf712211c108ad67ec1bfbdb887ac1ad6fd882ae8d4bbc30d55b447c54b2e85"
-    },
-    "reference/stock-ramboot/build_ramboot.py": {
-      "bytes": 4079,
-      "sha256": "f9510e2daafc56c759df73bcb4bb9bec3ab2dc4caeb480aeadcb0d88726097d4"
-    },
-    "reference/stock-ramboot/mdio_probe.S": {
-      "bytes": 1184,
-      "sha256": "2105404db67b58e55b8409632569c26c78bca09a0285f2f7db3a79b034809e9c"
-    },
-    "reference/stock-ramboot/mf297d_ramboot.c": {
-      "bytes": 24360,
-      "sha256": "235b69d50a1e90bc48f4d7ad53f3fda462ffb86cafc7fcb49c1f27641aefcb11"
-    },
-    "reference/stock-ramboot/nand_readonly.c": {
-      "bytes": 5531,
-      "sha256": "123752743c87664affa9cae098cb28b310f8cac076c4e198ea51dc18b731463a"
-    },
-    "reference/stock-ramboot/oob_probe.c": {
-      "bytes": 3625,
-      "sha256": "cdeb77956e47f3da0ee51aec74a3b9c199ee9ee0f6ceaa0fcc68c9f6f54afb93"
-    },
-    "reference/stock-ramboot/ramboot_a64.S": {
-      "bytes": 6329,
-      "sha256": "78b0a28bf5d6154cb82e46ce03f1f2cdb5058a5120f6a1d8496fe2687a98b9f1"
-    },
-    "reference/stock-ramboot/ramboot_config.h": {
-      "bytes": 1178,
-      "sha256": "ecb08cc08658992010330c446279df33ca55933a4f85e7a4743daaa9d546d773"
-    },
-    "reference/stock-ramboot/ramcommit.c": {
-      "bytes": 1039,
-      "sha256": "9d9bdc38410389e2c5ed3dfe897fed3915e432bad19bdc6deeeab7049f63c68d"
-    },
-    "reference/stock-ramboot/ramfault.S": {
-      "bytes": 1122,
-      "sha256": "48807c824404d714e6c813ead68098293f19d662122a3ae4d413ffcb6ab6df0f"
-    },
-    "reference/stock-ramboot/ramfetch.c": {
-      "bytes": 2987,
-      "sha256": "674dc42df3642e2127f3df876e545b23b791591bcc5f995723d72fe55f9e672a"
-    },
-    "reference/stock-ramboot/README.md": {
-      "bytes": 879,
-      "sha256": "d8746cccc609303f8b45866236be9b0bc29c0a7ad83f51608beb005c501ac21a"
-    },
-    "reference/rootfs/etc/board.d/02_network": {
-      "bytes": 2182,
-      "sha256": "b56268aa432ce9015396b8c919d35f81245891ef0132630c6cf51dc77325704b"
-    },
-    "reference/rootfs/etc/board.d/99-default_network": {
-      "bytes": 256,
-      "sha256": "86b966006324cffab7c9b948d77f42ab1ae8d85e0ba01bd9d7e6337fe7cc2668"
-    },
-    "reference/rootfs/etc/hotplug.d/firmware/11-ath11k-caldata": {
-      "bytes": 6623,
-      "sha256": "d7a312a86f09ce579d2d74a07b3f84da5b6b1236a0f9e7d90cc318234f92ac76"
-    },
-    "reference/etc/apk/world": {
-      "bytes": 2530,
-      "sha256": "068d0d88725acf4cb6ab0ec92d58d0266968d2b085bb04585bd443632f4b5cd8"
-    },
-    "nss/config/initramfs.config": {
-      "bytes": 296760,
-      "sha256": "dc7dedf8a5fc32364e2d574e999bd7638f13a2da1509295ecf254bc800519699"
-    },
-    "nss/config/nand.config": {
-      "bytes": 296716,
-      "sha256": "cad98ab00b56d9f160ee157cbc67c9dcab5eee49b5c46d969f56af6e66d647e6"
-    },
-    "nss/src/env_transition.c": {
-      "bytes": 8476,
-      "sha256": "443a0272a665e45122e696b918d7383630c82b117ccda2f24e279ca80fe32d29"
-    },
-    "nss/src/factory_data.c": {
-      "bytes": 2298,
-      "sha256": "4a5103e8c9783f8b7f77a7fe04ff0ea451cb9f5786176d483d7886675beee790"
-    },
-    "nss/src/radio-prepare": {
+    "nss/overlay/files/etc/board.d/03_mf297d_macs": {
+      "bytes": 357,
+      "sha256": "a82bf6bf293bdf219a62ea33836e91ee600b99e9381dd7042d5ad98aaf0055d5"
+    },
+    "nss/overlay/files/etc/config/dhcp": {
+      "bytes": 475,
+      "sha256": "26a759665177acfab80d74d205f9258235cc02002f29c9caab183987d00a3300"
+    },
+    "nss/overlay/files/etc/config/dropbear": {
+      "bytes": 90,
+      "sha256": "9147e2b7a3568ee04c87209735fad17999915029ffda9ae0aca66587e82c1c2e"
+    },
+    "nss/overlay/files/etc/config/firewall": {
+      "bytes": 597,
+      "sha256": "493c0a619b31110936ef7cfc5fafa72be5ff13c8a850daa32326cebf00815d23"
+    },
+    "nss/overlay/files/etc/config/luci": {
+      "bytes": 223,
+      "sha256": "b4c2460d608556cfaa27fe5a306070504fe32a9ad107d35747fbc416d2850ec2"
+    },
+    "nss/overlay/files/etc/config/network": {
+      "bytes": 712,
+      "sha256": "8425c6b78037286c124967270048da488b6ac5ff6a0903571bafc9bff724704e"
+    },
+    "nss/overlay/files/etc/config/nss": {
+      "bytes": 159,
+      "sha256": "2a8e30be90e526a3065e40815e0c5aa5ccd754cfe12d2977138cc17e058751ec"
+    },
+    "nss/overlay/files/etc/config/rpcd": {
+      "bytes": 169,
+      "sha256": "80a334ba1194fabb0295048a7b7028fbd47355718427cd2aa7982e65d407f23d"
+    },
+    "nss/overlay/files/etc/config/system": {
+      "bytes": 209,
+      "sha256": "880265838b1c1e01a31b6cf5244194fc75555304a233f72be8f8f53004ecafd8"
+    },
+    "nss/overlay/files/etc/config/uhttpd": {
+      "bytes": 4912,
+      "sha256": "6cc793366729d4792b95139780baa4fbfc3402db6b63aa015d3007b34510e14a"
+    },
+    "nss/overlay/files/etc/config/wireless": {
+      "bytes": 748,
+      "sha256": "ea66e43b7f79cea9a59a83418f8d2b4d0846c85b66ef0dd2d880d8d5fe178a0a"
+    },
+    "nss/overlay/files/etc/group": {
+      "bytes": 115,
+      "sha256": "0380cc7226db5490451ee6c7cd5e8cbdbf8932b3c00e14bbf0681e5d8d7137e3"
+    },
+    "nss/overlay/files/etc/hosts": {
+      "bytes": 110,
+      "sha256": "c1a978d90673437b35fa9494e0a54294062c152bb653d490b718052ab88447fd"
+    },
+    "nss/overlay/files/etc/init.d/mf297d-cpu": {
+      "bytes": 577,
+      "sha256": "e9b72bcd3b2de2cc7ce1a7e9dd3aa540db9d816c1acdeda9f71abda20c9f3ff9"
+    },
+    "nss/overlay/files/etc/init.d/mf297d-radio": {
+      "bytes": 78,
+      "sha256": "c03c2e489792890fdaf881bf43b13d41f0020dd90c50617c18505d0452169ef7"
+    },
+    "nss/overlay/files/etc/init.d/mf297d-wifi-led": {
+      "bytes": 414,
+      "sha256": "0da41c988b42f75d0e1c78d6e8b907f5685df3798e54ed994841273ebe54ca42"
+    },
+    "nss/overlay/files/etc/passwd": {
+      "bytes": 153,
+      "sha256": "f27d0e9b69f35ad2f9ef4bc0074bc5d0c8d2d683dc1ac4f6c66c528f2e42a186"
+    },
+    "nss/overlay/files/etc/shadow": {
+      "bytes": 93,
+      "sha256": "88ee8d39047ce430f7917fddbe85c3197f8092a5d7cc7a9a91745a8d0c7fd337"
+    },
+    "nss/overlay/files/etc/uci-defaults/08-mf297d-cpu": {
+      "bytes": 76,
+      "sha256": "92d7d1f635a1cfedd0bfd42ccdf42d215c97e7bcdeefc5ec27faae19e44d3b56"
+    },
+    "nss/overlay/files/etc/uci-defaults/09-mf297d-owner": {
+      "bytes": 517,
+      "sha256": "4075c1a01b8b55598f22b7b9b60572823e3af1f2bcbd7f1bb3468c81e7a9202b"
+    },
+    "nss/overlay/files/etc/uci-defaults/11-mf297d-wifi-led": {
+      "bytes": 86,
+      "sha256": "24ce7147efd8bbe517c75102b8a61af8ac89696b4bff0070de816f28d7be4cf0"
+    },
+    "nss/overlay/files/usr/sbin/mf297d-radio-prepare": {
       "bytes": 2479,
       "sha256": "7f1d7be73c7a96a57e3d6553df60b701bcadc015f17ea7c2956402a4c22a5e89"
     },
-    "nss/src/reader-build.json": {
-      "bytes": 384,
-      "sha256": "8e31f676c3888fc806bfac2cb1fa58ff2dc8963fb47ebd5e5094b0b9bc3e304e"
+    "nss/overlay/files/usr/sbin/mf297d-wifi-led": {
+      "bytes": 1373,
+      "sha256": "092a528df27ecf6207c3306221f73a7ac166deeea892df8b7b893d1469e99e15"
     },
-    "nss/src/stock-firmware.sha256": {
+    "nss/overlay/files/usr/share/mf297d/stock-firmware.sha256": {
       "bytes": 2564,
       "sha256": "40af58bc3c1ca3b28d97985d4284d4ddee937f341b4775c95450efe578a226dd"
     },
-    "nss/tools/boot-maintenance.sh": {
-      "bytes": 1577,
-      "sha256": "c5b354018d3c85329f001c182deed4e4b61604cbe04ebf516e8b12437e09c574"
-    },
-    "nss/tools/build-radio-reader.py": {
-      "bytes": 2544,
-      "sha256": "7c921d9eac26519fdee5cedc9d9eefd60d86ceb0d0984b4e1051129e9d3a2f21"
-    },
-    "nss/tools/install-from-ram.sh": {
-      "bytes": 2141,
-      "sha256": "793ed467aa9b46c8d3ff95f30cc136df9faa1c8effaae8891887854d430a6a62"
-    },
-    "nss/tools/package-build.py": {
-      "bytes": 1868,
-      "sha256": "33abf4f3b57eeceb5809edd4a09115fec5cc23ad604e50e542b91ad2876bb7c4"
-    },
-    "nss/tools/prepare-nand.py": {
-      "bytes": 10443,
-      "sha256": "3bef8b45c829c746031631837c6aa210d91a1eb738f7a5866e5be39ca72dfb84"
-    },
-    "nss/tools/prune-unused-feeds.py": {
-      "bytes": 1319,
-      "sha256": "ad03b3394d91e6022c3e6b2eb7b587dc026019cb08c3b091a96f0a00ac287251"
-    },
-    "nss/tools/select-profile.py": {
-      "bytes": 1223,
-      "sha256": "23dd82944d97a5254927519800cfe013ac85e66c30b2dd691d4962a1e060088b"
+    "nss/overlay/package/kernel/mac80211/patches/nss-extra/ath11k/999-999-ath11k-support-legacy-mpd-provider.patch": {
+      "bytes": 3551,
+      "sha256": "03f46d3dbbb96ab1d6bfe74b8083e9d489873d6c76bcd39d54b68177858c7364"
     },
     "nss/overlay/target/linux/qualcommax/dts/ipq5018-zte-mf297d.dts": {
       "bytes": 35342,
@@ -497,109 +329,401 @@
       "bytes": 4017,
       "sha256": "90f1c32b812fa79a434492dff1108002f3fe418ecbdc0848ca96574a46e8f1b1"
     },
-    "nss/overlay/package/kernel/mac80211/patches/nss-extra/ath11k/999-999-ath11k-support-legacy-mpd-provider.patch": {
-      "bytes": 3551,
-      "sha256": "03f46d3dbbb96ab1d6bfe74b8083e9d489873d6c76bcd39d54b68177858c7364"
+    "nss/SOURCE.json": {
+      "bytes": 343,
+      "sha256": "6132b8bf51752f5a5c92b57729e2829422a54cbf68efd72ffd4509aaecc1aec7"
     },
-    "nss/overlay/files/etc/group": {
-      "bytes": 115,
-      "sha256": "0380cc7226db5490451ee6c7cd5e8cbdbf8932b3c00e14bbf0681e5d8d7137e3"
+    "nss/src/env_transition.c": {
+      "bytes": 8476,
+      "sha256": "443a0272a665e45122e696b918d7383630c82b117ccda2f24e279ca80fe32d29"
     },
-    "nss/overlay/files/etc/hosts": {
-      "bytes": 110,
-      "sha256": "c1a978d90673437b35fa9494e0a54294062c152bb653d490b718052ab88447fd"
+    "nss/src/factory_data.c": {
+      "bytes": 2298,
+      "sha256": "4a5103e8c9783f8b7f77a7fe04ff0ea451cb9f5786176d483d7886675beee790"
     },
-    "nss/overlay/files/etc/passwd": {
-      "bytes": 153,
-      "sha256": "f27d0e9b69f35ad2f9ef4bc0074bc5d0c8d2d683dc1ac4f6c66c528f2e42a186"
-    },
-    "nss/overlay/files/etc/shadow": {
-      "bytes": 93,
-      "sha256": "88ee8d39047ce430f7917fddbe85c3197f8092a5d7cc7a9a91745a8d0c7fd337"
-    },
-    "nss/overlay/files/usr/sbin/mf297d-radio-prepare": {
+    "nss/src/radio-prepare": {
       "bytes": 2479,
       "sha256": "7f1d7be73c7a96a57e3d6553df60b701bcadc015f17ea7c2956402a4c22a5e89"
     },
-    "nss/overlay/files/usr/share/mf297d/stock-firmware.sha256": {
+    "nss/src/reader-build.json": {
+      "bytes": 384,
+      "sha256": "8e31f676c3888fc806bfac2cb1fa58ff2dc8963fb47ebd5e5094b0b9bc3e304e"
+    },
+    "nss/src/stock-firmware.sha256": {
       "bytes": 2564,
       "sha256": "40af58bc3c1ca3b28d97985d4284d4ddee937f341b4775c95450efe578a226dd"
     },
-    "nss/overlay/files/etc/board.d/03_mf297d_macs": {
-      "bytes": 357,
-      "sha256": "a82bf6bf293bdf219a62ea33836e91ee600b99e9381dd7042d5ad98aaf0055d5"
+    "nss/tools/boot-maintenance.sh": {
+      "bytes": 1577,
+      "sha256": "c5b354018d3c85329f001c182deed4e4b61604cbe04ebf516e8b12437e09c574"
     },
-    "nss/overlay/files/etc/config/dhcp": {
-      "bytes": 475,
-      "sha256": "26a759665177acfab80d74d205f9258235cc02002f29c9caab183987d00a3300"
+    "nss/tools/build-radio-reader.py": {
+      "bytes": 2544,
+      "sha256": "7c921d9eac26519fdee5cedc9d9eefd60d86ceb0d0984b4e1051129e9d3a2f21"
     },
-    "nss/overlay/files/etc/config/dropbear": {
-      "bytes": 90,
-      "sha256": "9147e2b7a3568ee04c87209735fad17999915029ffda9ae0aca66587e82c1c2e"
+    "nss/tools/install-from-ram.sh": {
+      "bytes": 2141,
+      "sha256": "793ed467aa9b46c8d3ff95f30cc136df9faa1c8effaae8891887854d430a6a62"
     },
-    "nss/overlay/files/etc/config/firewall": {
-      "bytes": 597,
-      "sha256": "493c0a619b31110936ef7cfc5fafa72be5ff13c8a850daa32326cebf00815d23"
+    "nss/tools/package-build.py": {
+      "bytes": 1868,
+      "sha256": "33abf4f3b57eeceb5809edd4a09115fec5cc23ad604e50e542b91ad2876bb7c4"
     },
-    "nss/overlay/files/etc/config/luci": {
-      "bytes": 223,
-      "sha256": "b4c2460d608556cfaa27fe5a306070504fe32a9ad107d35747fbc416d2850ec2"
+    "nss/tools/prepare-nand.py": {
+      "bytes": 10443,
+      "sha256": "3bef8b45c829c746031631837c6aa210d91a1eb738f7a5866e5be39ca72dfb84"
     },
-    "nss/overlay/files/etc/config/network": {
-      "bytes": 712,
-      "sha256": "8425c6b78037286c124967270048da488b6ac5ff6a0903571bafc9bff724704e"
+    "nss/tools/prune-unused-feeds.py": {
+      "bytes": 1319,
+      "sha256": "ad03b3394d91e6022c3e6b2eb7b587dc026019cb08c3b091a96f0a00ac287251"
     },
-    "nss/overlay/files/etc/config/nss": {
-      "bytes": 159,
-      "sha256": "2a8e30be90e526a3065e40815e0c5aa5ccd754cfe12d2977138cc17e058751ec"
+    "nss/tools/select-profile.py": {
+      "bytes": 1223,
+      "sha256": "23dd82944d97a5254927519800cfe013ac85e66c30b2dd691d4962a1e060088b"
     },
-    "nss/overlay/files/etc/config/rpcd": {
-      "bytes": 169,
-      "sha256": "80a334ba1194fabb0295048a7b7028fbd47355718427cd2aa7982e65d407f23d"
+    "patches/0999-mf297d-board-port.patch": {
+      "bytes": 3809,
+      "sha256": "c4230c9e34be602a27703a8acbb2ddcf56e65169e65878c5fe69623ff97b19c5"
     },
-    "nss/overlay/files/etc/config/system": {
-      "bytes": 209,
-      "sha256": "880265838b1c1e01a31b6cf5244194fc75555304a233f72be8f8f53004ecafd8"
+    "README.md": {
+      "bytes": 13706,
+      "sha256": "0726eeaf0fd5cda5b3aeb84ae81afb26c159cee7a81e1c9babe2be8dc0299462"
     },
-    "nss/overlay/files/etc/config/uhttpd": {
-      "bytes": 4912,
-      "sha256": "6cc793366729d4792b95139780baa4fbfc3402db6b63aa015d3007b34510e14a"
+    "reference/env-writer/README.md": {
+      "bytes": 961,
+      "sha256": "bd76c4c27f872fd3e6a41a3c0c0f129b698612c5d08e2d08cda0fed678c11c38"
     },
-    "nss/overlay/files/etc/config/wireless": {
-      "bytes": 748,
-      "sha256": "ea66e43b7f79cea9a59a83418f8d2b4d0846c85b66ef0dd2d880d8d5fe178a0a"
+    "reference/env-writer/wifi_env_install.c": {
+      "bytes": 13394,
+      "sha256": "ec0a29363a9fad44dfb09c36693f410d8d26b86c55754286f6ebf68cd34fca90"
     },
-    "nss/overlay/files/etc/init.d/mf297d-cpu": {
-      "bytes": 577,
-      "sha256": "e9b72bcd3b2de2cc7ce1a7e9dd3aa540db9d816c1acdeda9f71abda20c9f3ff9"
+    "reference/etc/apk/world": {
+      "bytes": 2530,
+      "sha256": "068d0d88725acf4cb6ab0ec92d58d0266968d2b085bb04585bd443632f4b5cd8"
     },
-    "nss/overlay/files/etc/init.d/mf297d-radio": {
-      "bytes": 78,
-      "sha256": "c03c2e489792890fdaf881bf43b13d41f0020dd90c50617c18505d0452169ef7"
+    "reference/etc/openwrt_release": {
+      "bytes": 245,
+      "sha256": "cbf712211c108ad67ec1bfbdb887ac1ad6fd882ae8d4bbc30d55b447c54b2e85"
     },
-    "nss/overlay/files/etc/uci-defaults/08-mf297d-cpu": {
-      "bytes": 76,
-      "sha256": "92d7d1f635a1cfedd0bfd42ccdf42d215c97e7bcdeefc5ec27faae19e44d3b56"
+    "reference/rootfs/etc/board.d/02_network": {
+      "bytes": 2182,
+      "sha256": "b56268aa432ce9015396b8c919d35f81245891ef0132630c6cf51dc77325704b"
     },
-    "nss/overlay/files/etc/uci-defaults/09-mf297d-owner": {
-      "bytes": 517,
-      "sha256": "4075c1a01b8b55598f22b7b9b60572823e3af1f2bcbd7f1bb3468c81e7a9202b"
+    "reference/rootfs/etc/board.d/99-default_network": {
+      "bytes": 256,
+      "sha256": "86b966006324cffab7c9b948d77f42ab1ae8d85e0ba01bd9d7e6337fe7cc2668"
     },
-    "nss/feed-overlay/qca-nss-drv/patches/0990-nss-queue-registration-on-available-cpus.patch": {
-      "bytes": 1187,
-      "sha256": "006e19924945741bb5a6df4290de056c9da9ab2a55a5e826cf654c3966ac80cd"
+    "reference/rootfs/etc/hotplug.d/firmware/11-ath11k-caldata": {
+      "bytes": 6623,
+      "sha256": "d7a312a86f09ce579d2d74a07b3f84da5b6b1236a0f9e7d90cc318234f92ac76"
     },
-    "files/usr/sbin/mf297d-wifi-start": {
-      "bytes": 616,
-      "sha256": "8a0ed31571af66454d16985d2b41d16c1775d493e325fd67a11bbb6a64a6fa27"
+    "reference/stock-ramboot/build_ramboot.py": {
+      "bytes": 4079,
+      "sha256": "f9510e2daafc56c759df73bcb4bb9bec3ab2dc4caeb480aeadcb0d88726097d4"
     },
-    "files/etc/init.d/mf297d-wifi": {
-      "bytes": 258,
-      "sha256": "5482a32c7a0bda74f8e8f6c314ad3441d4d36c48984b37de2392b5795c126377"
+    "reference/stock-ramboot/mdio_probe.S": {
+      "bytes": 1184,
+      "sha256": "2105404db67b58e55b8409632569c26c78bca09a0285f2f7db3a79b034809e9c"
     },
-    "files/etc/modules.d/60-mf297d-lte": {
-      "bytes": 55,
-      "sha256": "317b15d77b888c814dfce10201a511b58edcbb76414e1b8b01bb06b54e004a05"
+    "reference/stock-ramboot/mf297d_ramboot.c": {
+      "bytes": 24360,
+      "sha256": "235b69d50a1e90bc48f4d7ad53f3fda462ffb86cafc7fcb49c1f27641aefcb11"
+    },
+    "reference/stock-ramboot/nand_readonly.c": {
+      "bytes": 5531,
+      "sha256": "123752743c87664affa9cae098cb28b310f8cac076c4e198ea51dc18b731463a"
+    },
+    "reference/stock-ramboot/oob_probe.c": {
+      "bytes": 3625,
+      "sha256": "cdeb77956e47f3da0ee51aec74a3b9c199ee9ee0f6ceaa0fcc68c9f6f54afb93"
+    },
+    "reference/stock-ramboot/ramboot_a64.S": {
+      "bytes": 6329,
+      "sha256": "78b0a28bf5d6154cb82e46ce03f1f2cdb5058a5120f6a1d8496fe2687a98b9f1"
+    },
+    "reference/stock-ramboot/ramboot_config.h": {
+      "bytes": 1178,
+      "sha256": "ecb08cc08658992010330c446279df33ca55933a4f85e7a4743daaa9d546d773"
+    },
+    "reference/stock-ramboot/ramcommit.c": {
+      "bytes": 1039,
+      "sha256": "9d9bdc38410389e2c5ed3dfe897fed3915e432bad19bdc6deeeab7049f63c68d"
+    },
+    "reference/stock-ramboot/ramfault.S": {
+      "bytes": 1122,
+      "sha256": "48807c824404d714e6c813ead68098293f19d662122a3ae4d413ffcb6ab6df0f"
+    },
+    "reference/stock-ramboot/ramfetch.c": {
+      "bytes": 2987,
+      "sha256": "674dc42df3642e2127f3df876e545b23b791591bcc5f995723d72fe55f9e672a"
+    },
+    "reference/stock-ramboot/README.md": {
+      "bytes": 879,
+      "sha256": "d8746cccc609303f8b45866236be9b0bc29c0a7ad83f51608beb005c501ac21a"
+    },
+    "src/kernel/drivers/dma/qcom/bam_dma.c": {
+      "bytes": 40545,
+      "sha256": "f0a29a997a32dc1314802b45d33a1a42ae687ce98f62d77c5c64a4eb4380ce5e"
+    },
+    "src/kernel/drivers/mtd/nand/raw/qcom_nandc.c": {
+      "bytes": 70262,
+      "sha256": "6b9c20a2be724ce3002a61e99c7c8113c68772eb0c30d72c8ff1c3514263b20a"
+    },
+    "src/kernel/drivers/mtd/nand/spi/foresee.c": {
+      "bytes": 3468,
+      "sha256": "4b900d255c876a1010b657cd1d85d25e72b52be4327c059697729af1fdede86e"
+    },
+    "src/kernel/drivers/net/mdio/mdio-ipq4019.c": {
+      "bytes": 10491,
+      "sha256": "05277956637dbbd1e85b59a7b39fab3396b068597f40a8bd2e2feb06075f9b0c"
+    },
+    "src/kernel/drivers/net/pcs/pcs-qca-uniphy.c": {
+      "bytes": 29836,
+      "sha256": "8fdca9ef16a24932b2971184add511aefdf442dcf13eb5be438de25950fbd214"
+    },
+    "src/kernel/drivers/spi/spi-qpic-snand.c": {
+      "bytes": 48043,
+      "sha256": "877dba2b90093006e220e8a1d04b9abe51041833b21ffab1bd2e4520c5635080"
+    },
+    "src/lte-modules/build.sh": {
+      "bytes": 1094,
+      "sha256": "a0e5d0033e1f3831eac640b556037a4ac697a4dc396ee1fafd1c115b10cf2558"
+    },
+    "src/lte-modules/Makefile": {
+      "bytes": 452,
+      "sha256": "168594e4d9fa139370f528e3c097218cd349638c54cfff813090c199ea1e887d"
+    },
+    "src/lte-modules/patch_option.py": {
+      "bytes": 380,
+      "sha256": "35c79aa8f1eadd8255649fcec2e24f704315e89f787344c25847ff261f04b3bb"
+    },
+    "stock/boot.py": {
+      "bytes": 10900,
+      "sha256": "8078f19413edaa7679f1e89bc8613a4022c15ed009385cd253f8a70d5e5f8a64"
+    },
+    "stock/build.py": {
+      "bytes": 1987,
+      "sha256": "edd0416100a3a54aa6d8897662bed5aae6d868dd76eda173a7376b4da4a039e1"
+    },
+    "stock/erase_tail.c": {
+      "bytes": 2885,
+      "sha256": "02a629a605f728846e1cd91483a5434f7344c9d8cd98485f05ea00f90cc5ab4d"
+    },
+    "stock/images.py": {
+      "bytes": 6899,
+      "sha256": "f37fd6b5e4b81e2e998d35b2b2391b340229d8a6c8952a29ef005ac4d55ac0e0"
+    },
+    "stock/install.py": {
+      "bytes": 7229,
+      "sha256": "d90eeff3a7e32031a18f4371355b398c32351508c5c7948dda1bbfeb5b305e95"
+    },
+    "stock/install_phase_a.sh": {
+      "bytes": 2158,
+      "sha256": "c0506f804141c11f7c010c91b237f70997b30e7c27e875160d4dcbf5dba0a1c1"
+    },
+    "stock/install_phase_b.sh": {
+      "bytes": 2792,
+      "sha256": "f33471d9d2f48df5e2d58a27c28211c7a058c91776d6dc44141a30272bd12716"
+    },
+    "stock/loader/mdio_probe_payload.h": {
+      "bytes": 899,
+      "sha256": "ca5cbaef346cfb3dc8200cd7343bf96347269cd113b735ea302c38ec08213cae"
+    },
+    "stock/loader/mf297d_ramboot.c": {
+      "bytes": 22971,
+      "sha256": "08973e0ef5c654c1651a7ba2adc401a76773b9d5ea52a9396e9428e547d2e90f"
+    },
+    "stock/loader/ramboot_a64.bin": {
+      "bytes": 3584,
+      "sha256": "f1c868790b1923f977479fa1b305ac5ada786e43528e088739ef32efc7f6658d"
+    },
+    "stock/loader/ramboot_a64.S": {
+      "bytes": 6599,
+      "sha256": "ea5e095c03e82ed7b2a5feb742eed0049b7f8424690aae7c9cbfff86b27f69cb"
+    },
+    "stock/loader/ramboot_a64_payload.h": {
+      "bytes": 18305,
+      "sha256": "50f3c119a5c2214fdd1b2a463bbc802cbaa38eeb6d01df30dee2de5cc95ffb2b"
+    },
+    "stock/loader/ramboot_config.h": {
+      "bytes": 1180,
+      "sha256": "a2f0b6b48a4b7dc4676ffd67cdb469afc1ce4f9aecfac96f8fba62516d508c3b"
+    },
+    "stock/loader/ramcommit.c": {
+      "bytes": 1039,
+      "sha256": "9d9bdc38410389e2c5ed3dfe897fed3915e432bad19bdc6deeeab7049f63c68d"
+    },
+    "stock/loader/ramfault_payload.h": {
+      "bytes": 841,
+      "sha256": "f66d5b136e588db072c8545adaa975b3e87078aaf806685332ff0e4e33f48c05"
+    },
+    "stock/loader/ramfetch.c": {
+      "bytes": 2987,
+      "sha256": "674dc42df3642e2127f3df876e545b23b791591bcc5f995723d72fe55f9e672a"
+    },
+    "stock/prepare_install.py": {
+      "bytes": 12850,
+      "sha256": "64dba8dde75c13299d29131a11198a87ee767a05e10481dfd487e9643f04fe64"
+    },
+    "stock/README.md": {
+      "bytes": 7648,
+      "sha256": "3f0bfceab69fd64f111a37800b22d656662564e03466126aea50718bf12d5afa"
+    },
+    "stock/telnet_client.py": {
+      "bytes": 3953,
+      "sha256": "b2d3c387c9387b24d6f53718e6dc704aff5b109cc101b9ed6b98a94d172eec26"
+    },
+    "stock/tests/test_handoff.py": {
+      "bytes": 13704,
+      "sha256": "cb56fd705ce58b20b2a899b57de73c68312ed1fa9ac730b5cb9a57e9a54bcee6"
+    },
+    "tools/build_dtb.py": {
+      "bytes": 1277,
+      "sha256": "83b301edc3c4b9f285188b154e520d70ea9d271d3d78371d2f8efc4989a1371a"
+    },
+    "tools/build_fit.py": {
+      "bytes": 3064,
+      "sha256": "a65c730d6416e0803d390f21fb37a6818f592fabec51e4ec38b09778b2a7b3d1"
+    },
+    "tools/build_kernel.sh": {
+      "bytes": 1561,
+      "sha256": "7c5aec251a5e4d2839a1659e0b74cf52976b0bfd48030b7cfc9ef17ca72d2948"
+    },
+    "tools/build_kexec.sh": {
+      "bytes": 646,
+      "sha256": "2a9811b229b2e318f34cd01d7a37dd9249bea5c7c991a93ba749d9eb34a7618e"
+    },
+    "tools/fdt_codec.py": {
+      "bytes": 1683,
+      "sha256": "f2bb53163b1f6508a65ea296227850ba14d4ae91bea24c74fab6964f40efbdd0"
+    },
+    "tools/inspect_fit.py": {
+      "bytes": 3260,
+      "sha256": "71c905f8e1c0782f7d1fc453e3cfc5991c3f999d1d08f86adbf2674065e6186f"
+    },
+    "tools/package_stock_fw.py": {
+      "bytes": 1423,
+      "sha256": "648ebf2f949676a491fbf3edc97a1fa0b0af41b624723925250aa899582ebd17"
+    },
+    "tools/personalise_release.py": {
+      "bytes": 2351,
+      "sha256": "9413631ac63623f0d260d0fefd2895a1a4a143b0b682cb48055137a98443410b"
+    },
+    "tools/preflight.sh": {
+      "bytes": 604,
+      "sha256": "a25a7ae8c17f21158c9dc3261f3f2e0b7b75de0b9e691a60c3e7009bec751773"
+    },
+    "tools/prepare_caldata.py": {
+      "bytes": 1525,
+      "sha256": "c8d653d1eaaafbccd919c7ef60a6da21b724982a2031380a2d3b7c0b2161499e"
+    },
+    "tools/prepare_ram_boot.py": {
+      "bytes": 4387,
+      "sha256": "cd60f228c679d279dad4f35b606b716d6e9450335d120bff0826501bf82a1202"
+    },
+    "tools/ram-boot-manual.sh": {
+      "bytes": 1574,
+      "sha256": "48a343b4d7861a7cffd81201061a467d9de8f4d0a9f80ee1274ea944126405ee"
+    },
+    "tools/replace_fit_dtb.py": {
+      "bytes": 2081,
+      "sha256": "e5a92785bc80943b6338aeb25770aee1a7dde286782063756e3905e34d4382bc"
+    },
+    "tools/telnet_cfg.py": {
+      "bytes": 3008,
+      "sha256": "54960074faa7fa74e36115fdabf869ae034b7ffd114113a3d05429ae4c318cbf"
+    },
+    "tools/test_offline.py": {
+      "bytes": 4764,
+      "sha256": "829331e93019ffd4122a9edbcb4847ede8d2feaaaeedb4ead5fe076135b00b42"
+    },
+    "tools/verify_export.py": {
+      "bytes": 1801,
+      "sha256": "13c72a879877ebcb14771b872ab118ad4376ec1459ee415719d1c120af37c846"
+    },
+    "tools/windows-manager/assets/app.ico": {
+      "bytes": 312,
+      "sha256": "36091614a6cc8c1aa5effd82fb8fe20f061cfab13a176bfefbaf0f60492d32f2"
+    },
+    "tools/windows-manager/assets/app.png": {
+      "bytes": 290,
+      "sha256": "a14c14fd4ddfd0ee38f79df78773a3c31247b88af10cd0d4f2ab494a4e3dd602"
+    },
+    "tools/windows-manager/controller.py": {
+      "bytes": 13981,
+      "sha256": "2dfc39eaf8c79b4dff91a80ff81692c98bea00de036b7ca885d7c7cacce2df16"
+    },
+    "tools/windows-manager/cwmp.py": {
+      "bytes": 16029,
+      "sha256": "869a8b6b0c6c40288dc2e856d6a8ea70276c78672c98db827c3166e0d6b185e0"
+    },
+    "tools/windows-manager/flash_backup.py": {
+      "bytes": 11540,
+      "sha256": "1f8ff6ca699ad16581e00969572e5034bf52b2cb3a2b0e5b9672d2a5e0478a57"
+    },
+    "tools/windows-manager/gui.py": {
+      "bytes": 18596,
+      "sha256": "34fb033768bf70c703b66ba7a9424fbb901f9ab2b536d54e3d948a785fdc3aa2"
+    },
+    "tools/windows-manager/LICENSE.txt": {
+      "bytes": 1056,
+      "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685"
+    },
+    "tools/windows-manager/licenses/cryptography-LICENSE": {
+      "bytes": 197,
+      "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
+    },
+    "tools/windows-manager/licenses/cryptography-LICENSE.APACHE": {
+      "bytes": 11360,
+      "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+    },
+    "tools/windows-manager/licenses/cryptography-LICENSE.BSD": {
+      "bytes": 1532,
+      "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb"
+    },
+    "tools/windows-manager/licenses/pyinstaller-COPYING.txt": {
+      "bytes": 32604,
+      "sha256": "0598064c7d2718e38d7914a7d08343b2fa008e3bea9ebba2aa7a6ffa5900dd64"
+    },
+    "tools/windows-manager/licenses/scapy-LICENSE": {
+      "bytes": 18092,
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+    },
+    "tools/windows-manager/MF297D-Yerel-Yonetici.spec": {
+      "bytes": 889,
+      "sha256": "c465ecf6754a017d2548afd8a1d691a89fb6d4766ede6713e0ed5dccd2ba9071"
+    },
+    "tools/windows-manager/network_services.py": {
+      "bytes": 8314,
+      "sha256": "f0a0d584c755cbd76f056fcf02b2f6b42bce8f58148ed67c72db7b040383a331"
+    },
+    "tools/windows-manager/README.md": {
+      "bytes": 5170,
+      "sha256": "d4ef794cd492c19d1b5aad5256990b5a0392bcc294c2f2f0816eca4ebbbce49f"
+    },
+    "tools/windows-manager/requirements.txt": {
+      "bytes": 54,
+      "sha256": "71a22ee0e28b8ac0dfa7ae8073fbcf92be64a9004e84803f7aa9398d08f78360"
+    },
+    "tools/windows-manager/telnet_client.py": {
+      "bytes": 3953,
+      "sha256": "b2d3c387c9387b24d6f53718e6dc704aff5b109cc101b9ed6b98a94d172eec26"
+    },
+    "tools/windows-manager/test_app.py": {
+      "bytes": 10566,
+      "sha256": "83f0841bcee7baf2cece15b071de0d6e5cd23077378452de2f701d24fec42e3e"
+    },
+    "tools/windows-manager/test_flash_backup.py": {
+      "bytes": 3177,
+      "sha256": "6c1a40c6c354cc286e6398f55cb1934a9c6d204e04b9ce05b514f8ebd2f0b45f"
+    },
+    "tools/windows-manager/THIRD_PARTY_NOTICES.json": {
+      "bytes": 1629,
+      "sha256": "ec174e34d6e80357849fb7ca2e680d8170bc470488dd9a6d5fe8c7cf620b5296"
+    },
+    "tools/windows-manager/windows_net.py": {
+      "bytes": 5849,
+      "sha256": "70a8e274da06ecd4b8ca146b507df1f4607c4fd814fa42ced9d7bd183ba45c1f"
     }
   }
 }

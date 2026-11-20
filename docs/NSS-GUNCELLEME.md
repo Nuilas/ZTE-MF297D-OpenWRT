@@ -3,11 +3,11 @@
 MF297D üzerinde NAND'dan çalışan OpenWrt 6.18.60 portu. Ethernet, 2,4/5 GHz
 Wi-Fi NSS ve QMI/LTE `rmnet_rx` hızlandırması doğrulandı. İki normal NAND
 yeniden başlatması ve gerçek LTE trafiği test edildi. İki CPU, başlangıç servisiyle etkin;
-hız/uzun süreli kararlılık, IPv6 NSS ve SQM testleri henüz tamamlanmadı.
+IPv4/IPv6 NSS yolu sanal eşlerle test edildi; WAN hızı, uzun süreli kararlılık ve SQM testleri tamamlanmadı.
 
 ## İndir
 
-**[Güncel firmware ve araçlar — Release](https://github.com/ozgunokan/ZTE-MF297D-OpenWRT/releases/tag/mf297d-2026.11.20-nss.2)**
+**[Güncel firmware ve araçlar — Release](https://github.com/ozgunokan/ZTE-MF297D-OpenWRT/releases/tag/mf297d-2026.11.20-install-kit.3)**
 
 | Dosya | Kullanım |
 | --- | --- |
@@ -49,13 +49,30 @@ ssh root@192.168.1.1 'cat /sys/class/net/eth0/address; cat /sys/class/net/wan/ad
 python3 tools/personalise_release.py openwrt-mf297d-6.18.60-nss-initramfs.itb --lan-mac LAN_MAC --wan-mac WAN_MAC
 ```
 
-NAND'da NSS zaten açıksa, RAM geçişinden önce bir kez NSS kapalı aç:
+RAM geçişinden önce **CPU1, NSS ve Wi-Fi'nin hiç başlatılmadığı tek bir açılış**
+gerekir. Yalnız NSS'yi kapatmak yeterli değildir: sıcak geçişte CPU1 açılamayabilir
+ve Wi-Fi işlemcisi zaman aşımına düşebilir. Araç mevcut başlangıç dosyalarını ve
+NSS ayarlarını PC'deki özel klasöre yedekler; bir kez atlama işareti tüketilir.
+Firmware/ENV yazılmaz. Önce:
 
 ```sh
-ssh root@192.168.1.1 "uci set nss.general.enabled=0; uci set nss.general.wifi_offload=0; uci commit nss; reboot"
+sudo apt install python3-paramiko
+python3 tools/prepare_ram_boot.py stage --out ~/mf297d-ram-startup-private
+ssh root@192.168.1.1 reboot
 ```
 
-Yaklaşık 90 saniye sonra dosyaları gönderip RAM'den başlat:
+Yaklaşık **2 dakika** bekle. Mevcut başlangıç dosyalarını geri koy; bu komuttan
+sonra servisleri yeniden başlatma, aşağıdaki RAM adımına geç:
+
+```sh
+python3 tools/prepare_ram_boot.py restore --out ~/mf297d-ram-startup-private
+```
+
+Vazgeçersen `restore` sonrasında `ssh root@192.168.1.1 reboot` ile normal
+NAND'a dön. Yedek klasörü özeldir; GitHub'a yükleme. Root parolası varsa araç
+terminalde sorar; parola dosyaya yazılmaz.
+
+Şimdi dosyaları gönderip RAM'den başlat:
 
 ```sh
 ssh root@192.168.1.1 'mkdir -p /tmp/mf297d-ram'
