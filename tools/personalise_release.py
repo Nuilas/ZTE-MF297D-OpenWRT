@@ -19,11 +19,11 @@ dtb=encode(dt,old);kernel=tree['/images/kernel-1'];assert kernel['compression']=
 image=lzma.decompress(kernel['data'],format=lzma.FORMAT_ALONE);assert image[56:60]==b'ARM\x64'
 a.out.mkdir(exist_ok=False,parents=True)
 (a.out/'Image').write_bytes(image);(a.out/'mf297d.dtb').write_bytes(dtb)
-args=dt['/chosen']['bootargs'].rstrip(b'\0').decode();(a.out/'bootargs.txt').write_text(args+'\n')
+args=dt['/chosen']['bootargs'].rstrip(b'\0').decode();(a.out/'bootargs.txt').write_bytes((args+'\n').encode())
 tree['/images/fdt-1']['data']=dtb
 for n,v in tree.items():
  if n.startswith('/images/fdt-1/hash'):
   alg=v['algo'].rstrip(b'\0').decode();v['value']=struct.pack('>I',zlib.crc32(dtb)&0xffffffff) if alg=='crc32' else hashlib.new(alg,dtb).digest()
 (a.out/'personalised.itb').write_bytes(encode(tree,blob))
-(a.out/'SHA256SUMS').write_text(''.join(hashlib.sha256(x.read_bytes()).hexdigest()+'  '+x.name+'\n' for x in [a.out/'Image',a.out/'mf297d.dtb',a.out/'bootargs.txt',a.out/'personalised.itb']))
+(a.out/'SHA256SUMS').write_bytes(''.join(hashlib.sha256(x.read_bytes()).hexdigest()+'  '+x.name+'\n' for x in [a.out/'Image',a.out/'mf297d.dtb',a.out/'bootargs.txt',a.out/'personalised.itb']).encode())
 print('Prepared '+str(a.out)+'. No device writes. RAM boot tools accept only the NSS RAM image; native FIT needs an existing matching installation and updated boot CRC.')

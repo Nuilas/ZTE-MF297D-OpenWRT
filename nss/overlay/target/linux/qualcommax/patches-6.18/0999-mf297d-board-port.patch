@@ -1,0 +1,115 @@
+Subject: [PATCH] qualcommax: add measured MF297D NAND and MDIO settings
+
+Preserve the board-tested QPIC serial configuration, Foresee ID,
+Clause22 mode and switch reference-clock ordering on the MF297D.
+
+---
+--- a/drivers/spi/spi-qpic-snand.c
++++ b/drivers/spi/spi-qpic-snand.c
+@@ -169,6 +169,7 @@
+ static int qcom_spi_init(struct qcom_nand_controller *snandc)
+ {
+ 	u32 snand_cfg_val = 0x0;
++	u32 serial_reg_offset = 0;
+ 	int ret;
+ 
+ 	snand_cfg_val = FIELD_PREP(CLK_CNTR_INIT_VAL_VEC_MASK, CLK_CNTR_INIT_VAL_VEC) |
+@@ -176,19 +177,25 @@
+ 			FIELD_PREP(FEA_STATUS_DEV_ADDR_MASK, FEA_STATUS_DEV_ADDR) |
+ 			FIELD_PREP(SPI_CFG, 0);
+ 
++	/* MF297D: serial register bank and phase measured on this board. */
++	if (of_machine_is_compatible("zte,mf297d")) {
++		serial_reg_offset = 0x7000;
++		snand_cfg_val = 0x0b6dc00d;
++	}
++
+ 	snandc->regs->spi_cfg = cpu_to_le32(snand_cfg_val);
+ 	snandc->regs->num_addr_cycle = cpu_to_le32(SPI_NUM_ADDR);
+ 	snandc->regs->busy_wait_cnt = cpu_to_le32(SPI_WAIT_CNT);
+ 
+-	qcom_write_reg_dma(snandc, &snandc->regs->spi_cfg, NAND_FLASH_SPI_CFG, 1, 0);
++	qcom_write_reg_dma(snandc, &snandc->regs->spi_cfg, NAND_FLASH_SPI_CFG + serial_reg_offset, 1, 0);
+ 
+ 	snand_cfg_val &= ~LOAD_CLK_CNTR_INIT_EN;
+ 	snandc->regs->spi_cfg = cpu_to_le32(snand_cfg_val);
+ 
+-	qcom_write_reg_dma(snandc, &snandc->regs->spi_cfg, NAND_FLASH_SPI_CFG, 1, 0);
+-
+-	qcom_write_reg_dma(snandc, &snandc->regs->num_addr_cycle, NAND_NUM_ADDR_CYCLES, 1, 0);
+-	qcom_write_reg_dma(snandc, &snandc->regs->busy_wait_cnt, NAND_BUSY_CHECK_WAIT_CNT, 1,
++	qcom_write_reg_dma(snandc, &snandc->regs->spi_cfg, NAND_FLASH_SPI_CFG + serial_reg_offset, 1, 0);
++
++	qcom_write_reg_dma(snandc, &snandc->regs->num_addr_cycle, NAND_NUM_ADDR_CYCLES + serial_reg_offset, 1, 0);
++	qcom_write_reg_dma(snandc, &snandc->regs->busy_wait_cnt, NAND_BUSY_CHECK_WAIT_CNT + serial_reg_offset, 1,
+ 			   NAND_BAM_NEXT_SGL);
+ 
+ 	ret = qcom_submit_descs(snandc);
+--- a/drivers/mtd/nand/spi/foresee.c
++++ b/drivers/mtd/nand/spi/foresee.c
+@@ -71,6 +71,16 @@
+ }
+ 
+ static const struct spinand_info foresee_spinand_table[] = {
++	SPINAND_INFO("F35UQA002G",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x62, 0x62),
++		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&f35sqa002g_ooblayout,
++				     f35sqa002g_ecc_get_status)),
+ 	SPINAND_INFO("F35SQA002G",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x72, 0x72),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
+--- a/drivers/net/mdio/mdio-ipq4019.c
++++ b/drivers/net/mdio/mdio-ipq4019.c
+@@ -118,7 +118,10 @@
+ 
+ 	data = readl(priv->membase + MDIO_MODE_REG);
+ 
+-	data &= ~MDIO_MODE_C45;
++	if (of_machine_is_compatible("zte,mf297d"))
++		data = 0x1503f; /* Board-tested Clause 22 mode. */
++	else
++		data &= ~MDIO_MODE_C45;
+ 
+ 	writel(data, priv->membase + MDIO_MODE_REG);
+ 
+--- a/drivers/net/pcs/pcs-qca-uniphy.c
++++ b/drivers/net/pcs/pcs-qca-uniphy.c
+@@ -1034,6 +1034,11 @@
+ 	.fast_io = true,
+ };
+ 
++static void mf297d_refclk_disable(void *data)
++{
++	clk_disable_unprepare(data);
++}
++
+ static int qca_uniphy_probe(struct platform_device *pdev)
+ {
+ 	struct fwnode_pcs_provider *provider;
+@@ -1086,6 +1091,20 @@
+ 	ret = qca_uniphy_register_clks(uniphy);
+ 	if (ret)
+ 		return dev_err_probe(dev, ret, "Failed to register output clocks\n");
++
++	/* The switch reference clock must be live before MDIO reset/probe. */
++	if (of_machine_is_compatible("zte,mf297d") && uniphy->data->ref_clk_enable) {
++		ret = of_clk_set_defaults(dev->of_node, true);
++		if (ret)
++			return ret;
++		ret = clk_prepare_enable(uniphy->ref_clk.hw.clk);
++		if (ret)
++			return ret;
++		ret = devm_add_action_or_reset(dev, mf297d_refclk_disable,
++					uniphy->ref_clk.hw.clk);
++		if (ret)
++			return ret;
++	}
+ 
+ 	for (i = 0; i < QCA_UNIPHY_CHANNELS; i++) {
+ 		uniphy->port_pcs[i].pcs.ops = &qca_uniphy_pcs_ops;

@@ -1,0 +1,9 @@
+{
+  "sources": {
+    "xz-5.8.4.tar.bz2": "3340ae48f88665abc78d71dc43446fb3f7e70b48fd59844ac0e14958cef6e00b",
+    "squashfs4-4.7.5.tar.zst": "504dbc8e6709ac904c4e6929ebba6f88c125b2b9775371f0cd5d9967bfba89e1"
+  },
+  "squashfs_commit": "708c59ae80853b0845017c33b42e56061cc546cd",
+  "binary_sha256": "9384a34f04f2c9e9117884535129e8dcb6fbc1b4cefaffc3311db605e927b9f8",
+  "bytes": 1802960
+}

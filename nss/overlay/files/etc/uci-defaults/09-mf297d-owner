@@ -1,0 +1,14 @@
+#!/bin/sh
+. /lib/functions/system.sh
+eval "$(/usr/sbin/mf297d-factory-data macs "$(find_mtd_chardev mac)")" || exit 1
+uci set wireless.default_radio0.macaddr="$wifi2g"
+uci set wireless.default_radio1.macaddr="$wifi5g"
+uci set network.lan.macaddr="$lan"
+uci set network.wan.macaddr="$wan"
+uci set network.mf297d_eth0=device
+uci set network.mf297d_eth0.name=eth0
+uci set network.mf297d_eth0.macaddr="$lan"
+uci commit wireless
+uci commit network
+for s in qca-nss-drv qca-nss-pbuf; do /etc/init.d/$s disable; done
+exit 0

@@ -32,7 +32,7 @@ def main():
     tree = {
         '/': {'timestamp': struct.pack('>I', 0), 'description': b'MF297D source-built OpenWrt\0', '#address-cells': struct.pack('>I', 1)},
         '/images': {},
-        '/images/kernel-1': {'description': b'ARM64 OpenWrt Linux-6.18.55\0', 'data': kernel,
+        '/images/kernel-1': {'description': b'ARM64 OpenWrt Linux\0', 'data': kernel,
             'type': b'kernel\0', 'arch': b'arm64\0', 'os': b'linux\0', 'compression': b'lzma\0',
             'load': struct.pack('>I', 0x41000000), 'entry': struct.pack('>I', 0x41000000)},
         '/images/fdt-1': {'description': b'ARM64 MF297D device tree\0', 'data': dtb,

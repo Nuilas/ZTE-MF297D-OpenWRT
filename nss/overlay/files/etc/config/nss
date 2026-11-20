@@ -1,0 +1,7 @@
+config nss 'general'
+	option enabled '1'
+	option wifi_offload '1'
+	option topology 'dsa'
+	option fw_logbuf '256'
+	option enable_rps '0'
+	option enable_log '1'

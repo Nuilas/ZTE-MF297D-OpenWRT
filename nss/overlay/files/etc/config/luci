@@ -1,0 +1,7 @@
+config core 'main'
+	option lang 'auto'
+	option mediaurlbase '/luci-static/bootstrap'
+	option resourcebase '/luci-static/resources'
+config internal 'sauth'
+	option sessionpath '/tmp/luci-sessions'
+	option sessiontime '3600'

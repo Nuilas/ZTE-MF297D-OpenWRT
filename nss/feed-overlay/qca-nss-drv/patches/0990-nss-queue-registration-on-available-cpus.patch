@@ -1,0 +1,30 @@
+Subject: [PATCH] nss: queue data plane registration without a fixed host CPU
+
+The ordered registration workqueue is unbound, but queue_work_on(1) still
+indexes its per-CPU pool table with CPU 1. On a kernel booted with
+nr_cpus=1 that CPU is not possible. The first firmware initialization IRQ
+therefore dereferences an invalid pool pointer in __queue_work and panics.
+
+Use queue_work so the workqueue core selects a valid pool. This preserves
+the ordered workqueue and works with both single- and multi-CPU hosts.
+Observed on MF297D Linux 6.18.60 through UDP netconsole.
+
+---
+--- a/nss_data_plane/nss_data_plane_common.c
++++ b/nss_data_plane/nss_data_plane_common.c
+@@ -58,12 +58,12 @@
+  */
+ bool nss_data_plane_schedule_registration(void)
+ {
+-	if (!queue_work_on(1, nss_data_plane_workqueue, &nss_data_plane_work.work)) {
+-		nss_warning("Failed to register data plane workqueue on core 1\n");
++	if (!queue_work(nss_data_plane_workqueue, &nss_data_plane_work.work)) {
++		nss_warning("Failed to queue data plane registration work\n");
+ 		return false;
+ 	}
+ 
+-	nss_info("Register data plane workqueue on core 1\n");
++	nss_info("Queued data plane registration work\n");
+ 	return true;
+ }
+ 

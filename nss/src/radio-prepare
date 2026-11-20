@@ -1,0 +1,55 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-2.0-only
+set -e
+. /lib/functions.sh
+. /lib/functions/system.sh
+[ "$(board_name)" = 'zte,mf297d' ] || exit 1
+art="$(find_mtd_chardev '0:art')"
+mac="$(find_mtd_chardev 'mac')"
+[ -r "$art" ] && [ -r "$mac" ]
+fw=${MF297D_FW_DEST:-/lib/firmware/ath11k}
+factory=${MF297D_FACTORY_TOOL:-/usr/sbin/mf297d-factory-data}
+manifest=${MF297D_FW_MANIFEST:-/usr/share/mf297d/stock-firmware.sha256}
+reader=${MF297D_UNSQUASHFS:-/usr/sbin/mf297d-unsquashfs}
+mkdir -p "$fw/IPQ5018/hw1.0" "$fw/QCN6122/hw1.0"
+if [ ! -s "$fw/IPQ5018/hw1.0/q6_fw.mdt" ]; then
+ if [ ! -e /sys/class/ubi/ubi0/mtd_num ]; then
+  # RAM profile makes every MTD read-only, including this attachment.
+  ubiattach /dev/ubi_ctrl -m 21 -d 0
+ fi
+ [ "$(cat /sys/class/ubi/ubi0_1/name)" = wifi_fw ]
+ size=$(cat /sys/class/ubi/ubi0_1/data_bytes)
+ [ "$size" -gt 0 ] && [ "$size" -le 16777216 ]
+ work=$(mktemp -d /tmp/mf297d-stock.XXXXXX)
+ cleanup() {
+  case "$work" in /tmp/mf297d-stock.*) rm -rf -- "$work";; *) exit 1;; esac
+ }
+ trap cleanup EXIT
+ cat /dev/ubi0_1 > "$work/wifi_fw.squashfs"
+ "$reader" -processors 1 -data-queue 8 -frag-queue 8 -no-progress -no-xattrs -d "$work/extracted" "$work/wifi_fw.squashfs" >/dev/null
+ mountpoint="$work/extracted"
+ (cd "$mountpoint"; sha256sum -c "$manifest") >/dev/null
+ for file in "$mountpoint"/q6_fw.* "$mountpoint"/m3_fw.*; do
+  [ ! -f "$file" ] || cp "$file" "$fw/IPQ5018/hw1.0/"
+ done
+ for file in "$mountpoint"/qcn6122/q6_fw.* "$mountpoint"/qcn6122/m3_fw.*; do
+  [ ! -f "$file" ] || cp "$file" "$fw/QCN6122/hw1.0/"
+ done
+ cp "$mountpoint/bdwlan.b24" "$fw/IPQ5018/hw1.0/board.bin"
+ cp "$mountpoint/qcn6122/bdwlan.b60" "$fw/QCN6122/hw1.0/board.bin"
+ for chip in IPQ5018 QCN6122; do
+  cp "$fw/$chip/hw1.0/m3_fw.mdt" "$fw/$chip/hw1.0/m3_fw.mbn"
+ done
+ cleanup
+ trap - EXIT
+fi
+if [ ! -s "$fw/IPQ5018/hw1.0/cal-ahb-c000000.wifi.bin" ] || [ ! -s "$fw/QCN6122/hw1.0/cal-ahb-b00a040.wifi.bin" ]; then
+ # Generate together in tmpfs, then copy only this device's validated data.
+ temp="$(mktemp -d /tmp/mf297d-cal.XXXXXX)"
+ mkdir -p "$temp/IPQ5018/hw1.0" "$temp/QCN6122/hw1.0"
+ "$factory" cal "$art" "$mac" "$temp"
+ cp "$temp/IPQ5018/hw1.0/cal-ahb-c000000.wifi.bin" "$fw/IPQ5018/hw1.0/"
+ cp "$temp/QCN6122/hw1.0/cal-ahb-b00a040.wifi.bin" "$fw/QCN6122/hw1.0/"
+ rm -f "$temp/IPQ5018/hw1.0/cal-ahb-c000000.wifi.bin" "$temp/QCN6122/hw1.0/cal-ahb-b00a040.wifi.bin"
+ rmdir "$temp/IPQ5018/hw1.0" "$temp/IPQ5018" "$temp/QCN6122/hw1.0" "$temp/QCN6122" "$temp"
+fi

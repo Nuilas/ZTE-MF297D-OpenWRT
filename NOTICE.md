@@ -36,3 +36,26 @@ kernel bileşenidir; ilk sağlanan userspace/rootfs binary'si dağıtılmaz.
 NSS kaynak entegrasyonu ayrıca Release asset'i olarak verilir; taban kaynak
 ve feed commitleri pakette kayıtlıdır. kexec binary'sinin kaynağı kexec-tools
 2.0.32 ve bu depodaki build_kexec.sh reçetesidir.
+
+## 20 Kasım 2026 NSS kaynak ve binary ön sürümü
+
+Güncel kaynak tabanı kuncy7/openwrt-nss-edma,
+593ffa8e281c0a4ab17fd52365aecb546bfaf442; Linux 6.18.60'tır.
+nss/SOURCE.json ve feeds-lock.json tam kaynak sürümlerini kaydeder.
+nss/openwrt.patch, overlay ve feed-overlay proje değişiklikleridir.
+Eski src/config belgeleri tarihsel 6.18.55 portuna aittir.
+
+mf297d-unsquashfs, squashfs-tools 4.7.5 (GPL-2.0-or-later) ve XZ 5.8.4
+liblzma kullanır. Kaynak indirme adresleri/hashleri ve derleme komutları
+nss/tools/build-radio-reader.py ile nss/src/reader-build.json içindedir.
+Squashfs-tools: https://github.com/plougher/squashfs-tools ;
+XZ: https://tukaani.org/xz/ (liblzma ağırlıklı olarak 0BSD/public domain;
+dosya bazında upstream SPDX/lisans bildirimleri geçerlidir).
+Kendi factory_data.c yardımcısının lisansı dosya başlığındadır.
+Kexec için tools/build_kexec.sh ve kexec-tools 2.0.32 kaynakları geçerlidir.
+
+Genel imajlar çalışan derleme çıktılarının temizlenmiş türevleridir.
+Kapalı radyo firmware veya kişisel kalibrasyon dağıtılmaz; kendi cihazının
+korunmuş wifi_fw ve ART verileri çalışma anında okunur. Genel profil ve
+genelleştirilmiş NAND kurucu tam canlı kurulum testinden geçmemiştir.
+Temiz reçete kontrolü tam bit-eşdeğer yeniden üretim iddiası değildir.

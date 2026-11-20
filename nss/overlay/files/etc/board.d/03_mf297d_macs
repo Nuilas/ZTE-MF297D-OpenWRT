@@ -1,0 +1,10 @@
+#!/bin/sh
+. /lib/functions/uci-defaults.sh
+. /lib/functions/system.sh
+[ "$(board_name)" = 'zte,mf297d' ] || exit 0
+eval "$(/usr/sbin/mf297d-factory-data macs "$(find_mtd_chardev mac)")" || exit 1
+board_config_update
+ucidef_set_network_device_mac eth0 "$lan"
+ucidef_set_interface_macaddr lan "$lan"
+ucidef_set_interface_macaddr wan "$wan"
+board_config_flush

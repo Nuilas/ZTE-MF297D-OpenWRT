@@ -1,0 +1,3 @@
+#!/bin/sh /etc/rc.common
+START=18
+start() { /usr/sbin/mf297d-radio-prepare; }

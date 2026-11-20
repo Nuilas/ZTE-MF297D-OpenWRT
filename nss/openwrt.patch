@@ -1,0 +1,174 @@
+diff --git a/package/nss/luci-app-nss/Makefile b/package/nss/luci-app-nss/Makefile
+index c7ac95ed..dc76e1bd 100644
+--- a/package/nss/luci-app-nss/Makefile
++++ b/package/nss/luci-app-nss/Makefile
+@@ -16,8 +16,11 @@ LUCI_TITLE:=LuCI status page for NSS offloading
+ LUCI_DESCRIPTION:=Status -> NSS Offload: renders 'nss-status -j' (firmware state, \
+  cores, ports, Wi-Fi radios, ECM acceleration counts, SQM and fast-lane health), and \
+  adds the NSS core load and the ECM-accelerated connections to Status -> Overview.
+-LUCI_DEPENDS:=+luci-base +TARGET_qualcommax_ipq50xx:nss-tools-dwmac \
+-	+!TARGET_qualcommax_ipq50xx:nss-tools
++# Resolve the mutually exclusive runtime before emitting Kconfig metadata.
++# Advertising both select edges creates a cycle through nss-tools CONFLICTS.
++# This active branch supports IPQ50xx; the IPQ807x vendor stack is archived.
++# DUMP metadata has no target .config, so a make-time CONFIG test is invalid.
++LUCI_DEPENDS:=+luci-base @TARGET_qualcommax_ipq50xx +nss-tools-dwmac
+ LUCI_PKGARCH:=all
+ 
+ PKG_LICENSE:=GPL-2.0-only
+diff --git a/package/nss/nss-tools/files/nss-dwmac.init b/package/nss/nss-tools/files/nss-dwmac.init
+index b9b5dc7c..d9229bd3 100644
+--- a/package/nss/nss-tools/files/nss-dwmac.init
++++ b/package/nss/nss-tools/files/nss-dwmac.init
+@@ -76,7 +76,7 @@ wifi_load() {
+ #   nss.general.switch_args  any further fabric module parameters, verbatim,
+ #                            e.g. 'cpu_port=6 ports=0x7c wake_phys=...'
+ #                            for a QCA8337 with the CPU port on port 6
+-. /lib/functions.sh
++. "${IPKG_INSTROOT}/lib/functions.sh"
+ 
+ switch_to_trunk() {
+ 	local dev vtu args fabric driver
+@@ -202,17 +202,44 @@ switch_to_8021q() {
+ 	# at 6 s, the write at 11 s fails). The user ports are the conduit's
+ 	# uppers in sysfs; take them and the conduit down first - netifd
+ 	# configures them from scratch a moment later anyway.
++	# This also runs on an explicit service start, after netifd. Preserve
++	# administrative state instead of relying on a later netifd startup.
++	# Restore the conduit before its ports, including on a failed switch.
++	local up_devices="" masters="" rc=0 flags master binding
++	flags="$(cat "/sys/class/net/$trunk/flags")" || return 1
++	[ "$((flags & 1))" -eq 0 ] || up_devices="$trunk"
+ 	for up in "/sys/class/net/$trunk"/upper_*; do
+ 		[ -e "$up" ] || continue
+-		ip link set "${up##*/upper_}" down 2>/dev/null
++		port="${up##*/upper_}"
++		flags="$(cat "/sys/class/net/$port/flags")" || return 1
++		[ "$((flags & 1))" -eq 0 ] || up_devices="$up_devices $port"
++		master="$(readlink "/sys/class/net/$port/master")"
++		[ -z "$master" ] || masters="$masters $port:${master##*/}"
++	done
++	for up in "/sys/class/net/$trunk"/upper_*; do
++		[ -e "$up" ] || continue
++		port="${up##*/upper_}"
++		ip link set "$port" down 2>/dev/null
++	done
++	# DSA also refuses a tagger change while ports belong to a bridge.
++	# Keep each membership and restore it before administrative link state.
++	for binding in $masters; do
++		ip link set "${binding%%:*}" nomaster || rc=1
+ 	done
+ 	ip link set "$trunk" down 2>/dev/null
+-	if echo "$want" > "$tagging" 2>/dev/null; then
++	if [ "$rc" -eq 0 ] && echo "$want" > "$tagging" 2>/dev/null; then
+ 		logger -t nss "topology dsa: $trunk tagger $cur -> $want"
+-		return 0
++	else
++		logger -p user.err -t nss "topology dsa: could not switch $trunk tagger from $cur to $want"
++		rc=1
+ 	fi
+-	logger -t nss "topology dsa: could not switch $trunk tagger from $cur to $want (ports up? kernel without the $want tag driver?) - the firmware will not parse this traffic"
+-	return 1
++	for binding in $masters; do
++		ip link set "${binding%%:*}" master "${binding#*:}" || rc=1
++	done
++	for port in $up_devices; do
++		ip link set "$port" up || rc=1
++	done
++	return "$rc"
+ }
+ 
+ start_service() {
+@@ -222,7 +249,11 @@ start_service() {
+ 
+ 	topology="$(uci -q get nss.general.topology)"
+ 	if [ "$topology" = "dsa" ]; then
+-		switch_to_8021q
++		if ! switch_to_8021q; then
++			logger -p user.err -t nss "DSA tagger setup failed; refusing NSS takeover"
++			wifi_load 0
++			return 1
++		fi
+ 	elif ! switch_to_trunk; then
+ 		logger -p user.err -t nss "switch setup failed; refusing NSS takeover"
+ 		wifi_load 0
+diff --git a/target/linux/qualcommax/image/ipq50xx.mk b/target/linux/qualcommax/image/ipq50xx.mk
+index 86e7480f..cd58b5cb 100644
+--- a/target/linux/qualcommax/image/ipq50xx.mk
++++ b/target/linux/qualcommax/image/ipq50xx.mk
+@@ -965,3 +965,19 @@ define Device/zyxel_scr50axe
+ 		ipq-wifi-zyxel_scr50axe
+ endef
+ TARGET_DEVICES += zyxel_scr50axe
++
++# MF297D lab: RAM-only, all 22 physical MTDs read-only. No factory/sysupgrade.
++define Device/zte_mf297d
++	$(call Device/FitImageLzma)
++	DEVICE_VENDOR := ZTE
++	DEVICE_MODEL := MF297D (RAM lab)
++	DEVICE_DTS := ipq5018-zte-mf297d
++	DEVICE_DTS_CONFIG := config@mp03.3
++	SOC := ipq5018
++	BLOCKSIZE := 128k
++	PAGESIZE := 2048
++	NAND_SIZE := 256m
++	IMAGES :=
++	DEVICE_PACKAGES := -uboot-envtools kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
++endef
++TARGET_DEVICES += zte_mf297d
+diff --git a/target/linux/qualcommax/ipq50xx/base-files/etc/board.d/02_network b/target/linux/qualcommax/ipq50xx/base-files/etc/board.d/02_network
+index 389a0899..afefd777 100644
+--- a/target/linux/qualcommax/ipq50xx/base-files/etc/board.d/02_network
++++ b/target/linux/qualcommax/ipq50xx/base-files/etc/board.d/02_network
+@@ -7,6 +7,9 @@ ipq50xx_setup_interfaces()
+ {
+ 	local board="$1"
+ 	case $board in
++	zte,mf297d)
++		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "wan"
++		;;
+ 	elecom,wrc-x3000gs2|\
+ 	elecom,wrc-x3000gst2|\
+ 	iodata,wn-dax3000gr|\
+diff --git a/target/linux/qualcommax/ipq50xx/base-files/lib/upgrade/platform.sh b/target/linux/qualcommax/ipq50xx/base-files/lib/upgrade/platform.sh
+index c7237901..1bb6f25d 100644
+--- a/target/linux/qualcommax/ipq50xx/base-files/lib/upgrade/platform.sh
++++ b/target/linux/qualcommax/ipq50xx/base-files/lib/upgrade/platform.sh
+@@ -372,6 +372,10 @@ linksys_mx_pre_upgrade() {
+ 
+ platform_check_image() {
+ 	case "$(board_name)" in
++	zte,mf297d)
++		echo "MF297D RAM lab: custom NAND/ENV updater is not implemented." >&2
++		return 1
++		;;
+ 	cudy,p5|\
+ 	xiaomi,mi-router-ax3000t-v2)
+ 		nand_do_platform_check "$(board_name)" "$1"
+@@ -396,6 +400,10 @@ platform_pre_upgrade() {
+ 
+ platform_do_upgrade() {
+ 	case "$(board_name)" in
++	zte,mf297d)
++		echo "MF297D RAM lab: custom NAND/ENV updater is not implemented." >&2
++		return 1
++		;;
+ 	avm,fritzbox-4050)
+ 		sync
+ 		CI_KERNPART="fit0"
+diff --git a/target/linux/qualcommax/ipq50xx/config-default b/target/linux/qualcommax/ipq50xx/config-default
+index 0517c1be..a7a8ee6a 100644
+--- a/target/linux/qualcommax/ipq50xx/config-default
++++ b/target/linux/qualcommax/ipq50xx/config-default
+@@ -38,3 +38,11 @@ CONFIG_MAGIC_SYSRQ_SERIAL=y
+ CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE=0x1b6
+ CONFIG_DEVMEM=y
+ # CONFIG_STRICT_DEVMEM is not set
++CONFIG_KEXEC=y
++CONFIG_KEXEC_CORE=y
++CONFIG_SUSPEND=y
++CONFIG_IKCONFIG=y
++CONFIG_IKCONFIG_PROC=y
++CONFIG_FW_CACHE=y
++
++CONFIG_QCOM_Q6V5_MPD=y

@@ -1,0 +1,11 @@
+{
+  "base_repository": "https://github.com/kuncy7/openwrt-nss-edma.git",
+  "base_commit": "593ffa8e281c0a4ab17fd52365aecb546bfaf442",
+  "original_requested_repository": "https://github.com/JuliusBairaktaris/openwrt-ppe-nss.git",
+  "kernel": "6.18.60",
+  "profiles": [
+    "initramfs",
+    "nand"
+  ],
+  "private_credentials_included": false
+}
