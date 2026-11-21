@@ -862,8 +862,8 @@
       "sha256": "52026a9df4f8cee96704fb9c7399a236c0e370d30242ba9e91193aa56b6773f6"
     },
     "nss/tools/enable-host-tx.py": {
-      "bytes": 2182,
-      "sha256": "da8c770b2c11fe09765ffec2e777d3ccdfe8773970df8e0c755b4344014bce6b"
+      "bytes": 2425,
+      "sha256": "fb403b54a65353d616eed6742b7bdaf9241b36274b2f3633c6f58cb57bc6c655"
     },
     "nss/overlay/files/usr/sbin/mf297d-host-tx": {
       "bytes": 2621,
