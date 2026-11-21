@@ -1,0 +1,22 @@
+#!/bin/sh
+# Repair missing theme registration while preserving the selected theme.
+changed=0
+if ! uci -q get luci.themes >/dev/null; then
+	uci set luci.themes=internal || exit 1
+	changed=1
+fi
+register_theme() {
+	local name="$1" directory="$2"
+	[ -d "/www/luci-static/$directory" ] || return 0
+	[ -d "/usr/share/ucode/luci/template/themes/$directory" ] || return 0
+	if ! uci -q get "luci.themes.$name" >/dev/null; then
+		uci set "luci.themes.$name=/luci-static/$directory" || return 1
+		changed=1
+	fi
+}
+register_theme Bootstrap bootstrap || exit 1
+register_theme BootstrapDark bootstrap-dark || exit 1
+register_theme BootstrapLight bootstrap-light || exit 1
+register_theme Aurora aurora || exit 1
+[ "$changed" = 0 ] || uci commit luci
+exit 0

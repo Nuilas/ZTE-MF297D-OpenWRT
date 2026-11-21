@@ -194,8 +194,8 @@
       "sha256": "493c0a619b31110936ef7cfc5fafa72be5ff13c8a850daa32326cebf00815d23"
     },
     "nss/overlay/files/etc/config/luci": {
-      "bytes": 223,
-      "sha256": "b4c2460d608556cfaa27fe5a306070504fe32a9ad107d35747fbc416d2850ec2"
+      "bytes": 248,
+      "sha256": "2719cf03b04c693d0b4a96a614239a059e65ab72d73174dc118f1d1c7f7d0a64"
     },
     "nss/overlay/files/etc/config/network": {
       "bytes": 712,
@@ -862,8 +862,8 @@
       "sha256": "52026a9df4f8cee96704fb9c7399a236c0e370d30242ba9e91193aa56b6773f6"
     },
     "nss/tools/enable-host-tx.py": {
-      "bytes": 2425,
-      "sha256": "fb403b54a65353d616eed6742b7bdaf9241b36274b2f3633c6f58cb57bc6c655"
+      "bytes": 2466,
+      "sha256": "c3cb6cd72dbe2adce17980f992cf56c7dc9ed62846f6f266905c3d79ea39d39f"
     },
     "nss/overlay/files/usr/sbin/mf297d-host-tx": {
       "bytes": 2621,
@@ -900,6 +900,10 @@
     "nss/validation/vpn-ttl-speed.json": {
       "bytes": 7919,
       "sha256": "3fe84a214dfceb3abb974c9194ade6645c154005635c8465a8a08d29c4622521"
+    },
+    "nss/overlay/files/etc/uci-defaults/99-mf297d-luci-themes": {
+      "bytes": 741,
+      "sha256": "03f762c64c06571ab9d74c979a682e0610b974585c232f166b928a632f30fc60"
     }
   }
 }
