@@ -17,5 +17,11 @@ mkdir -p files/usr/sbin
 "$cc" -static -Os -s -Wall -Wextra -Werror -Wno-misleading-indentation "$integration/src/factory_data.c" -o files/usr/sbin/mf297d-factory-data
 cp mf297d/public-helper-bin/unsquashfs-aarch64 files/usr/sbin/mf297d-unsquashfs
 chmod 755 files/usr/sbin/mf297d-factory-data files/usr/sbin/mf297d-unsquashfs
-make -j"$jobs"
+if [ "$profile" = nand ]; then
+ # The custom NAND bundle is packaged below, outside OpenWrt's IMAGES list.
+ # An empty image list has no JSON records for profiles.json to aggregate.
+ make -j"$jobs" CONFIG_JSON_OVERVIEW_IMAGE_INFO=
+else
+ make -j"$jobs"
+fi
 python3 "$integration/tools/package-build.py" --tree "$tree" --profile "$profile" --out "$tree/bin/mf297d"

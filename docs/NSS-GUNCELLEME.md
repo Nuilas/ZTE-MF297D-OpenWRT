@@ -219,3 +219,24 @@ iki çekirdeğe sabitlenen işler NSS/iki Wi-Fi radyosuyla birlikte doğrulandı
 Kontrol: `cat /sys/devices/system/cpu/online` çıktısı `0-1` olmalıdır.
 Bu, erken SMP açılış sorununun çekirdek düzeyinde çözülmesi iddiası değildir;
 çalışan iki çekirdek sağlayan başlangıç düzenidir.
+
+
+## NAND build stops at profiles.json
+
+If the build reports `JSON info file script could not find any JSON files for target`,
+the custom NAND profile has no standard `IMAGES` entries to describe. Kernel and
+rootfs may already have been generated; this error is the final overview metadata
+step. Update the integration repository with `git -C ~/MF297D pull --ff-only`.
+The current NAND build wrapper disables that overview target and then runs the
+custom packaging step. Existing build trees can also be corrected explicitly:
+
+```sh
+cd ~/build-mf297d-nand
+cp .config .config.before-json-fix
+sed -i 's/^CONFIG_JSON_OVERVIEW_IMAGE_INFO=y$/# CONFIG_JSON_OVERVIEW_IMAGE_INFO is not set/' .config
+make defconfig
+JOBS=8 sh ~/MF297D/nss/build.sh nand "$PWD"
+```
+
+Completed custom outputs are under `bin/mf297d/`. This does not create a normal
+factory/sysupgrade image; use the documented installation workflow.

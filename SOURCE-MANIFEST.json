@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-20",
+  "generated": "2026-11-21",
   "files": {
     ".gitattributes": {
       "bytes": 45,
@@ -42,8 +42,8 @@
       "sha256": "7bcee31893df30b78296cf054cd82388bb086448bae05df1598f2e90b75826d2"
     },
     "docs/NSS-GUNCELLEME.md": {
-      "bytes": 9310,
-      "sha256": "7c599f3bfed78a0570618cdea98a97974c67f0a7661f745f500f8e43316ab769"
+      "bytes": 10214,
+      "sha256": "d1d0c1d46881a04431e7f1f0b4250b287d4704e8403346b45babd23431ed5fed"
     },
     "docs/NSS-RELEASE.md": {
       "bytes": 5752,
@@ -130,16 +130,16 @@
       "sha256": "0e9846ee9a88056e803eb9382c7f3f004b80fe92c3f896cb3493d7b5e2d1bb06"
     },
     "nss/build.sh": {
-      "bytes": 1064,
-      "sha256": "b67b8aa4caa8e5fdc282744088d1f09a7e7344530f75baa0cc969d321f1f3847"
+      "bytes": 1304,
+      "sha256": "49314bbfacb85657cf686a706208c22349d26126990897c3b55d899afa49255d"
     },
     "nss/config/initramfs.config": {
       "bytes": 296749,
       "sha256": "7dd6646b02e083bb3ff15f2127a6dc4d310762467fcfc679c1e80facf317a460"
     },
     "nss/config/nand.config": {
-      "bytes": 296705,
-      "sha256": "14351e6aa1306e481c135080a40513097704ed23b23708498eebd5e6c4438675"
+      "bytes": 296716,
+      "sha256": "baa4c344c31edd31e4d160ae5af8c5df20458417eef13856337c62acd3764e0d"
     },
     "nss/configure.sh": {
       "bytes": 1676,
