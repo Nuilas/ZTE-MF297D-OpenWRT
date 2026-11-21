@@ -1,0 +1,308 @@
+{
+  "date": "2026-11-21",
+  "tests": [
+    {
+      "label": "ttl64-long-default",
+      "socks_proxy": false,
+      "download_Mbps": 438.22,
+      "download_MiB": 784.4,
+      "seconds": 15.01,
+      "cpu": {
+        "cpu": {
+          "avg": 94.7,
+          "max": 98.7
+        },
+        "cpu0": {
+          "avg": 98.3,
+          "max": 100.0
+        },
+        "cpu1": {
+          "avg": 91.1,
+          "max": 96.3
+        }
+      },
+      "streams": [
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 438957548,
+          "seconds": 15.001873,
+          "speed_Bps": 29260395,
+          "error": "curl: (28) Operation timed out after 15001 milliseconds with 438957548 out of 1073741824 bytes received\n"
+        },
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 383530476,
+          "seconds": 15.000326,
+          "speed_Bps": 25568410,
+          "error": "curl: (28) Operation timed out after 15000 milliseconds with 383530476 out of 1073741824 bytes received\n"
+        }
+      ]
+    },
+    {
+      "label": "ttl64-gso32-after",
+      "socks_proxy": false,
+      "download_Mbps": 472.73,
+      "download_MiB": 846.3,
+      "seconds": 15.02,
+      "cpu": {
+        "cpu": {
+          "avg": 97.1,
+          "max": 100.0
+        },
+        "cpu0": {
+          "avg": 96.3,
+          "max": 100.0
+        },
+        "cpu1": {
+          "avg": 97.8,
+          "max": 100.0
+        }
+      },
+      "streams": [
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 513996268,
+          "seconds": 15.002144,
+          "speed_Bps": 34261842,
+          "error": "curl: (28) Operation timed out after 15001 milliseconds with 513996268 out of 1073741824 bytes received\n"
+        },
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 373437932,
+          "seconds": 15.004796,
+          "speed_Bps": 24888102,
+          "error": "curl: (28) Operation timed out after 15004 milliseconds with 373437932 out of 1073741824 bytes received\n"
+        }
+      ]
+    },
+    {
+      "label": "postboot-ttl-off",
+      "socks_proxy": false,
+      "download_Mbps": 337.82,
+      "download_MiB": 604.7,
+      "seconds": 15.01,
+      "cpu": {
+        "cpu": {
+          "avg": 95.1,
+          "max": 100.0
+        },
+        "cpu0": {
+          "avg": 97.0,
+          "max": 100.0
+        },
+        "cpu1": {
+          "avg": 93.3,
+          "max": 100.0
+        }
+      },
+      "streams": [
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 366360044,
+          "seconds": 15.000201,
+          "speed_Bps": 24423960,
+          "error": "curl: (28) Operation timed out after 15000 milliseconds with 366360044 out of 1073741824 bytes received\n"
+        },
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 267662828,
+          "seconds": 15.000258,
+          "speed_Bps": 17844062,
+          "error": "curl: (28) Operation timed out after 15000 milliseconds with 267662828 out of 1073741824 bytes received\n"
+        }
+      ],
+      "xray_proxy_downlink_delta": 635317589,
+      "ttl_status": {
+        "enabled": false,
+        "active": false,
+        "ttl": 64,
+        "ipv6": false,
+        "devices": "",
+        "error": "",
+        "packets": 0,
+        "ecm_present": true,
+        "ecm_ipv4_stop": "0",
+        "ecm_ipv6_stop": "0"
+      }
+    },
+    {
+      "label": "postboot-ttl64",
+      "socks_proxy": false,
+      "download_Mbps": 345.35,
+      "download_MiB": 618.4,
+      "seconds": 15.02,
+      "cpu": {
+        "cpu": {
+          "avg": 93.8,
+          "max": 100.0
+        },
+        "cpu0": {
+          "avg": 96.7,
+          "max": 100.0
+        },
+        "cpu1": {
+          "avg": 90.9,
+          "max": 98.8
+        }
+      },
+      "streams": [
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 321746412,
+          "seconds": 15.007082,
+          "speed_Bps": 21439859,
+          "error": "curl: (28) Operation timed out after 15006 milliseconds with 321746412 out of 1073741824 bytes received\n"
+        },
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 326661612,
+          "seconds": 15.000261,
+          "speed_Bps": 21777311,
+          "error": "curl: (28) Operation timed out after 15000 milliseconds with 326661612 out of 1073741824 bytes received\n"
+        }
+      ],
+      "xray_proxy_downlink_delta": 649480761,
+      "ttl_status": {
+        "enabled": true,
+        "active": true,
+        "ttl": 64,
+        "ipv6": false,
+        "devices": "wan ",
+        "error": "",
+        "packets": 10550,
+        "ecm_present": true,
+        "ecm_ipv4_stop": "1",
+        "ecm_ipv6_stop": "0"
+      }
+    },
+    {
+      "label": "postboot-cpu1-before",
+      "socks_proxy": false,
+      "download_Mbps": 364.6,
+      "download_MiB": 652.6,
+      "seconds": 15.02,
+      "cpu": {
+        "cpu": {
+          "avg": 94.1,
+          "max": 99.4
+        },
+        "cpu0": {
+          "avg": 91.2,
+          "max": 98.7
+        },
+        "cpu1": {
+          "avg": 97.1,
+          "max": 100.0
+        }
+      },
+      "streams": [
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 275822060,
+          "seconds": 15.001527,
+          "speed_Bps": 18386427,
+          "error": "curl: (28) Operation timed out after 15001 milliseconds with 275822060 out of 1073741824 bytes received\n"
+        },
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 408499692,
+          "seconds": 15.000771,
+          "speed_Bps": 27232205,
+          "error": "curl: (28) Operation timed out after 15000 milliseconds with 408499692 out of 1073741824 bytes received\n"
+        }
+      ]
+    },
+    {
+      "label": "postboot-default-middle",
+      "socks_proxy": false,
+      "download_Mbps": 359.7,
+      "download_MiB": 643.9,
+      "seconds": 15.02,
+      "cpu": {
+        "cpu": {
+          "avg": 94.3,
+          "max": 98.7
+        },
+        "cpu0": {
+          "avg": 98.0,
+          "max": 100.0
+        },
+        "cpu1": {
+          "avg": 90.5,
+          "max": 97.3
+        }
+      },
+      "streams": [
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 341751276,
+          "seconds": 15.00023,
+          "speed_Bps": 22783292,
+          "error": "curl: (28) Operation timed out after 15000 milliseconds with 341751276 out of 1073741824 bytes received\n"
+        },
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 333379052,
+          "seconds": 15.002084,
+          "speed_Bps": 22222381,
+          "error": "curl: (28) Operation timed out after 15001 milliseconds with 333379052 out of 1073741824 bytes received\n"
+        }
+      ]
+    },
+    {
+      "label": "postboot-cpu1-after",
+      "socks_proxy": false,
+      "download_Mbps": 287.54,
+      "download_MiB": 514.7,
+      "seconds": 15.01,
+      "cpu": {
+        "cpu": {
+          "avg": 93.7,
+          "max": 100.0
+        },
+        "cpu0": {
+          "avg": 88.7,
+          "max": 100.0
+        },
+        "cpu1": {
+          "avg": 98.8,
+          "max": 100.0
+        }
+      },
+      "streams": [
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 54146540,
+          "seconds": 15.000163,
+          "speed_Bps": 3609762,
+          "error": "curl: (28) Operation timed out after 15000 milliseconds with 54146540 out of 1073741824 bytes received\n"
+        },
+        {
+          "exit": 28,
+          "http": 200,
+          "bytes": 485504492,
+          "seconds": 15.000486,
+          "speed_Bps": 32366180,
+          "error": "curl: (28) Operation timed out after 15000 milliseconds with 485504492 out of 1073741824 bytes received\n"
+        }
+      ]
+    }
+  ],
+  "final_ttl_default_enabled": false,
+  "temporary_cpu_affinity_reverted": true,
+  "cold_power_cycle_tested": false,
+  "new_firmware_image_flashed": false
+}

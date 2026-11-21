@@ -113,8 +113,8 @@ To enable again, set both options to `1`, then enable and start the service.
 No boot environment, partition layout, recovery image or NAND firmware changes
 are needed. High CPU at unrestricted maximum speed is still possible; the
 verified fixed-rate result is the evidence for reduced CPU cost at 200 Mbps.
-Boot persistence is configured; a full-device reboot was not performed in this
-validation. The `.ko` and ABI identity are deliberately not sysupgrade backup
+Subsequent warm reboot tests are recorded in
+[VPN-TTL-VALIDATION.md](../docs/VPN-TTL-VALIDATION.md). The `.ko` and ABI identity are deliberately not sysupgrade backup
 items: the new image must contain the rebuilt kmod package.
 
 The final CPU-affinity A/B/A internet comparison was inconclusive: the return

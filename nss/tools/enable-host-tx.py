@@ -6,7 +6,7 @@ import argparse, shutil, subprocess
 def enable(tree):
     integration=Path(__file__).resolve().parents[1]
     source=integration/'overlay/files'
-    for rel in ('usr/sbin/mf297d-host-tx','etc/init.d/mf297d-host-tx','etc/uci-defaults/95-mf297d-host-tx','etc/config/mf297d_tuning'):
+    for rel in ('usr/sbin/mf297d-host-tx','etc/init.d/mf297d-host-tx','etc/uci-defaults/95-mf297d-host-tx','etc/config/mf297d_tuning','etc/config/mf297d-ttl'):
         dest=tree/'files'/rel
         dest.parent.mkdir(parents=True,exist_ok=True)
         if rel.startswith('etc/config/') and dest.exists():
@@ -24,11 +24,13 @@ def enable(tree):
     package=tree/'package/mf297d-host-tso'
     shutil.copytree(integration/'packages/mf297d-host-tso',package,dirs_exist_ok=True)
     shutil.copyfile(integration/'src/host_tso.c',package/'src/host_tso.c')
+    shutil.copytree(integration/'overlay/package/luci-app-ttl',tree/'package/luci-app-ttl',dirs_exist_ok=True)
     config=tree/'.config'
     if config.exists():
         lines=config.read_text().splitlines()
-        lines=[s for s in lines if s not in ('# CONFIG_PACKAGE_kmod-mf297d-host-tso is not set','CONFIG_PACKAGE_kmod-mf297d-host-tso=m','CONFIG_PACKAGE_kmod-mf297d-host-tso=y')]
-        lines.append('CONFIG_PACKAGE_kmod-mf297d-host-tso=y')
+        for name in ('kmod-mf297d-host-tso','luci-app-ttl'):
+            lines=[s for s in lines if s not in ('# CONFIG_PACKAGE_'+name+' is not set','CONFIG_PACKAGE_'+name+'=m','CONFIG_PACKAGE_'+name+'=y')]
+            lines.append('CONFIG_PACKAGE_'+name+'=y')
         config.write_bytes(('\n'.join(lines)+'\n').encode())
         subprocess.run(['make','defconfig'],cwd=tree,check=True)
     print('MF297D IPv4 host TX checksum tuning installed; existing tuning settings preserved.')

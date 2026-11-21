@@ -5,14 +5,20 @@
 MF297D NSS için IPv4 TX checksum, NSS sahibiyle uyumlu TSO kontrolü ve WAN
 GRO/GSO durum düzeltmesi eklendi. Özgün Xray ile ölçümler:
 
-- Mevcut internet VPN bağlantısı: **333 Mbps**.
+- TTL 64 açık uzun internet VPN testleri: **345–438 Mbps**; 438 Mbps sabit hız değildir.
+- Geçici CPU1 yerleşimiyle en yüksek: **473 Mbps**; sürekli hız garantisi değildir.
 - Yaklaşık **202 Mbps** sabit VPN trafiğinde ortalama **%52 CPU**.
 - Ayrı yerel TLS/VLESS Vision testi: **574 Mbps**; internet hızı değildir.
 
 Canlı test LAN1 ve IPv4 üzerinde yapıldı. Servis yeniden başlatma, otomatik
-tekrar uygulama, yanlış çekirdek kimliğini reddetme ve geri alma doğrulandı;
-bu değişiklik için cihazın tamamen yeniden başlatılması henüz test edilmedi.
+tekrar uygulama, yanlış çekirdek kimliğini reddetme ve geri alma doğrulandı.
+Yeniden açılış sonuçları ve test kapsamı
+[VPN/TTL doğrulama belgesinde](docs/VPN-TTL-VALIDATION.md).
 CPU sabitleme veya değiştirilmiş Xray kalıcı olarak eklenmedi.
+
+**TTL sabitleme varsayılan olarak kapalıdır.** LuCI'de Network → TTL Control
+sayfasından isteğe bağlı açılır; hazır IPv4 değeri 64'tür. TSO/GRO performans
+düzeltmeleri TTL kapalıyken de etkindir. Mevcut derleme ayarların korunur.
 
 **Bu düzeltmeler kaynak kodundadır. Önceden yayımlanan Release imajları bunları
 içermez; kaynakları güncelleyip firmware'i yeniden derlemelisin.** Çekirdek modülü

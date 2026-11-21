@@ -502,8 +502,8 @@
       "sha256": "c4230c9e34be602a27703a8acbb2ddcf56e65169e65878c5fe69623ff97b19c5"
     },
     "README.md": {
-      "bytes": 15747,
-      "sha256": "79bd5f30dbeb4fc0d378a9d09645fbf1a7d52e26cf4185cd8f1b73c035bd5e93"
+      "bytes": 16154,
+      "sha256": "1afdc55e277ca73da3f07789e9d0bb86bf998a5f2ddb714e06c6d65af35d6fdf"
     },
     "reference/env-writer/README.md": {
       "bytes": 961,
@@ -846,8 +846,8 @@
       "sha256": "70a8e274da06ecd4b8ca146b507df1f4607c4fd814fa42ced9d7bd183ba45c1f"
     },
     "nss/HOST-TX-TUNING.md": {
-      "bytes": 6257,
-      "sha256": "960d4392a820a9949f52c7f36a6c220589795423ab70ce3a36e6fa5c821da271"
+      "bytes": 6267,
+      "sha256": "411cf195ac6393db355463e96f4204aab7c51049cc7476c942c23e5988ca4414"
     },
     "nss/src/host_tso.c": {
       "bytes": 6912,
@@ -862,8 +862,8 @@
       "sha256": "52026a9df4f8cee96704fb9c7399a236c0e370d30242ba9e91193aa56b6773f6"
     },
     "nss/tools/enable-host-tx.py": {
-      "bytes": 2026,
-      "sha256": "ec56fa5afb0c77e64aa8b3e48be10c0c2432e9ce4db4f978bcf4b452bd7567dc"
+      "bytes": 2182,
+      "sha256": "da8c770b2c11fe09765ffec2e777d3ccdfe8773970df8e0c755b4344014bce6b"
     },
     "nss/overlay/files/usr/sbin/mf297d-host-tx": {
       "bytes": 2621,
@@ -884,6 +884,22 @@
     "nss/overlay/files/etc/sysupgrade.conf": {
       "bytes": 199,
       "sha256": "683d21155ac54e5a48fb4a780ee302ea688e325b426be906adedb73adab00789"
+    },
+    "nss/overlay/files/etc/config/mf297d-ttl": {
+      "bytes": 142,
+      "sha256": "c400f84fb81e9109f5df4617623a8b8450bd15f015262c7a22e99d4635ddbc22"
+    },
+    "docs/VPN-TTL-VALIDATION.md": {
+      "bytes": 4917,
+      "sha256": "7d4abd1d3002d0da18158ab6e7fa0fe8eebfc634656427e4672935887299dfcb"
+    },
+    "nss/validation/vpn-ttl-boot.json": {
+      "bytes": 2621,
+      "sha256": "0ba4c780ffa024c0aef1d850a2020c7858c6e5fa4343c58f5a85d160945659c9"
+    },
+    "nss/validation/vpn-ttl-speed.json": {
+      "bytes": 7919,
+      "sha256": "3fe84a214dfceb3abb974c9194ade6645c154005635c8465a8a08d29c4622521"
     }
   }
 }
