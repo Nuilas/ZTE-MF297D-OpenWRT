@@ -142,8 +142,8 @@
       "sha256": "414e51d446bcedad6df68912bc557ce3c7bd13a9f7b0c6bbab4432d389f4cdc7"
     },
     "nss/build.sh": {
-      "bytes": 1586,
-      "sha256": "3b8342b22173a925e26fd78cbdc11b6805071b4a1710a08c7316d8448d01f32b"
+      "bytes": 1641,
+      "sha256": "c85786946eb520924ca1a95e44760a7410fe30ab58981fc6adfd9650c67562b9"
     },
     "nss/config/initramfs.config": {
       "bytes": 304575,
@@ -154,8 +154,8 @@
       "sha256": "6beefde7c21cf7a6e1171bb22149e0ea66a94f0345f34f307a6099903d667584"
     },
     "nss/configure.sh": {
-      "bytes": 1676,
-      "sha256": "2a7c136a57e9b2bf6d741e18004a265eb82ec08551d3f473f8eb0d5074eab2aa"
+      "bytes": 1738,
+      "sha256": "284f61748f81a6aca5c8e1cc6887dc1be36a4061a933abca397d161cf7582792"
     },
     "nss/feed-overlay/qca-nss-drv/patches/0990-nss-queue-registration-on-available-cpus.patch": {
       "bytes": 1187,
@@ -502,8 +502,8 @@
       "sha256": "c4230c9e34be602a27703a8acbb2ddcf56e65169e65878c5fe69623ff97b19c5"
     },
     "README.md": {
-      "bytes": 14576,
-      "sha256": "f76a7db25e30ec4a5f3243eb3b8ada64a105efb502c8bd5463328ffcea9b01e4"
+      "bytes": 15747,
+      "sha256": "79bd5f30dbeb4fc0d378a9d09645fbf1a7d52e26cf4185cd8f1b73c035bd5e93"
     },
     "reference/env-writer/README.md": {
       "bytes": 961,
@@ -844,6 +844,46 @@
     "tools/windows-manager/windows_net.py": {
       "bytes": 5849,
       "sha256": "70a8e274da06ecd4b8ca146b507df1f4607c4fd814fa42ced9d7bd183ba45c1f"
+    },
+    "nss/HOST-TX-TUNING.md": {
+      "bytes": 6257,
+      "sha256": "960d4392a820a9949f52c7f36a6c220589795423ab70ce3a36e6fa5c821da271"
+    },
+    "nss/src/host_tso.c": {
+      "bytes": 6912,
+      "sha256": "6c8c847a24e59eafd16c477b8ecba7bb06997809493e6e5430a9958c10dd2e77"
+    },
+    "nss/packages/mf297d-host-tso/Makefile": {
+      "bytes": 1061,
+      "sha256": "a31ba39ecdcaf9c8ee2b05ce86cc4558cc3443677fc4fa8c4abccada8bace5c3"
+    },
+    "nss/packages/mf297d-host-tso/src/Makefile": {
+      "bytes": 121,
+      "sha256": "52026a9df4f8cee96704fb9c7399a236c0e370d30242ba9e91193aa56b6773f6"
+    },
+    "nss/tools/enable-host-tx.py": {
+      "bytes": 2026,
+      "sha256": "ec56fa5afb0c77e64aa8b3e48be10c0c2432e9ce4db4f978bcf4b452bd7567dc"
+    },
+    "nss/overlay/files/usr/sbin/mf297d-host-tx": {
+      "bytes": 2621,
+      "sha256": "6b3c8e7078cb35c2d17f6ad162ec53a8a731e59aaf8181fcb2ef215f748deb19"
+    },
+    "nss/overlay/files/etc/init.d/mf297d-host-tx": {
+      "bytes": 342,
+      "sha256": "15563bf2388c4c5291a4fbb6b2bd43224e0f3ff808f79a820e456b25d27a552d"
+    },
+    "nss/overlay/files/etc/config/mf297d_tuning": {
+      "bytes": 81,
+      "sha256": "4b0b494044d7d54926a13322c31f4ac81e5a4b124904f26fafaf881f7ae77522"
+    },
+    "nss/overlay/files/etc/uci-defaults/95-mf297d-host-tx": {
+      "bytes": 125,
+      "sha256": "a5fe57d8dfba1ded751955de7603b1acc3b40714ff96d153f535064537d80682"
+    },
+    "nss/overlay/files/etc/sysupgrade.conf": {
+      "bytes": 199,
+      "sha256": "683d21155ac54e5a48fb4a780ee302ea688e325b426be906adedb73adab00789"
     }
   }
 }

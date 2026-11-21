@@ -1,0 +1,65 @@
+#!/bin/sh
+# Restore the tested IPv4 host-TX checksum feature after NSS takes over eth0.
+# IPv4 TSO is supplied by a kernel-bound companion; IPv6 is unchanged.
+
+refresh_wan_soft_offloads() {
+ local features
+ [ -e /sys/class/net/wan ] || return 0
+ features="$(ethtool -k wan 2>/dev/null)"
+ # Repair only a stale actual-off/wanted-on state; respect an explicit off.
+ if printf '%s\n' "$features" | grep -Fq 'generic-receive-offload: off [requested on]'; then
+  ethtool -K wan gro off && ethtool -K wan gro on || return 1
+ fi
+ if printf '%s\n' "$features" | grep -Fq 'generic-segmentation-offload: off [requested on]'; then
+  ethtool -K wan gso off && ethtool -K wan gso on || return 1
+ fi
+ if printf '%s\n' "$features" | grep -Fq 'rx-gro-list: off [requested on]'; then
+  ethtool -K wan rx-gro-list off && ethtool -K wan rx-gro-list on || return 1
+ fi
+}
+
+tso_apply() {
+ [ "$(uci -q get mf297d_tuning.general.host_ipv4_tso || echo 1)" = '1' ] || return 0
+ if [ ! -d /sys/module/mf297d_host_tso ]; then
+  local abi=/usr/lib/mf297d-host-tso/kernel-notes.sha256
+  local module="/lib/modules/$(uname -r)/mf297d_host_tso.ko"
+  [ -r "$abi" ] && [ -r "$module" ] || return 0
+  [ "$(cat "$abi")" = "$(sha256sum /sys/kernel/notes | cut -d ' ' -f1)" ] || return 0
+  insmod "$module" seconds=0 || return 1
+ fi
+ if [ "$(cat /sys/module/mf297d_host_tso/parameters/enable)" = 'Y' ]; then
+  if ethtool -k lan1 2>/dev/null | grep -q 'tx-tcp-segmentation: on' &&
+     ethtool -k eth0 2>/dev/null | grep -q 'tx-tcp-segmentation: on'; then
+   return 0
+  fi
+  echo N > /sys/module/mf297d_host_tso/parameters/enable || return 1
+ fi
+ echo Y > /sys/module/mf297d_host_tso/parameters/enable
+}
+
+apply() {
+ [ "$(cat /tmp/sysinfo/board_name 2>/dev/null)" = 'zte,mf297d' ] || return 0
+ [ -e /sys/class/net/eth0 ] || return 0
+ grep -q 'started dev=eth0' /sys/kernel/debug/qca-dwmac-nss/status 2>/dev/null || return 0
+ if [ "$(uci -q get mf297d_tuning.general.host_ipv4_checksum)" = '1' ]; then
+  if ethtool -k eth0 2>/dev/null | grep -q 'tx-checksum-ipv4: off'; then
+   ethtool -K eth0 tx-checksum-ipv4 on || return 1
+   logger -t mf297d-host-tx 'enabled IPv4 host TX checksum offload on eth0'
+  fi
+ fi
+ refresh_wan_soft_offloads || return 1
+ tso_apply
+}
+
+case "$1" in
+ apply) apply ;;
+ watch) while :; do apply; sleep 30; done ;;
+disable)
+ [ "$(cat /tmp/sysinfo/board_name 2>/dev/null)" = 'zte,mf297d' ] || exit 0
+ if [ -e /sys/module/mf297d_host_tso/parameters/enable ]; then
+  echo N > /sys/module/mf297d_host_tso/parameters/enable || exit 1
+ fi
+ ethtool -K eth0 tx-checksum-ipv4 off
+ ;;
+ *) echo "Usage: $0 {apply|watch|disable}" >&2; exit 2 ;;
+esac

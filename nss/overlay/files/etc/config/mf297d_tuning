@@ -1,0 +1,3 @@
+config tuning 'general'
+	option host_ipv4_checksum '1'
+	option host_ipv4_tso '1'

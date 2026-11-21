@@ -1,5 +1,33 @@
 # ZTE MF297D — OpenWrt + NSS ve LuCI güncelleme
 
+## Xray/VPN performans düzeltmeleri (kaynak güncellemesi)
+
+MF297D NSS için IPv4 TX checksum, NSS sahibiyle uyumlu TSO kontrolü ve WAN
+GRO/GSO durum düzeltmesi eklendi. Özgün Xray ile ölçümler:
+
+- Mevcut internet VPN bağlantısı: **333 Mbps**.
+- Yaklaşık **202 Mbps** sabit VPN trafiğinde ortalama **%52 CPU**.
+- Ayrı yerel TLS/VLESS Vision testi: **574 Mbps**; internet hızı değildir.
+
+Canlı test LAN1 ve IPv4 üzerinde yapıldı. Servis yeniden başlatma, otomatik
+tekrar uygulama, yanlış çekirdek kimliğini reddetme ve geri alma doğrulandı;
+bu değişiklik için cihazın tamamen yeniden başlatılması henüz test edilmedi.
+CPU sabitleme veya değiştirilmiş Xray kalıcı olarak eklenmedi.
+
+**Bu düzeltmeler kaynak kodundadır. Önceden yayımlanan Release imajları bunları
+içermez; kaynakları güncelleyip firmware'i yeniden derlemelisin.** Çekirdek modülü
+her imajın kendi çekirdeğiyle derlenir; başka imajdan `.ko` kopyalama.
+Mevcut derleme alanında örnek:
+
+```sh
+cd ~/MF297D
+git pull --ff-only
+sh nss/build.sh nand ~/build-mf297d-nand
+```
+
+[Teknik açıklama, testler ve devre dışı bırakma](nss/HOST-TX-TUNING.md).
+
+
 ## OpenWrt zaten kuruluysa: arayüzden güncelle
 
 **LuCI sysupgrade desteği eklendi ve gerçek NAND yükseltmesiyle test edildi.**

@@ -25,7 +25,7 @@ cp -a "$integration/feed-overlay/." feeds/nss/
 cp "$integration/config/$profile.config" .config
 python3 "$integration/tools/prune-unused-feeds.py" "$PWD"
 python3 "$integration/tools/select-profile.py" "$PWD" "$profile"
-chmod 755 files/etc/board.d/*mf297d* files/etc/uci-defaults/*mf297d* files/etc/init.d/mf297d-radio files/etc/init.d/mf297d-cpu files/etc/init.d/mf297d-wifi-led files/usr/sbin/mf297d-wifi-led files/usr/sbin/mf297d-radio-prepare
+chmod 755 files/etc/board.d/*mf297d* files/etc/uci-defaults/*mf297d* files/etc/init.d/mf297d-radio files/etc/init.d/mf297d-cpu files/etc/init.d/mf297d-wifi-led files/usr/sbin/mf297d-wifi-led files/usr/sbin/mf297d-radio-prepare files/etc/init.d/mf297d-host-tx files/usr/sbin/mf297d-host-tx
 chmod 600 files/etc/shadow
 make defconfig
 mkdir -p mf297d

@@ -11,6 +11,7 @@ jobs=${JOBS:-8}
 make -j"$jobs" tools/install
 make -j"$jobs" toolchain/install
 python3 "$integration/tools/enable-sysupgrade.py" "$tree"
+python3 "$integration/tools/enable-host-tx.py" "$tree"
 python3 "$integration/tools/build-radio-reader.py" --tree "$tree" --out "$tree/mf297d/public-helper-bin"
 cc="$tree/staging_dir/toolchain-aarch64_cortex-a53_gcc-14.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc"
 export STAGING_DIR="$tree/staging_dir/target-aarch64_cortex-a53_musl"
