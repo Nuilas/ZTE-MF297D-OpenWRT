@@ -84,3 +84,17 @@ commit6fe92d1a3fb17545d82d020a3c995f32e6b71f9d. Apache-2.0 ve upstream dosya
 bildirimleri geçerlidir. Paket tarball hash'i OpenWrt Makefile'da sabittir.
 Python/PyInstaller/Paramiko/Cryptography ve ilgili Windows EXE bağımlılıklarının
 lisans bildirimleri stok araç ZIP'inin LICENSES klasöründedir.
+
+## 21 Kasım 2026 — LuCI sysupgrade
+
+`nss/src/upgrade_guard.c`, yükseltme kancaları, paketleyici, açılış geçişi ve testlerin
+lisansı dosya başlıklarında belirtilen GPL-2.0-only'dır. OpenWrt'nin standart
+sysupgrade/UBI ve ayar yedekleme altyapısı kullanılır; kaynak tabanı `nss/SOURCE.json` içindedir.
+Yeni doğrulayıcının statik musl bağlantısı için musl telif/lisans metni
+`LICENSES/musl-COPYRIGHT.txt` dosyasındadır. Musl kaynağı sabit OpenWrt tabanının
+`toolchain/musl` tarifinden elde edilir: https://musl.libc.org/ .
+
+Sysupgrade sürümü mevcut proje NAND düzeni içindir; stok paneline verilecek factory
+imajı değildir. Release paket listesi `PACKAGES.txt` içindedir. Varsayılan derleme
+profili ve kullanıcının ek paket seçimleri farklı olabilir; bit eşdeğer yeniden
+üretim iddiası yoktur. Kendi ek paketlerini derleme alanında seçebilirsin.

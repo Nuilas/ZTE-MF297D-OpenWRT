@@ -42,8 +42,8 @@
       "sha256": "7bcee31893df30b78296cf054cd82388bb086448bae05df1598f2e90b75826d2"
     },
     "docs/NSS-GUNCELLEME.md": {
-      "bytes": 10214,
-      "sha256": "d1d0c1d46881a04431e7f1f0b4250b287d4704e8403346b45babd23431ed5fed"
+      "bytes": 10408,
+      "sha256": "7a3a7794b457636ad4f70dcb9b11d2b2e39263b7ef28f678919c26aaedd49332"
     },
     "docs/NSS-RELEASE.md": {
       "bytes": 5752,
@@ -56,6 +56,14 @@
     "docs/RECOVERY.md": {
       "bytes": 2224,
       "sha256": "37cc01c4d2d90cd7b0ac3b44c5cfc7ae2f3f221cb2cfa8c53e380bdded9a48fc"
+    },
+    "docs/SYSUPGRADE-BOOTSTRAP.md": {
+      "bytes": 4651,
+      "sha256": "0f911f7deee4665fabeeb74d93ad7c61c888a873494789befe4053c6355a9a08"
+    },
+    "docs/SYSUPGRADE.md": {
+      "bytes": 4781,
+      "sha256": "ac3f0f7365214ee4a700668d11ec773a2f5fba48a22abc89b2b4f3c7095de14e"
     },
     "docs/TODO.md": {
       "bytes": 2492,
@@ -125,21 +133,25 @@
       "bytes": 18600,
       "sha256": "8780e78a1a737e127f25a65f6d95269bffd36158dc261114de7859b490bfc5aa"
     },
+    "LICENSES/musl-COPYRIGHT.txt": {
+      "bytes": 6196,
+      "sha256": "b870108ec5e7790e9f9919064f1b9421d62d5f9b0e6c230c6adf7ea2da62e97b"
+    },
     "NOTICE.md": {
-      "bytes": 5319,
-      "sha256": "0e9846ee9a88056e803eb9382c7f3f004b80fe92c3f896cb3493d7b5e2d1bb06"
+      "bytes": 6219,
+      "sha256": "414e51d446bcedad6df68912bc557ce3c7bd13a9f7b0c6bbab4432d389f4cdc7"
     },
     "nss/build.sh": {
-      "bytes": 1304,
-      "sha256": "49314bbfacb85657cf686a706208c22349d26126990897c3b55d899afa49255d"
+      "bytes": 1586,
+      "sha256": "3b8342b22173a925e26fd78cbdc11b6805071b4a1710a08c7316d8448d01f32b"
     },
     "nss/config/initramfs.config": {
-      "bytes": 296749,
-      "sha256": "7dd6646b02e083bb3ff15f2127a6dc4d310762467fcfc679c1e80facf317a460"
+      "bytes": 304575,
+      "sha256": "2e3dfd5f164907339f7cf6e9926707378e8ac597fad71a8453ec622d59abde3d"
     },
     "nss/config/nand.config": {
-      "bytes": 296716,
-      "sha256": "baa4c344c31edd31e4d160ae5af8c5df20458417eef13856337c62acd3764e0d"
+      "bytes": 304540,
+      "sha256": "6beefde7c21cf7a6e1171bb22149e0ea66a94f0345f34f307a6099903d667584"
     },
     "nss/configure.sh": {
       "bytes": 1676,
@@ -162,8 +174,8 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "nss/openwrt.patch": {
-      "bytes": 6993,
-      "sha256": "92d31da6d8cdad2b705e88a38fcca0483548dceefd78d7a7bfafc961ac9950e9"
+      "bytes": 7307,
+      "sha256": "86834fcdad81fa1ce9a3b552753e57bc8197a35cc9ec34e32273a6be48acd1b4"
     },
     "nss/overlay/files/etc/board.d/03_mf297d_macs": {
       "bytes": 357,
@@ -229,6 +241,10 @@
       "bytes": 414,
       "sha256": "0da41c988b42f75d0e1c78d6e8b907f5685df3798e54ed994841273ebe54ca42"
     },
+    "nss/overlay/files/etc/mf297d-sysupgrade-version": {
+      "bytes": 7,
+      "sha256": "4ac3d1715fcee712f0168eca6cf704693a920517cc8bc209f9870672cfc0d536"
+    },
     "nss/overlay/files/etc/passwd": {
       "bytes": 153,
       "sha256": "f27d0e9b69f35ad2f9ef4bc0074bc5d0c8d2d683dc1ac4f6c66c528f2e42a186"
@@ -249,6 +265,10 @@
       "bytes": 86,
       "sha256": "24ce7147efd8bbe517c75102b8a61af8ac89696b4bff0070de816f28d7be4cf0"
     },
+    "nss/overlay/files/lib/upgrade/mf297d.sh": {
+      "bytes": 7732,
+      "sha256": "f365338076f4c095f63388a7f72ad4deda975658d1d48e351f98d1a1c667b5b8"
+    },
     "nss/overlay/files/usr/sbin/mf297d-radio-prepare": {
       "bytes": 2479,
       "sha256": "7f1d7be73c7a96a57e3d6553df60b701bcadc015f17ea7c2956402a4c22a5e89"
@@ -264,6 +284,74 @@
     "nss/overlay/package/kernel/mac80211/patches/nss-extra/ath11k/999-999-ath11k-support-legacy-mpd-provider.patch": {
       "bytes": 3551,
       "sha256": "03f46d3dbbb96ab1d6bfe74b8083e9d489873d6c76bcd39d54b68177858c7364"
+    },
+    "nss/overlay/package/luci-app-ttl/.gitattributes": {
+      "bytes": 19,
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c"
+    },
+    "nss/overlay/package/luci-app-ttl/.gitignore": {
+      "bytes": 41,
+      "sha256": "def1eee8c6a01dc11c35c6a9bddb951709444ee1d1f95f11a47f9cede6059c51"
+    },
+    "nss/overlay/package/luci-app-ttl/htdocs/luci-static/resources/view/mf297d/ttl.js": {
+      "bytes": 2377,
+      "sha256": "f8ef8904c930ea2ce1b499252c26e62f710e36083a7bdab7b2be3160d391dde5"
+    },
+    "nss/overlay/package/luci-app-ttl/LICENSE": {
+      "bytes": 18600,
+      "sha256": "8780e78a1a737e127f25a65f6d95269bffd36158dc261114de7859b490bfc5aa"
+    },
+    "nss/overlay/package/luci-app-ttl/Makefile": {
+      "bytes": 435,
+      "sha256": "731b5a8d01764210db061a16be73f73e4d8b602ac585d6d69de518c08a7e4c8d"
+    },
+    "nss/overlay/package/luci-app-ttl/po/templates/ttl.pot": {
+      "bytes": 1137,
+      "sha256": "7e855af3510cbc200287d927d350e1c3bb03113b60ac6de09589d75ea6171309"
+    },
+    "nss/overlay/package/luci-app-ttl/po/tr/ttl.po": {
+      "bytes": 1982,
+      "sha256": "3d1b3e6e8923439f5a9d94f7e0df03a2d04fede4aa771da995792a39d8cad5c7"
+    },
+    "nss/overlay/package/luci-app-ttl/README.md": {
+      "bytes": 6224,
+      "sha256": "0194d4a03bbd2ba754660056367164f3cf3302e0402d318fffe8850a97d9d53c"
+    },
+    "nss/overlay/package/luci-app-ttl/root/etc/config/mf297d-ttl": {
+      "bytes": 142,
+      "sha256": "c400f84fb81e9109f5df4617623a8b8450bd15f015262c7a22e99d4635ddbc22"
+    },
+    "nss/overlay/package/luci-app-ttl/root/etc/hotplug.d/iface/95-mf297d-ttl": {
+      "bytes": 127,
+      "sha256": "9c646373c9648f77e73f924c9aab696debcc5e45ed68618686b024318c0fa5f3"
+    },
+    "nss/overlay/package/luci-app-ttl/root/etc/init.d/mf297d-ttl": {
+      "bytes": 507,
+      "sha256": "8b09ba4abccae8a5a4c7b3e84b89772232f96b75b305543ef1bd765704262b15"
+    },
+    "nss/overlay/package/luci-app-ttl/root/etc/uci-defaults/95-mf297d-ttl": {
+      "bytes": 74,
+      "sha256": "f2bee7a0492315c427339599256ab45752976b878dc680804818866f98ec721b"
+    },
+    "nss/overlay/package/luci-app-ttl/root/usr/libexec/rpcd/mf297d.ttl": {
+      "bytes": 183,
+      "sha256": "a0c739fda5dfd81c34d13030e5b54dbaa8bcd4bd611fde63f6f3ebaf648c6a4f"
+    },
+    "nss/overlay/package/luci-app-ttl/root/usr/sbin/mf297d-ttl": {
+      "bytes": 6738,
+      "sha256": "4f225e9a63c889215448c44352ceb239222f75a02772b046f497d12aa299d5f8"
+    },
+    "nss/overlay/package/luci-app-ttl/root/usr/share/luci/menu.d/luci-app-ttl.json": {
+      "bytes": 277,
+      "sha256": "c54b299538e0fd03e9a9fe1ae29c2a1dc019a42872a31c2fd8786c1e1a546dfc"
+    },
+    "nss/overlay/package/luci-app-ttl/root/usr/share/rpcd/acl.d/luci-app-ttl.json": {
+      "bytes": 237,
+      "sha256": "8bb247f602f5644270b910895438ff5f7ababd0c0dee24f3c96a53974e39501a"
+    },
+    "nss/overlay/package/luci-app-ttl/tests/VALIDATION.json": {
+      "bytes": 828,
+      "sha256": "fdedd6afb23f0699174a5f7cb9c608d5bcb86da1f884cd94a061ddcd48e63af1"
     },
     "nss/overlay/target/linux/qualcommax/dts/ipq5018-zte-mf297d.dts": {
       "bytes": 35342,
@@ -353,6 +441,18 @@
       "bytes": 2564,
       "sha256": "40af58bc3c1ca3b28d97985d4284d4ddee937f341b4775c95450efe578a226dd"
     },
+    "nss/src/upgrade_guard.c": {
+      "bytes": 11611,
+      "sha256": "9b13478aead31eb5565e28c4f36d6b19b6f57bced76ae51201fe4169a61d78b6"
+    },
+    "nss/tests/test_backend.py": {
+      "bytes": 4488,
+      "sha256": "d2078d3dae08c7fcd2dbf8ae656db28f7ace75641fe336a128e2263f2571dfe2"
+    },
+    "nss/tests/test_sysupgrade.py": {
+      "bytes": 6257,
+      "sha256": "acec016279d6123bd28e86f217081bb38ad62aef1a345a57bb251ff5c6570d1e"
+    },
     "nss/tools/boot-maintenance.sh": {
       "bytes": 1577,
       "sha256": "c5b354018d3c85329f001c182deed4e4b61604cbe04ebf516e8b12437e09c574"
@@ -361,17 +461,33 @@
       "bytes": 2544,
       "sha256": "7c921d9eac26519fdee5cedc9d9eefd60d86ceb0d0984b4e1051129e9d3a2f21"
     },
+    "nss/tools/enable-sysupgrade.py": {
+      "bytes": 2083,
+      "sha256": "1b22771401b77914704231a41a7eb874c96e8f0b7234dd570461d2771340eb47"
+    },
     "nss/tools/install-from-ram.sh": {
       "bytes": 2141,
       "sha256": "793ed467aa9b46c8d3ff95f30cc136df9faa1c8effaae8891887854d430a6a62"
     },
+    "nss/tools/install-upgrade-support.py": {
+      "bytes": 2977,
+      "sha256": "7b7dbc8094156398eb25c955b0bfe98c2a292a054cecf2424d43df456e877005"
+    },
     "nss/tools/package-build.py": {
-      "bytes": 1868,
-      "sha256": "33abf4f3b57eeceb5809edd4a09115fec5cc23ad604e50e542b91ad2876bb7c4"
+      "bytes": 2266,
+      "sha256": "94ae32e6e40379d75a496aa239bd9e8d5eebfc59fe8a7028b7ffde1dea07248c"
+    },
+    "nss/tools/package-sysupgrade.py": {
+      "bytes": 3547,
+      "sha256": "c529d10a5069de26ad7261e7375167b65f60d4e27402165588d4ef075b8aae22"
     },
     "nss/tools/prepare-nand.py": {
       "bytes": 10443,
       "sha256": "3bef8b45c829c746031631837c6aa210d91a1eb738f7a5866e5be39ca72dfb84"
+    },
+    "nss/tools/prepare-sysupgrade.py": {
+      "bytes": 5883,
+      "sha256": "063d5c3a0815f2996794215e0bdb3c2afb9d19e5f6073ed758cebf54197cd7ea"
     },
     "nss/tools/prune-unused-feeds.py": {
       "bytes": 1319,
@@ -386,8 +502,8 @@
       "sha256": "c4230c9e34be602a27703a8acbb2ddcf56e65169e65878c5fe69623ff97b19c5"
     },
     "README.md": {
-      "bytes": 13706,
-      "sha256": "0726eeaf0fd5cda5b3aeb84ae81afb26c159cee7a81e1c9babe2be8dc0299462"
+      "bytes": 14576,
+      "sha256": "f76a7db25e30ec4a5f3243eb3b8ada64a105efb502c8bd5463328ffcea9b01e4"
     },
     "reference/env-writer/README.md": {
       "bytes": 961,
@@ -636,6 +752,10 @@
     "tools/test_offline.py": {
       "bytes": 4764,
       "sha256": "829331e93019ffd4122a9edbcb4847ede8d2feaaaeedb4ead5fe076135b00b42"
+    },
+    "tools/upgrade_boot.py": {
+      "bytes": 2292,
+      "sha256": "c6743a7d5294878a4d56b316d0ef412c057419ea2853de6bb9c36281ed8f62dc"
     },
     "tools/verify_export.py": {
       "bytes": 1801,

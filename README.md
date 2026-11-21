@@ -1,4 +1,23 @@
-# ZTE MF297D — Telnet'ten OpenWrt NAND'a kurulum
+# ZTE MF297D — OpenWrt + NSS ve LuCI güncelleme
+
+## OpenWrt zaten kuruluysa: arayüzden güncelle
+
+**LuCI sysupgrade desteği eklendi ve gerçek NAND yükseltmesiyle test edildi.**
+`fit-v1` açılış desteği etkin cihazda:
+
+1. [Güncel Release'ten](https://github.com/ozgunokan/ZTE-MF297D-OpenWRT/releases/latest) **`openwrt-mf297d-nss-sysupgrade.bin`** indir.
+2. **<http://192.168.1.1> → System → Backup / Flash Firmware** bölümünü aç.
+3. **Flash new firmware image** ile dosyayı seç. Ayarların kalsın istiyorsan **Keep settings** açık olsun.
+4. Doğrulama sonrası **Continue** ile yükle; birkaç dakika güç ve Ethernet bağlantısını kesme.
+
+**RESET kurtarması, radyo firmware'leri, ART/MAC ve bootloader korunur.** Normal
+sysupgrade ENV'ye de yazmaz. Eski `...-nand.bin` bu dosyayla aynı biçimde değildir;
+arayüzde yalnız **`...-sysupgrade.bin`** kullanılır.
+
+[Basit güncelleme ve kendi firmware'ini derleme](docs/SYSUPGRADE.md) ·
+[Eski kurulumda tek seferlik etkinleştirme](docs/SYSUPGRADE-BOOTSTRAP.md)
+
+## Stok Turkcell sisteminden ilk kurulum
 
 Sıra: **1. Telnet → 2. yükleyiciyi aktar/hazırla → 3. RAM'de aç ve yedekle →
 4. RESET kurtarmasını doğrula → 5. en son NAND'a kur.**
@@ -278,18 +297,19 @@ Yeni image/DTB ile eski sabit modül karıştırılmaz; CRC ve bellek tablosu bi
 Stok kurucusunu yeniden çalıştırma. [Mevcut NAND sistemini güncelleme ve temiz derleme](docs/NSS-GUNCELLEME.md)
 anlatımını kullan. Kullanımdaki cihazda CPU ve LED düzeltmeleri ayrıca kalıcı kurulmuştur.
 
-## Bu bilgisayardaki Ubuntu derleme alanı
+## Ubuntu / VMware Ubuntu'da derleme
 
-PC Windows: `wsl -d MF297D-Ubuntu -u build`.
-Ardından **PC Ubuntu**:
+Mevcut derleme alanında seçtiğin paketler korunur:
 
 ```sh
-cd /home/build/openwrt-mf297d-nss-ipq50
+cd ~/MF297D
+git pull
+cd ~/build-mf297d-nand
 cp .config .config.backup
 make menuconfig
-make defconfig
-make -j8
+JOBS=8 sh ~/MF297D/nss/build.sh nand "$PWD"
 ```
 
-Derlemek modeme kendiliğinden yazmaz. Kaynak reçetesi [nss/](nss/SOURCE.json),
-test ayrıntıları [NSS-RELEASE](docs/NSS-RELEASE.md), lisanslar [NOTICE](NOTICE.md).
+Arayüze yükleyeceğin dosya `bin/mf297d/openwrt-mf297d-nss-sysupgrade.bin`.
+Derlemek modeme kendiliğinden yazmaz. [Temiz alan kurulumu](docs/NSS-GUNCELLEME.md#3-ubuntuda-paket-ekleyip-derleme),
+[sysupgrade adımları ve korunan bölümler](docs/SYSUPGRADE.md), lisanslar [NOTICE](NOTICE.md).

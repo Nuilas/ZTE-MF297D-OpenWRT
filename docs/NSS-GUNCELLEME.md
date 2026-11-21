@@ -1,5 +1,11 @@
 # ZTE MF297D — OpenWrt + NSS
 
+**Günlük güncelleme için yeni yöntem:** [LuCI'den sysupgrade](SYSUPGRADE.md).
+Arayüze yüklenen dosya **`openwrt-mf297d-nss-sysupgrade.bin`**. Aşağıdaki
+`...-nand.bin` ve RAM bakım adımları eski/elle kurulum yoludur; normal
+arayüz güncellemesinde çalıştırılmaz. Önceki kurulumlarda bir kez
+[FIT açılış desteği](SYSUPGRADE-BOOTSTRAP.md) etkinleştirilir.
+
 MF297D üzerinde NAND'dan çalışan OpenWrt 6.18.60 portu. Ethernet, 2,4/5 GHz
 Wi-Fi NSS ve QMI/LTE `rmnet_rx` hızlandırması doğrulandı. İki normal NAND
 yeniden başlatması ve gerçek LTE trafiği test edildi. İki CPU, başlangıç servisiyle etkin;
@@ -165,7 +171,7 @@ cd /home/build/openwrt-mf297d-nss-ipq50
 cp .config .config.backup
 make menuconfig
 make defconfig
-make -j8
+JOBS=8 sh ~/MF297D/nss/build.sh nand "$PWD"
 ```
 
 `menuconfig` içinde istediğin paketleri seçip kaydet. Hata ayrıntısı için

@@ -101,11 +101,11 @@ index 86e7480f..cd58b5cb 100644
  endef
  TARGET_DEVICES += zyxel_scr50axe
 +
-+# MF297D lab: RAM-only, all 22 physical MTDs read-only. No factory/sysupgrade.
++# MF297D profiles; NAND/sysupgrade artifacts are packaged by nss/tools.
 +define Device/zte_mf297d
 +	$(call Device/FitImageLzma)
 +	DEVICE_VENDOR := ZTE
-+	DEVICE_MODEL := MF297D (RAM lab)
++	DEVICE_MODEL := MF297D
 +	DEVICE_DTS := ipq5018-zte-mf297d
 +	DEVICE_DTS_CONFIG := config@mp03.3
 +	SOC := ipq5018
@@ -131,31 +131,41 @@ index 389a0899..afefd777 100644
  	elecom,wrc-x3000gst2|\
  	iodata,wn-dax3000gr|\
 diff --git a/target/linux/qualcommax/ipq50xx/base-files/lib/upgrade/platform.sh b/target/linux/qualcommax/ipq50xx/base-files/lib/upgrade/platform.sh
-index c7237901..1bb6f25d 100644
+index c7237901..20c1e038 100644
 --- a/target/linux/qualcommax/ipq50xx/base-files/lib/upgrade/platform.sh
 +++ b/target/linux/qualcommax/ipq50xx/base-files/lib/upgrade/platform.sh
-@@ -372,6 +372,10 @@ linksys_mx_pre_upgrade() {
+@@ -6,6 +6,10 @@ REQUIRE_IMAGE_METADATA=1
+ RAMFS_COPY_BIN='cmp dumpimage fw_printenv fw_setenv head seq'
+ RAMFS_COPY_DATA='/etc/fw_env.config /var/lock/fw_printenv.lock'
+ 
++# MF297D fixed-layout sysupgrade support
++. /lib/upgrade/mf297d.sh
++RAMFS_COPY_BIN="$RAMFS_COPY_BIN /usr/libexec/mf297d-upgrade-guard sha256sum jsonfilter mktemp"
++
+ fritzbox_remove_oem_ubi_volumes() {
+ 	remove_oem_ubi_volume avm_filesys_0
+ 	remove_oem_ubi_volume avm_filesys_1
+@@ -372,6 +376,9 @@ linksys_mx_pre_upgrade() {
  
  platform_check_image() {
  	case "$(board_name)" in
 +	zte,mf297d)
-+		echo "MF297D RAM lab: custom NAND/ENV updater is not implemented." >&2
-+		return 1
++		mf297d_check_image "$1"
 +		;;
  	cudy,p5|\
  	xiaomi,mi-router-ax3000t-v2)
  		nand_do_platform_check "$(board_name)" "$1"
-@@ -396,6 +400,10 @@ platform_pre_upgrade() {
+@@ -396,6 +403,9 @@ platform_pre_upgrade() {
  
  platform_do_upgrade() {
  	case "$(board_name)" in
 +	zte,mf297d)
-+		echo "MF297D RAM lab: custom NAND/ENV updater is not implemented." >&2
-+		return 1
++		mf297d_do_upgrade "$1"
 +		;;
  	avm,fritzbox-4050)
  		sync
  		CI_KERNPART="fit0"
+
 diff --git a/target/linux/qualcommax/ipq50xx/config-default b/target/linux/qualcommax/ipq50xx/config-default
 index 0517c1be..a7a8ee6a 100644
 --- a/target/linux/qualcommax/ipq50xx/config-default
