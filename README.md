@@ -2,6 +2,8 @@
 
 ## Xray/VPN performans düzeltmeleri (kaynak güncellemesi)
 
+Sorumluluk reddi. Cihazın bilinen bir brick kurtarma yöntemi yok. Uart erişimi bulamadık. Cihazınızı brick ederseniz çöp etmiş olursunuz. Sorumluluk tamamen size aittir.
+
 MF297D NSS için IPv4 TX checksum, NSS sahibiyle uyumlu TSO kontrolü ve WAN
 GRO/GSO durum düzeltmesi eklendi. Özgün Xray ile ölçümler:
 
