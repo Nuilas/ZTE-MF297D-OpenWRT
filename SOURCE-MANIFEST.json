@@ -630,8 +630,8 @@
       "sha256": "f37fd6b5e4b81e2e998d35b2b2391b340229d8a6c8952a29ef005ac4d55ac0e0"
     },
     "stock/install.py": {
-      "bytes": 7229,
-      "sha256": "d90eeff3a7e32031a18f4371355b398c32351508c5c7948dda1bbfeb5b305e95"
+      "bytes": 7540,
+      "sha256": "093c0c30432d03c419de9328ebca68bfdfd242dc016ba68ab58a995a8936177c"
     },
     "stock/install_phase_a.sh": {
       "bytes": 2158,
