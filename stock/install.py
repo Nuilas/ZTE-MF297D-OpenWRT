@@ -13,8 +13,13 @@ from prepare_install import Device
 INPUTS=['kernel.bin','rootfs.bin','recovery.itb','overlay.ubifs','env-helper','erase-tail','kexec','install_phase_a.sh','install_phase_b.sh','SHA256SUMS','prefix.before.sha256','prefix.after.sha256']
 def sha(b):return hashlib.sha256(b).hexdigest()
 def upload(d,p,dst):
- data=p.read_bytes();c=d.t.open_session();c.settimeout(180);c.exec_command('set -C; umask 077; cat > '+dst);c.sendall(data);c.shutdown_write();c.makefile('rb').read();rc=c.recv_exit_status();c.close()
+ data=p.read_bytes();c=d.t.open_session();c.settimeout(180);c.exec_command('test ! -L '+dst+'; umask 077; cat > '+dst);c.sendall(data);c.shutdown_write();c.makefile('rb').read();rc=c.recv_exit_status();c.close()
  if rc or d.read('sha256sum '+dst).decode().split()[0]!=sha(data):raise ValueError('Upload failed: '+p.name)
+def ensure_stage(d,path):
+ # A previous interrupted handoff may leave the owner-token directory in tmpfs.
+ # Reuse only a real root-owned directory; reject symlinks and other objects.
+ cmd='if test -e '+path+'; then test -d '+path+' && test ! -L '+path+' && test "$(stat -c %u '+path+')" = 0 && chmod 700 '+path+'; else mkdir -m 700 '+path+'; fi'
+ d.read(cmd)
 def token_args(d,plan,role):
  args=d.read('cat /proc/cmdline').decode().split()
  if 'root=/dev/ram0' not in args or 'mf297d.owner_token='+plan['owner_token'] not in args or role not in args:raise ValueError('Wrong RAM role/owner; no automatic retry')
@@ -60,7 +65,7 @@ def handoff(out,plan,phase):
    prefix(d,plan)
   status=json.loads(d.read('nss-status -j'))
   if status['state']!='host':raise ValueError('Installation RAM must stay on host Ethernet path; NSS must be disabled')
-  path='/tmp/mf297d-stage-'+plan['owner_token'];d.read('test ! -e '+path+' && mkdir -m 700 '+path)
+  path='/tmp/mf297d-stage-'+plan['owner_token'];ensure_stage(d,path)
   for n in ['kexec','phase-'+phase+'-Image','phase-'+phase+'.dtb','phase-'+phase+'-args.txt']:upload(d,out/n,path+'/'+n)
   cmd='set -e; cd '+path+'; chmod 500 kexec; /etc/init.d/mf297d-wifi-led stop 2>/dev/null || true; wifi down; ifdown lte 2>/dev/null || true; '
   cmd+='for r in /sys/class/remoteproc/remoteproc*; do test ! -r "$r/state" || test "$(cat "$r/state")" = offline; done; '
@@ -71,7 +76,7 @@ def handoff(out,plan,phase):
 def install_inputs(out,plan,phase):
  d=wait_role(plan,'mf297d.install_stock='+('1' if phase=='a' else '2'))
  try:
-  path='/tmp/mf297d-first-install';d.read('test ! -e '+path+' && mkdir -m 700 '+path)
+  path='/tmp/mf297d-first-install';ensure_stage(d,path)
   for n in INPUTS:upload(d,out/n,path+'/'+n)
   if phase=='b':
    proof=json.loads((out/'RESET-PROOF.private.json').read_text());(out/'RESET-PERMIT').write_bytes((plan['owner_token']+'\n').encode());(out/'LOWER-SHA256').write_bytes((proof['lower_sha256']+'\n').encode())
